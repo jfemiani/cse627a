@@ -106,24 +106,25 @@ If a student guesses correct for problematic reasons, consider revising by e.g. 
 
 ## 🧠 Simulated Student Stream-of-Thought (for every question)
 
-After presenting the question and completing the Question Review Checklist, simulate how a student with **partial knowledge or no preparation** might reason through the options.
+After presenting the question and completing the Question Review Checklist, simulate how an **unprepared student**—someone with minimal or no understanding of the content—might reason through the answer options.  
 
-- They do **not know the correct answer outright**
-- They use **clues in the question phrasing**, tone, or structure
-- They attempt to **eliminate clearly bad options**
-- They may make a **plausible guess** based on reasoning or associations
+The purpose of this simulation is **not** to illustrate how a knowledgeable student would reason, but rather to assess the question's ability to differentiate genuine understanding from superficial guessing. Specifically:
 
-Include a brief paragraph like this after each question:
+- Assume the student **does not know the correct answer** beforehand.
+- The student relies on superficial clues such as wording, phrasing, answer length, tone, or grammatical hints.
+- The student attempts to eliminate answers that seem obviously incorrect, extreme, inconsistent, or implausible, without using any genuine understanding of the underlying concept.
+- The student might guess based on intuition, associations, or vague familiarity—but again, not from genuine comprehension.
+
+Your simulated paragraph should highlight potential flaws in the question design, such as overly obvious correct answers or weak distractors that allow easy elimination. Include reasoning that realistically reflects a student who does **not truly understand the material**:
 
 ```markdown
 ### Student Stream-of-Thought
-"I'm not sure what the right answer is. But I notice that option (a) uses extreme language, so maybe I can rule that out. Option (b) sounds more specific and mentions something that seems like it balances two effects. That feels more grounded. (c) says something that I vaguely remember being false, and (d) seems too vague. I might guess (b), but I'm not confident."
+"I'm not sure about this concept at all. But option (a) seems suspicious because it uses absolute words like 'always' or 'never,' which teachers usually avoid. Option (b) feels complicated, maybe it's right, but I'm just guessing. Option (c) looks plausible because it's longer and more detailed—maybe the instructor wouldn't make the correct answer obviously different. Option (d) is so vague I can’t evaluate it. I'd probably choose (c), but honestly, it's just a guess."
 ```
 
-This exercise helps surface issues with **guessability**, **answer balance**, or **overly weak distractors**, and should be part of the QA process.
+This exercise is critical to surface issues with **guessability**, **answer balance**, and **overly weak distractors**, and it must be part of your QA process before approving each question.
 
 
-## 🔍 Question Review Checklist (Run for Each Question)
 
 After generating each question, perform this checklist and **report your answers** before asking for approval:
 

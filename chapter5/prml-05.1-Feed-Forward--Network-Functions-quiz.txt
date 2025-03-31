@@ -1,0 +1,138 @@
+Title: concept-check – remember – non-edge – Universal Approximation Property
+Points: 1
+1. Which statement correctly describes the universal approximation property of neural networks?
+a) Neural networks can approximate any discrete function exactly.
+... Incorrect. Universal approximation refers specifically to continuous functions, not discrete functions.
+*b) Neural networks with at least one hidden layer can approximate any continuous function to arbitrary accuracy, given enough hidden units.
+... Correct. This is precisely what the universal approximation theorem states.
+c) Neural networks require at least three hidden layers to approximate any function.
+... Incorrect. The theorem requires only one hidden layer.
+d) Universal approximation means neural networks can approximate only linear functions perfectly.
+... Incorrect. The universal approximation theorem explicitly addresses nonlinear continuous functions.
+
+Title: medium – understand – non-edge – Weight-space Symmetry
+Points: 1
+1. Which scenario demonstrates the concept of weight-space symmetry in neural networks?
+a) Scaling all weights entering a hidden unit by a positive constant and dividing all outgoing weights from the same hidden unit by the same constant leaves the network output unchanged.
+... Incorrect. Nonlinear activation functions do not generally allow such simple linear rescaling without altering outputs.
+*b) Swapping two hidden units (including all their incoming and outgoing connections) does not alter the input-output mapping of the network.
+... Correct. Hidden units can be permuted without changing the network's function due to symmetry.
+c) Changing the activation function of a hidden unit and adjusting its biases correspondingly leaves the network's input-output mapping unchanged.
+... Incorrect. Changing the activation function fundamentally alters the nonlinear transformation, even with bias adjustments.
+d) Increasing all bias terms by the same nonzero constant uniformly leaves the network output unchanged.
+... Incorrect. Uniform bias shifts typically change the activations and thus alter the output.
+
+Title: medium – understand – non-edge – Neural Networks vs. Linear Models
+Points: 1
+1. What primarily distinguishes neural networks from linear models, such as polynomial or logistic regression?
+a) Neural networks can only handle linear relationships in data.
+... Incorrect. Neural networks specifically address nonlinear relationships.
+b) Neural networks always use fewer parameters than linear models.
+... Incorrect. Neural networks typically have many parameters.
+*c) Neural networks learn nonlinear transformations adaptively from data.
+... Correct. Adaptively learned nonlinear transformations distinguish neural networks from traditional linear models.
+d) Neural networks require less computational effort during training.
+... Incorrect. Neural networks usually require more computation during training compared to simpler linear models.
+
+Title: concept-check – remember – non-edge – Hidden Units Definition
+Points: 1
+1. In a neural network, what is the primary role of hidden units?
+a) Generate final output predictions by applying the output activation function directly to raw input features.
+... Incorrect. Hidden units do not directly produce final outputs from raw inputs; this is the role of output units.
+*b) Perform intermediate nonlinear transformations to extract useful features from input data.
+... Correct. Hidden units apply nonlinear transformations, capturing intermediate features.
+c) Linearly combine the predictions from multiple neural networks to improve accuracy.
+... Incorrect. Combining predictions is ensemble learning, not the function of hidden units.
+d) Adjust weights and biases automatically during forward propagation.
+... Incorrect. Weight and bias adjustments occur during training (via backpropagation), not during forward propagation or by hidden units themselves.
+
+
+Title: concept-check – remember – non-edge – Backpropagation Purpose
+Points: 1
+1. What is the primary purpose of the backpropagation algorithm in neural networks?
+a) To select the best activation functions for hidden units automatically during training.
+... Incorrect. Backpropagation uses fixed activation functions chosen by the designer.
+b) To generate predictions by propagating inputs through the network layers.
+... Incorrect. This describes forward propagation, not backpropagation.
+*c) To efficiently compute gradients of the loss function with respect to network parameters.
+... Correct. Backpropagation calculates these gradients efficiently for optimization.
+d) To prevent overfitting by automatically removing redundant hidden units.
+... Incorrect. Backpropagation doesn't automatically remove units; network pruning is a separate step.
+
+
+Title: concept-check – understand – non-edge – Activation Function Purpose
+Points: 1
+1. Why do neural networks typically use nonlinear activation functions in hidden units?
+a) Nonlinear functions always reduce the number of parameters required by the network.
+... Incorrect. Nonlinear activations don't inherently reduce parameter count; they add representational power.
+b) Nonlinear functions ensure the neural network outputs remain linearly related to inputs.
+... Incorrect. Nonlinear activation functions break linearity, enabling more complex transformations.
+*c) Nonlinear functions enable neural networks to model complex, nonlinear relationships in data.
+... Correct. Nonlinear activations provide the expressive power needed to capture complex patterns.
+d) Nonlinear functions speed up the forward propagation computation during inference.
+... Incorrect. Nonlinear functions do not inherently speed up inference; they typically increase computational complexity.
+
+
+Title: medium – understand – non-edge – Feed-forward Structure and Gradient Computation
+Points: 1
+1. Why is the feed-forward (acyclic) structure useful for efficiently training neural networks with backpropagation?
+a) It ensures all computations within the network are linear, simplifying gradient calculations.
+... Incorrect. Feed-forward networks typically involve nonlinear functions, not linear.
+b) It automatically prevents overfitting by limiting the complexity of network architectures.
+... Incorrect. Feed-forward structure alone doesn't directly limit complexity or prevent overfitting.
+*c) It allows straightforward calculation of gradients by defining a clear computational order for forward and backward passes.
+... Correct. Feed-forward structure ensures a clearly defined order of computations, making gradient calculations straightforward.
+d) It eliminates the need for activation functions in hidden layers, reducing complexity.
+... Incorrect. Feed-forward structure does not eliminate the use of activation functions; they remain essential for modeling nonlinearities.
+
+
+Title: hard – analyze – non-edge – Historical Misconception on Network Depth
+Points: 1
+1. Historically, what misconception arose from the universal approximation theorem regarding neural network depth?
+a) It suggested that neural networks with nonlinear activations were fundamentally limited compared to linear models.
+... Incorrect. The theorem emphasizes the power of nonlinear activations, not their limitations.
+b) It implied that deeper networks would always overfit, discouraging researchers from building deeper architectures.
+... Incorrect. Concerns about overfitting apply generally, not uniquely to deeper networks.
+*c) It led researchers to underestimate the practical advantages of deeper networks, believing shallow networks were sufficient.
+... Correct. The theorem suggested shallow networks could approximate any function, leading to neglect of deeper architectures.
+d) It encouraged researchers to discard hidden layers entirely, advocating purely linear network structures.
+... Incorrect. The theorem specifically highlights the necessity of nonlinear hidden layers, not their removal.
+
+
+Title: medium – understand – non-edge – Forward Propagation and Differentiability
+Points: 1
+1. Why is differentiability of each step in forward propagation important for training neural networks?
+a) Because differentiable functions require fewer parameters to approximate a target function.
+... Incorrect. Differentiability affects optimization, not parameter count.
+*b) Because it enables gradient-based optimization methods to compute parameter updates effectively.
+... Correct. Differentiability is essential for computing gradients during training.
+c) Because non-differentiable functions produce more accurate outputs for classification tasks.
+... Incorrect. Non-differentiable functions can disrupt training, not improve accuracy.
+d) Because forward propagation is only possible for differentiable activation functions.
+... Incorrect. Forward propagation can compute outputs even for non-differentiable functions; the issue arises in training.
+
+
+Title: medium – analyze – non-edge – Limitations of Universal Approximation
+Points: 1
+1. What is a practical limitation of the universal approximation theorem in real-world neural network applications?
+a) It assumes the training data must span all possible inputs to guarantee good test performance.
+... Incorrect. The theorem makes no claim about generalization; it concerns approximation capacity on a compact domain.
+*b) It does not specify how many hidden units are required to reach a desired approximation accuracy.
+... Correct. The theorem is existential—it guarantees the existence of a solution, not the architecture or efficiency.
+c) It only applies to networks trained with gradient descent.
+... Incorrect. The theorem is independent of the training algorithm; it's a representational result.
+d) It requires that the input data be normally distributed to ensure convergence.
+... Incorrect. The theorem makes no distributional assumptions about the input data.
+
+
+Title: medium – analyze – non-edge – Generalization and Model Complexity
+Points: 1
+1. Why might increasing the number of hidden units in a neural network hurt its generalization performance, even if training error decreases?
+a) More hidden units always lead to better generalization because the model has greater capacity.
+... Incorrect. Greater capacity can lead to overfitting if not properly regularized.
+*b) The network may overfit the training data, capturing noise rather than underlying patterns.
+... Correct. Excessive capacity allows the model to memorize training data instead of generalizing.
+c) Hidden units reduce the expressiveness of the network by restricting the learned function class.
+... Incorrect. More hidden units increase expressiveness, not reduce it.
+d) Increasing hidden units automatically removes regularization, making the model untrainable.
+... Incorrect. Regularization must be explicitly applied; it’s not automatically disabled by increasing size.
