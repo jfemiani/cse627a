@@ -1,0 +1,138 @@
+Quiz title: PRML Chapter 1 - 1.2 Probability Theory  
+Quiz description: This quiz covers foundational concepts in probability theory from Section 1.2 of PRML.  
+shuffle answers: true  
+show correct answers: false  
+
+Title: Probability of One Head  
+Points: 1  
+1. Suppose we flip a fair coin twice. What is the probability of getting exactly one heads?  
+a) 1/4  
+... Incorrect. That’s the chance of getting either HH or TT.  
+*b) 1/2  
+... Correct. Two favorable outcomes: HT and TH.  
+c) 3/4  
+... Incorrect. This is too high.  
+d) None of the above  
+... Incorrect. 1/2 is correct.
+
+Title: Drawing Red Balls Without Replacement  
+Points: 1  
+1. You draw two balls without replacement from a box with 5 red and 3 blue balls. What's the chance both are red?  
+a) 10/16 or 0.625  
+... Incorrect. That assumes replacement.  
+b) 5/16 or 0.3125  
+... Incorrect. Misapplied conditional probability.  
+c) 25/64 or 0.390625  
+... Incorrect. That would be with replacement.  
+*d) 5/14 or 0.357142...  
+... Correct. (5/8) * (4/7) = 20/56 = 5/14.
+
+Title: Drawing Hearts and Diamonds  
+Points: 1  
+1. Draw two cards at random from a 52-card deck (no replacement). What's the chance the first is a heart and the second a diamond?  
+a) 1/17  
+... Incorrect. That’s too low.  
+b) 1/16  
+... Incorrect. Rounded approximation.  
+*c) 13/204  
+... Correct. (13/52)*(13/51) = 13/204.  
+d) 1/25  
+... Incorrect. Too small.  
+
+
+Title: Log-Likelihood Use  
+Points: 1  
+1. Why use the log-likelihood in maximum likelihood estimation?  
+*a) It simplifies computation  
+... Correct. Products become sums, making math easier.  
+b) It ensures unbiasedness  
+... Incorrect. Bias is unrelated to this transformation.  
+c) It guarantees convexity  
+... Incorrect. Not generally true.  
+d) It improves stability  
+... Incorrect. That’s a side benefit, not the core reason.
+
+Title: Importance of Gaussian  
+Points: 1  
+1. Why is the Gaussian distribution so widely used in ML?  
+a) It's the only one usable in Bayesian analysis  
+... Incorrect. Many distributions are used.  
+b) It best fits all natural data  
+... Incorrect. Not universally true.  
+c) It’s popular in software packages  
+... Incorrect. Convenience ≠ importance.  
+*d) It has interpretable, tractable properties  
+... Correct. It is analytically convenient and flexible.  
+
+Title: Marginal Probability from Joint  
+Points: 1  
+1. If $p(X, Y) = p(Y|X)p(X)$, how can we compute the marginal probability $p(Y)$?  
+a) $p(Y) = \frac{p(X, Y)}{p(X)}$  
+... Incorrect. That’s the definition of conditional probability.  
+*b) $p(Y) = \sum_X p(Y|X)p(X)$  
+... Correct. This is marginalization using the law of total probability.  
+c) $p(Y) = p(X) + p(Y|X)$  
+... Incorrect. This does not follow any valid rule.  
+d) $p(Y) = p(X) \cdot p(Y)$  
+... Incorrect. This is only valid under independence.
+
+Title: Bayes’ Theorem Application  
+Points: 1  
+1. Which of the following expresses Bayes’ theorem?  
+a) $p(X|Y) = p(X)p(Y)$  
+... Incorrect. That assumes independence.  
+b) $p(X|Y) = \frac{p(Y|X)}{p(X)}$  
+... Incorrect. That reverses the roles of conditional and marginal.  
+*c) $p(Y|X) = \frac{p(X|Y)p(Y)}{p(X)}$  
+... Correct. This is the standard form of Bayes’ theorem.  
+d) $p(X, Y) = \frac{p(Y)}{p(X|Y)}$  
+... Incorrect. This is not a valid identity.
+
+Title: Independence Definition  
+Points: 1  
+1. What condition must hold for two variables $X$ and $Y$ to be independent?  
+a) $p(X|Y) = 0$  
+... Incorrect. That would mean they are mutually exclusive.  
+*b) $p(X, Y) = p(X)p(Y)$  
+... Correct. Independence implies the joint equals the product of marginals.  
+c) $p(Y|X) = p(X|Y)$  
+... Incorrect. That may hold in some cases, but it's not the definition.  
+d) $p(X, Y) = p(X|Y)$  
+... Incorrect. This is only valid if $p(Y) = 1$.
+
+Title: Expectation of a Function  
+Points: 1  
+1. How is the expectation $\mathbb{E}[f(x)]$ defined in the _discrete_ case?  
+a) $\sum_x f(x)$  
+... Incorrect. This ignores the probability weights.  
+*b) $\sum_x p(x) f(x)$  
+... Correct. Expectation is a weighted average.  
+c) $\int f(x) dx$  
+... Incorrect. That’s the continuous case.  
+d) $\mathbb{E}[f(x)] = f(\mathbb{E}[x])$  for any function $f$. 
+... Incorrect. That’s only true for linear functions.
+
+Title: Variance Identity  
+Points: 1  
+1. Which identity is valid for variance of a variable $x$?  
+a) $\mathrm{Var}[x] = \mathbb{E}[x]^2$  
+... Incorrect. That’s the square of the mean, not variance.  
+*b) $\mathrm{Var}[x] = \mathbb{E}[x^2] - (\mathbb{E}[x])^2$  
+... Correct. This is the decomposition of variance.  
+c) $\mathrm{Var}[x] = \mathbb{E}[x + c]$  
+... Incorrect. Variance is unaffected by constant shifts.  
+d) $\mathrm{Var}[x] = \mathbb{E}[x]^2 + \mathbb{E}[x^2]$  
+... Incorrect. This incorrectly sums components.
+
+
+Title: MLE Variance Bias  
+Points: 1  
+1. What is true about the MLE of variance in a Gaussian distribution?  
+*a) It is biased  
+... Correct. It underestimates the variance.  
+b) It is unbiased  
+... Incorrect. It doesn't correct for degrees of freedom.  
+c) It always overestimates  
+... Incorrect. It typically underestimates.  
+d) It always underestimates  
+... Incorrect. It usually does, but "always" is too strong.

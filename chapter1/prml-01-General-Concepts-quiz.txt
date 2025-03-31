@@ -1,0 +1,125 @@
+Quiz title: PRML Chapter 1 – General Concepts  
+Quiz description: This quiz reviews foundational definitions and distinctions from the introductory sections of Chapter 1 in PRML, including learning paradigms and model types.  
+shuffle answers: true  
+show correct answers: false  
+
+Title: concept-check – remember – non-edge – What is pattern recognition  
+Points: 1  
+1. According to PRML, what defines pattern recognition?  
+*a) Automatic identification of patterns in data  
+... Correct. Pattern recognition refers to learning structure from data.  
+b) Guaranteed correct classification  
+... Incorrect. Pattern recognition is typically probabilistic.  
+c) Requires human-labeled data  
+... Incorrect. Not all approaches are supervised.  
+d) None of the above  
+... Incorrect. Option A is accurate.
+
+Title: concept-check – remember – non-edge – Supervised vs. unsupervised learning  
+Points: 1  
+1. Which best differentiates supervised from unsupervised learning?  
+*a) Supervised uses labeled data; unsupervised does not  
+... Correct. This is the fundamental difference.  
+b) Supervised memorizes; unsupervised generalizes  
+... Incorrect. Both can generalize or overfit.  
+c) Supervised uses unlabeled data  
+... Incorrect. That’s reversed.  
+d) Supervised needs known outcomes; unsupervised does not  
+... Incorrect. Partially true, but too vague.
+
+Title: concept-check – understand – non-edge – Goal of ML algorithms  
+Points: 1  
+1. What is the main goal of machine learning algorithms?  
+a) Predict with 100% accuracy  
+... Incorrect. Perfection is not feasible; generalization is key.  
+*b) Learn from data to make predictions or decisions  
+... Correct. This is the fundamental objective of ML.  
+c) Analyze data for scientific discovery  
+... Incorrect. This is an application, not the goal itself.  
+d) Generate new theories  
+... Incorrect. Theory generation may result from ML, but it’s not the primary goal.
+
+Title: concept-check – remember – non-edge – Example of supervised learning  
+Points: 1  
+1. Which of the following is a supervised learning task?  
+a) Predicting stock prices without historical labels  
+... Incorrect. No labels implies it's not supervised.  
+b) Document clustering  
+... Incorrect. Unsupervised grouping of text.  
+c) Recommending movies without explicit feedback  
+... Incorrect. Often uses implicit data, not labels.  
+*d) Classifying handwritten digits  
+... Correct. This is a classic supervised task with labeled data.
+
+Title: concept-check – remember – non-edge – Example of unsupervised learning  
+Points: 1  
+1. Which of the following is an example of unsupervised learning?  
+a) Image classification  
+... Incorrect. This requires labels.  
+b) Object detection  
+... Incorrect. Requires bounding box labels.  
+*c) Clustering  
+... Correct. Clustering groups data without needing labels.  
+d) Feature selection with labels  
+... Incorrect. That’s a supervised preprocessing step.
+
+Title: concept-check – remember – non-edge – Generative vs. discriminative  
+Points: 1  
+1. What is the key difference between generative and discriminative models?  
+*a) Generative models learn $p(x, y)$; discriminative learn $p(y|x)$  
+... Correct. This is the textbook distinction.  
+b) Generative models are more flexible  
+... Incorrect. Flexibility depends on model class, not this distinction.  
+c) Discriminative models assume fewer priors  
+... Incorrect. This is vague and not generally true.  
+d) None of the above  
+... Incorrect. Option A is accurate.
+
+Title: concept-check – remember – non-edge – Example of a generative model  
+Points: 1  
+1. Which of the following is a generative model?  
+a) K-nearest neighbors  
+... Incorrect. This is a non-parametric classifier.  
+b) Decision tree  
+... Incorrect. It models decision boundaries, not joint distributions.  
+*c) Gaussian mixture model  
+... Correct. GMMs model the joint distribution $p(x, y)$ or $p(x)$.  
+d) Support vector machine  
+... Incorrect. SVMs are discriminative margin-based classifiers.
+
+Title: concept-check – remember – non-edge – Example of non-parametric model  
+Points: 1  
+1. Which of the following is an example of a non-parametric model?  
+a) Linear regression  
+... Incorrect. Assumes a fixed parameter form.  
+b) Logistic regression  
+... Incorrect. Also has a fixed parameterization.  
+*c) Decision tree  
+... Correct. Tree complexity grows with data, not fixed parameters.  
+d) Naive Bayes  
+... Incorrect. Typically treated as a parametric model.
+
+
+Title: medium – apply – non-edge – Scenario: supervised vs. unsupervised  
+Points: 1  
+1. A dataset of user behavior logs is analyzed to discover usage patterns without any labeled outcomes. What type of learning is this?  
+a) Supervised learning  
+... Incorrect. There are no labels provided.  
+*b) Unsupervised learning  
+... Correct. Discovering structure without labels is unsupervised.  
+c) Reinforcement learning  
+... Incorrect. No actions or rewards are involved.  
+d) Discriminative modeling  
+... Incorrect. This term applies to modeling strategy, not learning paradigm.
+
+Title: medium – understand – non-edge – Generative vs. discriminative: modeling trade-offs  
+Points: 1  
+1. Why might discriminative models like logistic regression outperform generative models like Naive Bayes in classification tasks?  
+a) Discriminative models require more parameters and are more expressive  
+... Incorrect. Generative models typically require more parameters, as they model $p(x, y)$ rather than just $p(y|x)$.  
+*b) Discriminative models avoid modeling unnecessary aspects of the data distribution  
+... Correct. They directly optimize for predictive performance by focusing only on $p(y|x)$.  
+c) Generative models assume linear decision boundaries  
+... Incorrect. Many generative models allow for nonlinear decision surfaces.  
+d) Discriminative models use prior knowledge about the input distribution  
+... Incorrect. That is typically a characteristic of generative models, not discriminative ones.

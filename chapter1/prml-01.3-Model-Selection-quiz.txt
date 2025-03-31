@@ -1,0 +1,115 @@
+Quiz title: PRML Chapter 1 - 1.3 Model Selection  
+Quiz description: This quiz assesses understanding of model selection principles from Section 1.3 of PRML.  
+shuffle answers: true  
+show correct answers: false  
+
+Title: Avoiding Overfitting  
+Points: 1  
+1. Which technique helps prevent overfitting?  
+a) More training data  
+... Not the best answer. Helpful, but not always available.  
+b) More model complexity  
+... Incorrect. Increases overfitting.  
+c) Better evaluation metric  
+... Incorrect. Doesn’t change training behavior.  
+*d) Regularization  
+... Correct. It penalizes complexity directly.
+
+Title: Purpose of Validation Set  
+Points: 1  
+1. What is a validation set used for?  
+*a) Assessing model generalization  
+... Correct. Helps tune hyperparameters and select models.  
+b) Training the model  
+... Incorrect. That’s the training set.  
+c) Choosing architecture  
+... Incorrect. Indirectly, but not its main role.  
+d) None of the above  
+... Incorrect. Option A is best.
+
+Title: AIC and Model Complexity  
+Points: 1  
+1. Why use AIC for model selection?  
+*a) It penalizes complex models  
+... Correct. AIC helps prevent overfitting by penalizing the number of parameters.  
+b) It uses parameter priors  
+... Incorrect. That’s a feature of Bayesian model selection, not AIC.  
+c) It guarantees the best test error  
+... Incorrect. AIC provides an estimate based on training likelihood, not a guarantee.  
+d) It directly measures model interpretability  
+... Incorrect. AIC balances fit and complexity, not interpretability.
+
+Title: Occam’s Razor  
+Points: 1  
+1. What does Occam’s Razor suggest in ML?  
+a) Pick model based on dataset size  
+... Incorrect. Not the core idea.  
+b) Pick model with least squared error  
+... Incorrect. That can lead to overfitting.  
+*c) Prefer simpler models when accuracy is equal  
+... Correct. This is the core principle.  
+d) Choose models with more parameters  
+... Incorrect. That leads to overfitting.
+
+Title: Role of Model Selection  
+Points: 1  
+1. What is the purpose of model selection?  
+a) Pick most complex model  
+... Incorrect. Complexity is not the goal.  
+b) Pick simplest model  
+... Incorrect. Simplicity alone isn’t sufficient.  
+*c) Balance accuracy, complexity, generalizability  
+... Correct. This is model selection’s goal.  
+d) Pick model with highest variance  
+... Incorrect. High variance harms generalization.  
+
+
+Title: Behavior of Training vs Test Error  
+Points: 1  
+1. As model complexity increases, what typically happens to training and test error?  
+a) Both training and test error decrease  
+... Incorrect. Only training error always decreases.  
+*b) Training error decreases, but test error eventually increases  
+... Correct. This is the classic symptom of overfitting.  
+c) Training error increases, and test error decreases  
+... Incorrect. This would indicate underfitting.  
+d) Both errors remain constant  
+... Incorrect. Complexity impacts both metrics.
+
+Title: Visual Diagnosis of Overfitting  
+Points: 1  
+1. In PRML’s polynomial curve fitting example, how is overfitting visually identified?  
+a) The curve lies far below all data points  
+... Incorrect. That would suggest underfitting.  
+b) The curve intersects all data points exactly  
+... Incorrect. That shows perfect training fit, but not generalization.  
+*c) The curve oscillates wildly between data points  
+... Correct. This is especially noticeable at boundaries.  
+d) The curve appears flat across the input space  
+... Incorrect. That would imply no model learning.
+
+
+Title: Validation Set vs Test Set  
+Points: 1  
+1. What is the main difference between a validation set and a test set?  
+a) The validation set is used to train the model, the test set is not  
+... Incorrect. Neither is used for training.  
+*b) The validation set is used during training to tune models; the test set is used only after model selection*  
+... Correct. The test set provides an unbiased final evaluation.  
+c) The test set is smaller than the validation set  
+... Incorrect. This depends on implementation, not purpose.  
+d) They are the same and used interchangeably  
+... Incorrect. Their roles are distinct and sequential.
+
+
+Title: Purpose of Cross-Validation  
+Points: 1  
+1. Why is cross-validation often used in model selection, especially with limited data?  
+a) It removes the need to evaluate performance on a separate test set  
+... Incorrect. A final test set is still necessary to assess unbiased generalization.  
+*b) It gives a more stable estimate of generalization by averaging across different splits*  
+... Correct. This reduces variance from a single split and helps when data is limited.  
+c) It allows the model to train on a larger portion of the data while still being validated  
+... Incorrect. This sounds appealing, but each fold is trained on *less* data than the full set.  
+d) It guarantees that the selected model generalizes better than alternatives  
+... Incorrect. Cross-validation estimates generalization but does not guarantee outcomes.

@@ -1,0 +1,79 @@
+Quiz title: PRML Chapter 1 - 1.5 Decision Theory  
+Quiz description: This quiz evaluates your understanding of core ideas from Section 1.5 of PRML, including decision rules and loss functions.  
+shuffle answers: true  
+show correct answers: false  
+
+
+
+
+Title: Loss Function in Decision Theory  
+Points: 1  
+1. What is a loss function in decision theory?  
+a) A function that maps inputs to outputs  
+... Incorrect. That describes a predictive model, not a loss function.  
+*b) A function that measures the quality of a decision  
+... Correct. Loss functions quantify the cost of incorrect decisions.  
+c) A function that describes a distribution  
+... Incorrect. That would be a probability distribution.  
+
+
+Title: Decision Boundary  
+Points: 1  
+1. What is a decision boundary in binary classification?  
+*a) A surface separating different predicted classes  
+... Correct. It defines the point of decision switching.  
+b) The value of a prediction function  
+... Incorrect. That’s a threshold, not a boundary.  
+c) The cost function value  
+... Incorrect. That relates to optimization, not decision surfaces.  
+
+
+Title: Bayes Decision Rule  
+Points: 1  
+1. What does the Bayes decision rule prescribe?   (Not Bayes Thm!)
+a) Classify based on posterior probability > threshold  
+... Incorrect. That’s a heuristic, not the Bayes-optimal decision.  
+b) Classify based on prior probability  
+... Incorrect. Prior alone is insufficient.  
+*c) Classify to minimize expected loss  
+... Correct. This is the essence of the Bayes decision rule.  
+
+
+
+Title: medium – understand – non-edge – Posterior vs Decision
+Points: 1
+1. When does choosing the most probable class match the Bayes optimal decision rule?
+a) Only when the classes are linearly separable  
+... Incorrect. Separability affects modeling, not decision rules.  
+b) When the loss function is asymmetric  
+... Incorrect. Asymmetric loss shifts the optimal decision away from the most probable class.  
+*c) When the loss matrix penalizes all misclassifications equally  
+... Correct. This corresponds to uniform loss, where minimizing expected loss is equivalent to choosing the most probable class.  
+d) When the prior is uniform  
+... Incorrect. Priors affect posteriors, but not the equivalence between posterior-maximization and loss-minimization.
+
+
+Title: hard – analyze – edge – Effect of Asymmetric Loss
+Points: 1
+1. How does asymmetric loss affect the decision boundary between two classes?
+a) It moves the boundary toward the class with higher prior  
+... Incorrect. Priors influence posteriors, but boundary shifts are driven by the loss matrix.  
+*b) It moves the boundary toward the class with lower misclassification cost  
+... Correct. A lower loss makes that class more "favored" under uncertainty.  
+c) It makes the boundary disappear  
+... Incorrect. The decision rule still partitions space, just differently.  
+d) It equalizes the posterior probabilities at the boundary  
+... Incorrect. That only happens when losses are symmetric.
+
+
+Title: medium – apply – non-edge – Regression Loss and the Mean
+Points: 1
+1. In regression, minimizing expected squared error leads to what prediction?
+a) The mode of $p(y \mid \mathbf{x})$  
+... Incorrect. The mode gives the most likely value, not the one minimizing squared error.  
+*b) The mean of $p(y \mid \mathbf{x})$  
+... Correct. The mean minimizes expected squared error.  
+c) The median of $p(y \mid \mathbf{x})$  
+... Incorrect. That minimizes absolute error, not squared.  
+d) The MAP estimate of $y$  
+... Incorrect. MAP may differ from mean, especially for skewed distributions.

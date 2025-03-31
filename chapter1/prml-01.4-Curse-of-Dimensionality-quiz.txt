@@ -1,0 +1,68 @@
+Quiz title: PRML Chapter 1.4 – The Curse of Dimensionality  
+Quiz description: This quiz tests understanding of key geometric and statistical effects that emerge in high-dimensional spaces, as described in Section 1.4 of PRML.  
+shuffle answers: true  
+show correct answers: false
+
+Title: concept-check – understand – non-edge – Volume of central subcube  
+Points: 1  
+1. In a $D$-dimensional unit cube, what happens to the volume of the central subcube $[0, 0.5]^D$ as $D$ increases?  
+a) It stays the same  
+... Incorrect. The volume shrinks exponentially with dimension.  
+*b) It decreases exponentially  
+... Correct. The volume is $(0.5)^D$, which vanishes as $D$ grows.  
+c) It increases linearly  
+... Incorrect. Volume increases only if the subcube expands.  
+d) It fluctuates but stays near 0.5  
+... Incorrect. The decline is consistent and exponential.
+
+
+Title: medium – apply – edge – Shell concentration in high-dimensional Gaussians  
+Points: 1  
+1. Why does a standard Gaussian distribution in $\mathbb{R}^D$ concentrate its mass in a thin shell as $D$ increases?  
+a) The density increases with distance from the origin  
+... Incorrect. Gaussian density decreases exponentially with distance.  
+*b) Most samples occur near the radius where shell volume and density balance  
+... Correct. The shell volume increases with radius, offsetting the drop in density until a peak at $r \approx \sqrt{D}$.  
+c) Most samples lie near the origin because the density is highest there  
+... Incorrect. The origin has highest density but negligible volume in high dimensions.  
+d) The distribution spreads uniformly over all radii  
+... Incorrect. The mass concentrates sharply around a specific radius.
+
+
+Title: medium – analyze – non-edge – Behavior of nearest neighbor distances  
+Points: 1  
+1. Why do distance-based methods like k-nearest neighbors degrade in high-dimensional spaces?  
+a) Because distances become infinite as dimension increases  
+... Incorrect. Distances do grow in magnitude, but their relative values are what matter.  
+*b) Because the difference between the nearest and farthest neighbors becomes small  
+... Correct. In high dimensions, distances concentrate — making "nearest" points no longer meaningfully closer than others.  
+c) Because the number of neighbors becomes too large to compute  
+... Incorrect. The number of neighbors is fixed by $k$, not by the dimensionality.  
+d) Because the Gaussian density drops to zero in high dimensions  
+... Incorrect. Falling density doesn't explain the collapse of distance contrast between points.
+
+
+Title: concept-check – remember – non-edge – Axis length needed to retain cube volume  
+Points: 1  
+1. In a uniform distribution over the $[0,1]^D$ cube, how much of each axis must be retained to keep 95% of the total volume as $D$ increases?  
+a) A fixed central subregion like $[0.25, 0.75]^D$  
+... Incorrect. This subregion’s volume shrinks exponentially with dimension.  
+*b) Nearly the full length of each axis  
+... Correct. To preserve 95% of the volume, each axis must span nearly $[0,1]$ as $D \to \infty$.  
+c) Exactly half of each axis  
+... Incorrect. That only retains $(0.5)^D$ of the volume.  
+d) Any range of fixed width, as long as it’s centered  
+... Incorrect. Fixed-width ranges shrink to negligible volume in high dimensions.
+
+Title: medium – understand – edge – Misinterpretation of the Gaussian shell  
+Points: 1  
+1. What is the most accurate interpretation of the “Gaussian shell” phenomenon in high dimensions?  
+a) Most points lie exactly on a spherical surface at radius $\sqrt{D}$  
+... Incorrect. There is no literal surface; points cluster in a narrow range of radii.  
+*b) Most points lie within a thin range of distances from the origin centered around $\sqrt{D}$  
+... Correct. This reflects the concentration of norm values due to high dimension.  
+c) Most points lie near the origin due to high density there  
+... Incorrect. While the origin has high density, its volume is negligible.  
+d) Most points are spread evenly across all distances  
+... Incorrect. The distribution concentrates strongly near a characteristic radius.
+

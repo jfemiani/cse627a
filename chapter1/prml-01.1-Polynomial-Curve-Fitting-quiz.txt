@@ -1,0 +1,64 @@
+Quiz title: PRML Chapter 1 - 1.1 Example: Polynomial Curve Fitting  
+Quiz description: This quiz tests understanding of the polynomial curve fitting example from PRML Section 1.1.  
+shuffle answers: true  
+show correct answers: false  
+
+Title: Overfitting in Polynomial Models  
+Points: 1  
+1. What typically happens when a polynomial model is too complex for the given data?  
+a) The model generalizes well to new data  
+... Incorrect. Overly complex models tend to overfit and fail to generalize.  
+*b) The model fits the training data well but performs poorly on unseen data  
+... Correct. This is characteristic of overfitting.  
+c) The model has lower variance  
+... Incorrect. Complex models often have high variance.  
+d) The model always produces lower error  
+... Incorrect. It may reduce training error but increase test error.  
+
+Title: Maximum Likelihood Estimation  
+Points: 1  
+1. In the polynomial curve fitting example, how are the coefficients of the polynomial determined?  
+a) By minimizing the sum of squared test errors  
+... Incorrect. The test data is not used in model fitting.  
+*b) By maximizing the likelihood of the observed data  
+... Correct. The parameters are fitted via maximum likelihood.  
+c) By choosing weights that perfectly fit the training data  
+... Incorrect. Perfect fit may overfit and is not the fitting criterion.  
+d) By minimizing the degree of the polynomial  
+... Incorrect. The degree is fixed; coefficients are optimized.
+
+Title: Regularization Purpose  
+Points: 1  
+1. What is the purpose of the regularization term added to the error function in polynomial curve fitting?  
+a) To increase the model’s training accuracy  
+... Incorrect. Regularization usually decreases training accuracy.  
+*b) To reduce overfitting by penalizing large coefficients  
+... Correct. Regularization discourages complexity by shrinking weights.  
+c) To ensure that the model fits all training points exactly  
+... Incorrect. That’s what regularization tries to avoid.  
+d) To select the degree of the polynomial  
+... Incorrect. The degree is chosen separately, not via regularization.
+
+Title: Root Mean Square Error  
+Points: 1  
+1. Why is root-mean-square (RMS) error a useful metric in the curve fitting example?  
+*a) It provides a scale-sensitive measure of how well the model fits the data  
+... Correct. RMS is in the same units as the data and measures residual spread.  
+b) It always decreases as model complexity increases  
+... Incorrect. It decreases on training data, but not necessarily on test data.  
+c) It selects the best polynomial degree automatically  
+... Incorrect. RMS is used for evaluation, not selection.  
+d) It ensures maximum likelihood  
+... Incorrect. RMS is related, but maximum likelihood depends on distributional assumptions.
+
+Title: Behavior of High-Degree Polynomials  
+Points: 1  
+1. In the polynomial curve fitting example, what is a common behavior of high-degree polynomials?  
+a) They fit the training data poorly  
+... Incorrect. They typically interpolate the training data.  
+*b) They oscillate wildly between data points  
+... Correct. This is especially visible at boundaries.  
+c) They always generalize better to new data  
+... Incorrect. High-degree polynomials often overfit.  
+d) They minimize bias  
+... Incorrect. While bias may decrease, variance increases.

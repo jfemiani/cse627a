@@ -1,0 +1,67 @@
+Quiz title: PRML Chapter 1 - 1.6 Information Theory  
+Quiz description: This quiz assesses comprehension of entropy, KL divergence, and related concepts from Section 1.6 of PRML.  
+shuffle answers: true  
+show correct answers: false  
+
+Title: concept-check – remember – non-edge – Definition of entropy  
+Points: 1  
+1. What does the entropy $H[x]$ measure for a discrete random variable $x$?  
+a) The probability of the most likely outcome  
+... Incorrect. That’s the mode, not entropy.  
+*b) The average uncertainty or surprise across all outcomes  
+... Correct. Entropy is the expected information content of the distribution.  
+c) The number of distinct values $x$ can take  
+... Incorrect. This affects entropy but is not what it measures.  
+d) The expected value of $x$  
+... Incorrect. Expectation and entropy are distinct concepts.
+
+Title: medium – understand – non-edge – Why KL divergence is non-negative  
+Points: 1  
+1. Why is the KL divergence $\text{KL}(p \| q)$ always non-negative?  
+a) Because $p(x)$ and $q(x)$ are normalized probability distributions  
+... Incorrect. Normalization is necessary but doesn’t explain why KL is $\ge 0$.  
+*b) Because $H[p]$ is the minimum possible expected code length, and using $q(x)$ only increases it  
+... Correct. KL measures the penalty for encoding with $q$ instead of the optimal $p$; that penalty is never negative.  
+c) Because the log-ratio $\log \frac{p(x)}{q(x)}$ is positive  
+... Incorrect. The log-ratio can be negative or positive — only the overall average matters.  
+d) Because the log function is concave  
+... Incorrect. Concavity is used in the proof but not the conceptual reason for non-negativity.
+
+
+Title: medium – understand – non-edge – Entropy and optimal encoding  
+Points: 1  
+1. What does the entropy $H[x]$ of a distribution tell us about data encoding?  
+a) The shortest codeword needed to represent the most likely outcome  
+... Incorrect. That’s related to specific symbol codes, not the expected length.  
+*b) The minimum expected number of bits needed to encode outcomes from $x$  
+... Correct. Entropy quantifies the best achievable average code length using an optimal lossless code.  
+c) The total number of bits needed to encode all possible outcomes  
+... Incorrect. That depends on the number of values, not their probabilities.  
+d) The amount of compression achieved by using Huffman coding  
+... Incorrect. Huffman coding may approximate entropy, but this is not its definition.
+
+
+Title: medium – understand – non-edge – Meaning of mutual information  
+Points: 1  
+1. What does mutual information $I(x; y)$ represent between two random variables $x$ and $y$?  
+a) The probability that $x = y$  
+... Incorrect. Mutual information measures dependence, not equality.  
+*b) The reduction in uncertainty about $x$ given knowledge of $y$  
+... Correct. Mutual information quantifies how much knowing one variable reduces uncertainty about the other.  
+c) The joint entropy of $x$ and $y$  
+... Incorrect. Joint entropy measures combined uncertainty, not reduction.  
+d) The sum of the individual entropies of $x$ and $y$  
+... Incorrect. That would be true only if $x$ and $y$ were independent.
+
+
+Title: concept-check – understand – edge – Asymmetry of KL divergence  
+Points: 1  
+1. Why is $\text{KL}(p \| q) \ne \text{KL}(q \| p)$ in general?  
+a) Because $p$ and $q$ may have different entropy  
+... Incorrect. Entropy affects the values but does not explain asymmetry.  
+*b) Because KL weights the log-ratio $\log \frac{p(x)}{q(x)}$ using $p(x)$, not $q(x)$  
+... Correct. The asymmetry arises because the expectation is taken under $p$, not symmetrically.  
+c) Because the log function is not defined for negative numbers  
+... Incorrect. The log of a ratio is defined for positive inputs — not related to asymmetry.  
+d) Because $q(x)$ is usually a Gaussian  
+... Incorrect. KL is asymmetric for *any* distributions, not just Gaussians.
