@@ -1,0 +1,147 @@
+Title: concept-check – remember – non-edge – Definition of conjugate prior  
+Points: 1.0  
+1. What is a conjugate prior in Bayesian inference?  
+a) A prior unrelated to the likelihood function.  
+... Incorrect. A conjugate prior is specifically chosen so that the posterior retains the same functional form as the prior.  
+*b) A prior that results in a posterior distribution of the same form.  
+... Correct. This is the standard definition of a conjugate prior.  
+c) A prior that always increases the likelihood value.  
+... Incorrect. The purpose of a conjugate prior is not to increase the likelihood, but to simplify the computation of the posterior.  
+d) A prior that gives a flat posterior distribution.  
+... Incorrect. A flat (noninformative) prior is not necessarily conjugate.  
+
+Title: concept-check – remember – non-edge – Likelihood of binary variable  
+Points: 1.0  
+1. For a binary variable $x \in \{0,1\}$ with success probability $\mu$, which expression correctly represents the likelihood for a single observation?  
+a) $p(x|\mu)= \mu$, regardless of $x$.  
+... Incorrect. This does not distinguish between the cases $x=0$ and $x=1$.  
+*b) $p(x|\mu)= \mu^x (1-\mu)^{1-x}$.  
+... Correct. When $x=1$, the expression gives $\mu$, and when $x=0$, it gives $1-\mu$.  
+c) $p(x|\mu)= \mu+(1-\mu)$.  
+... Incorrect. This sums to 1 regardless of $x$ and does not vary with the observed value.  
+d) $p(x|\mu)= x\,\mu\,(1-\mu)^{1-x}$.  
+... Incorrect. Multiplying by $x$ incorrectly forces the likelihood to be 0 when $x=0$.  
+
+Title: concept-check – remember – non-edge – MLE for Bernoulli parameter  
+Points: 1.0  
+1. Given $N$ independent observations of a binary variable, what is the maximum likelihood estimate for $\mu$?  
+*a) The fraction of observations equal to 1.  
+... Correct. The MLE for $\mu$ is calculated as the number of successes divided by $N$.  
+b) The sum of the observations.  
+... Incorrect. While the sum equals the number of 1's, it must be divided by $N$ to obtain the probability estimate.  
+c) The ratio of zeros to total observations.  
+... Incorrect. This gives $1-\mu$, not $\mu$.  
+d) The prior mean of $\mu$.  
+... Incorrect. The prior mean is used in Bayesian inference, not in maximum likelihood estimation.  
+
+Title: concept-check – remember – non-edge – Conjugate prior for Bernoulli  
+Points: 1.0  
+1. Which distribution is commonly used as the conjugate prior for a Bernoulli or binomial likelihood?  
+a) Gaussian distribution.  
+... Incorrect. Gaussians are not conjugate to the Bernoulli/binomial likelihood.  
+b) Gamma distribution.  
+... Incorrect. The Gamma distribution is conjugate to the Poisson or exponential likelihood, not the binomial.  
+*c) Beta distribution.  
+... Correct. The Beta distribution is the standard conjugate prior for Bernoulli and binomial models.  
+d) Uniform distribution.  
+... Incorrect. Although a uniform prior (Beta(1,1)) is a special case, it is not generally referred to as the conjugate prior.  
+
+Title: concept-check – remember – non-edge – Beta distribution functional form  
+Points: 1.0  
+1. Which expression best represents the Beta distribution density for $\mu$ (ignoring normalization)?  
+a) $\mu^{a}(1-\mu)^{b}$  
+... Incorrect. The proper exponents are $a-1$ and $b-1$, not $a$ and $b$.  
+*b) $\mu^{a-1}(1-\mu)^{b-1}$  
+... Correct. This is the functional form of the Beta density (up to the normalizing constant).  
+c) $\mu^{a+1}(1-\mu)^{b+1}$  
+... Incorrect. The exponents are incorrect by an additive factor.  
+d) $\exp(-a\mu-b(1-\mu))$  
+... Incorrect. This is not the form of the Beta distribution.
+
+Title: medium – apply – edge – Entropy of Bernoulli variable  
+Points: 1.0  
+1. Which of the following expressions correctly gives the entropy of a Bernoulli random variable with parameter $\mu$?  
+a) $\mu \ln \mu + (1-\mu) \ln (1-\mu)$  
+... Incorrect. The entropy formula requires a negative sign to ensure a nonnegative result.  
+*b) $-\mu \ln \mu - (1-\mu) \ln (1-\mu)$  
+... Correct. This is the standard formula for the entropy of a Bernoulli variable.  
+c) $\mu(1-\mu)$  
+... Incorrect. This is the variance of a Bernoulli random variable, not its entropy.  
+d) $\ln(\mu) - \ln(1-\mu)$  
+... Incorrect. This does not correspond to the entropy formula.  
+
+Title: medium – apply – edge – Bernoulli over $\{-1,1\}$  
+Points: 1.0  
+1. For a binary variable $x \in \{-1,1\}$ with parameter $\mu \in [-1,1]$, which of the following forms is equivalent to its probability mass function?  
+a) $p(x|\mu)= \left(\frac{1-\mu}{2}\right)^{\frac{1+x}{2}} \left(\frac{1+\mu}{2}\right)^{\frac{1-x}{2}}$  
+... Incorrect. This formulation reverses the roles for $x=1$ and $x=-1$.  
+b) $p(x|\mu)= \left(\frac{1+\mu}{2}\right)^{\frac{1-x}{2}} \left(\frac{1-\mu}{2}\right)^{\frac{1+x}{2}}$  
+... Incorrect. This also does not correctly match the conventional parameterization.  
+*c) $p(x|\mu)= \frac{1}{2}\Bigl(1+\mu\,x\Bigr)$  
+... Correct. This is the standard representation for a binary variable on $\{-1,1\}$.  
+d) $p(x|\mu)= \frac{1}{2}\Bigl(1-\mu\,x\Bigr)$  
+... Incorrect. This would reverse the probabilities for $x=1$ and $x=-1$.  
+
+Title: medium – understand – non-edge – Binomial theorem and normalization  
+Points: 1.0  
+1. The binomial theorem states that  
+$$ (1+x)^N = \sum_{m=0}^{N} \binom{N}{m} x^m. $$  
+Which of the following uses this identity to prove that the binomial distribution is normalized?  
+a) Applying the law of large numbers.  
+... Incorrect. The law of large numbers is not used to show normalization.  
+b) Using the combinatorial identity $\binom{N}{m} + \binom{N}{m-1} = \binom{N+1}{m}$.  
+... Incorrect. Although true, this identity is not needed for normalization.  
+*c) Recognizing that the sum of probabilities $\sum_{m=0}^{N} \binom{N}{m} \mu^m (1-\mu)^{N-m} = (\mu+(1-\mu))^N = 1^N$.  
+... Correct. This directly uses the binomial theorem to confirm that the probabilities sum to one.  
+d) Differentiating the generating function of the binomial coefficients.  
+... Incorrect. Differentiation is unnecessary for demonstrating normalization.  
+
+Title: concept-check – remember – non-edge – Variance of binomial distribution  
+Points: 1.0  
+1. What is the variance of a binomial distribution with parameters $N$ and $\mu$?  
+a) $N\mu$  
+... Incorrect. This is the expected value, not the variance.  
+b) $\mu(1-\mu)$  
+... Incorrect. This is the variance of a single Bernoulli trial; it must be scaled by $N$.  
+*c) $N\mu(1-\mu)$  
+... Correct. This is the well-known formula for the variance of a binomial distribution.  
+d) $N^2\mu(1-\mu)$  
+... Incorrect. Over-scaling the variance by an extra factor of $N$.  
+
+
+Title: medium – understand – non-edge – Posterior mean as weighted average  
+Points: 1.0  
+1. In Bayesian updating for a Bernoulli variable with a Beta prior, what does the posterior mean represent?  
+a) The average of the prior mean and 0.5  
+... Incorrect. The posterior mean depends on the observed data, not a fixed midpoint.  
+*b) A weighted average of the prior mean and the maximum likelihood estimate (sample mean)  
+... Correct. The posterior mean balances prior belief with observed data.  
+c) The variance of the posterior distribution  
+... Incorrect. Variance and mean are distinct concepts.  
+d) The mode of the prior distribution  
+... Incorrect. The posterior mean is not determined by the prior mode.  
+
+
+Title: medium – analyze – edge – Why conjugate priors are useful  
+Points: 1.0  
+1. Why are conjugate priors often chosen in Bayesian analysis?  
+a) They provide the most accurate predictions  
+... Incorrect. Accuracy depends on model fit, not conjugacy.  
+*b) They ensure the posterior remains in the same family, simplifying computation  
+... Correct. Conjugate priors lead to analytically tractable posteriors.  
+c) They eliminate the influence of the prior after updating  
+... Incorrect. The prior still affects the posterior.  
+d) They increase the entropy of the posterior  
+... Incorrect. Entropy change depends on data and distribution, not conjugacy. 
+
+TTitle: hard – analyze – non-edge – Posterior form from Beta prior and Bernoulli likelihood  
+Points: 1.0  
+1. Suppose we observe $N$ Bernoulli trials with $m$ successes and use a Beta$(a, b)$ prior for $\mu$. What is the posterior distribution for $\mu$?  
+a) Beta$(m+a-1, N-m+b-1)$  
+... Incorrect. These parameters would correspond to a posterior mode under certain assumptions, not the full posterior.  
+*b) Beta$(m + a, N - m + b)$  
+... Correct. The posterior combines observed counts with prior pseudo-counts.  
+c) Beta$(a + N, b + m)$  
+... Incorrect. The parameters are misaligned; $m$ must be matched with successes.  
+d) Beta$(N + a + b, N - m)$  
+... Incorrect. This incorrectly sums all prior and observed counts into one parameter. 

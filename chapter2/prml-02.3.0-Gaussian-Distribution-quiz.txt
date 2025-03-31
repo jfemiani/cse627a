@@ -1,0 +1,141 @@
+Quiz title: PRML Chapter 2 – The Gaussian Distribution
+Quiz description: This quiz tests understanding of key concepts from Section 2.3.0 of PRML.
+shuffle answers: true
+show correct answers: false
+
+Title: concept-check – remember – non-edge – Univariate Gaussian Normalization
+Points: 1
+1. Which term in the univariate Gaussian formula 
+$$\mathcal{N}(x|\mu,\sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\!\Bigl\{-\frac{1}{2\sigma^2}(x-\mu)^2\Bigr\}$$ 
+ensures that the distribution is normalized (i.e., integrates to 1)?
+a) $\exp\!\Bigl\{-\frac{1}{2\sigma^2}(x-\mu)^2\Bigr\}$
+... Incorrect. This term determines the shape of the curve.
+*b) $\frac{1}{\sqrt{2\pi\sigma^2}}$
+... Correct. This constant ensures the total area under the curve is 1.
+c) $(x-\mu)^2$
+... Incorrect. This is part of the exponent that measures deviation.
+d) $\sqrt{2\pi\sigma^2}$
+... Incorrect. This term appears in the denominator's reciprocal.
+
+Title: concept-check – understand – non-edge – Quadratic Form Interpretation
+Points: 1
+1. In the multivariate Gaussian distribution, what does the quadratic form 
+$$(x-\mu)^\top\Sigma^{-1}(x-\mu)$$ 
+represent?
+a) The Euclidean distance squared between $x$ and $\mu$.
+... Incorrect. This form adjusts the Euclidean distance using covariance information.
+*b) The Mahalanobis distance squared between $x$ and $\mu$.
+... Correct. It measures distance while accounting for the variance and correlation.
+c) A measure of the variance of $x$.
+... Incorrect. Variance is described by $\Sigma$, not the quadratic form.
+d) The normalization factor of the Gaussian.
+... Incorrect. The normalization factor is given separately.
+
+
+Title: concept-check – remember – non-edge – Jacobian Determinant Value
+Points: 1
+1. When transforming $x$ to the whitened variable $y = U(x-\mu)$ using an orthogonal matrix $U$, what is the value of the Jacobian determinant $|J|$?
+a) $|\Sigma|$
+... Incorrect. This value is related to the covariance, not the transformation.
+b) $\prod_{j=1}^D \lambda_j^{1/2}$
+... Incorrect. This is the square root of the determinant of $\Sigma$, not the Jacobian.
+*c) 1
+... Correct. Since $U$ is orthogonal, the transformation preserves volume.
+d) 0
+... Incorrect. A zero determinant would imply a degenerate transformation.
+
+Title: concept-check – understand – non-edge – Determinant and Eigenvalues
+Points: 1
+1. How is the determinant of the covariance matrix $\Sigma$ related to its eigenvalues?
+a) $|\Sigma| = \sum_{j=1}^D \lambda_j$
+... Incorrect. The determinant is the product of the eigenvalues, not the sum.
+b) $|\Sigma|^{1/2} = \prod_{j=1}^D \lambda_j$
+... Incorrect. The square root of the determinant requires taking the square root of each eigenvalue.
+*c) $|\Sigma|^{1/2} = \prod_{j=1}^D \lambda_j^{1/2}$
+... Correct. The square root of the determinant is the product of the square roots of the eigenvalues.
+d) $|\Sigma|^{1/2} = \sum_{j=1}^D \lambda_j^{1/2}$
+... Incorrect. The determinant involves the product, not the sum, of the eigenvalue square roots.
+
+
+Title: concept-check – understand – non-edge – Whitening Transformation Effect
+Points: 1
+1. After applying the transformation 
+$$
+y = U(x-\mu)
+$$ 
+where $U$ is an orthogonal matrix whose rows are the eigenvectors of $\Sigma$, what is the form of the covariance matrix in the $y$ coordinates?
+a) $\Sigma$
+... Incorrect. In the $y$-space, the covariance does not remain the same.
+*b) A diagonal matrix with entries equal to the eigenvalues of $\Sigma$.
+... Correct. The transformation diagonalizes $\Sigma$, resulting in a diagonal covariance matrix.
+c) The identity matrix.
+... Incorrect. That would occur only if $\Sigma$ were isotropic.
+d) A matrix with all entries equal.
+... Incorrect. This does not describe the effect of the whitening transformation.
+
+
+Title: concept-check – understand – non-edge – Restricted Covariance Implications
+Points: 1
+1. What is a primary benefit of using an isotropic covariance matrix $\Sigma = \sigma^2 I$ in a Gaussian model?
+a) It allows modeling different variances in each direction.
+... Incorrect. Isotropic covariance assumes the same variance in every direction.
+*b) It significantly reduces the number of free parameters, simplifying computation.
+... Correct. Isotropic covariance reduces complexity and limits the number of parameters.
+c) It captures all correlations between different dimensions.
+... Incorrect. Isotropic covariance assumes no correlation between dimensions.
+d) It increases the flexibility of the model.
+... Incorrect. It reduces flexibility by enforcing the same variance in all directions.
+
+
+Title: concept-check – remember – non-edge – Gaussian Second-Order Moment
+Points: 1
+1. For a Gaussian distribution with mean $\mu$ and covariance $\Sigma$, which expression correctly represents the second-order moment $E[xx^\top]$?
+a) $\Sigma$
+... Incorrect. This is only the covariance.
+b) $\mu\mu^\top$
+... Incorrect. This is just the outer product of the mean.
+*c) $\mu\mu^\top + \Sigma$
+... Correct. The second-order moment includes both the outer product of the mean and the covariance.
+d) $\mu + \Sigma$
+... Incorrect. The dimensions of $\mu$ and $\Sigma$ are not compatible for addition.
+
+
+Title: concept-check – understand – non-edge – Central Limit Theorem Relevance
+Points: 1
+1. Why is the Central Limit Theorem relevant to the Gaussian distribution in PRML?
+a) It shows that any individual random variable becomes Gaussian as the sample size increases.
+... Incorrect. The theorem concerns the sum or average of random variables, not individual ones.
+*b) It explains why the sum (or average) of many independent random variables tends to be Gaussian, regardless of their original distributions.
+... Correct. This is the key insight of the Central Limit Theorem.
+c) It states that the variance of a Gaussian distribution decreases with larger sample sizes.
+... Incorrect. The CLT does not address changes in variance with sample size.
+d) It implies that all distributions are inherently Gaussian if enough data is collected.
+... Incorrect. The CLT only applies to the distribution of sums (or averages), not to arbitrary distributions.
+
+
+Title: concept-check – remember – non-edge – Orthogonality of Eigenvectors
+Points: 1
+1. Which property of a covariance matrix $\Sigma$ guarantees that its eigenvectors can be chosen to be orthonormal?
+a) $\Sigma$ is positive semidefinite.
+... Incorrect. While positive semidefiniteness is necessary for a covariance matrix, it is not the property that guarantees orthonormal eigenvectors.
+*b) $\Sigma$ is symmetric.
+... Correct. A symmetric matrix always has a complete set of orthonormal eigenvectors.
+c) $\Sigma$ is diagonal.
+... Incorrect. Diagonal matrices trivially have orthonormal eigenvectors, but a covariance matrix need not be diagonal to have this property.
+d) $\Sigma$ has distinct eigenvalues.
+... Incorrect. Even if eigenvalues are repeated, symmetry ensures the eigenvectors can be chosen to be orthonormal.
+
+
+Title: concept-check – remember – non-edge – Positive Definiteness Definition
+Points: 1
+1. Which of the following best describes a positive definite matrix $A$?
+a) $A$ has at least one positive eigenvalue.
+... Incorrect. A positive definite matrix requires all eigenvalues to be strictly positive.
+*b) For all nonzero vectors $w$, $w^\top A w > 0$.
+... Correct. This is the standard definition of a positive definite matrix.
+c) For all vectors $w$, $w^\top A w \ge 0$.
+... Incorrect. This describes a positive semidefinite matrix.
+d) All eigenvalues of $A$ are nonnegative.
+... Incorrect. This is the definition of a positive semidefinite matrix.
+
+

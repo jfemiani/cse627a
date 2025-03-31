@@ -1,0 +1,114 @@
+Quiz title: PRML Section 2.2 – Multinomial Variables and Dirichlet Priors  
+Quiz description: This quiz tests your understanding of multinomial distributions, their likelihood functions, and their conjugate prior — the Dirichlet distribution.
+
+Title: concept-check – remember – non-edge – Multinomial observation representation  
+Points: 1  
+1. In the multinomial model, how is each observation typically represented?  
+a) As a scalar index between 1 and $K$  
+... Incorrect. While categories can be indexed this way in code, the model assumes a richer representation.  
+*b) As a $K$-dimensional one-hot encoded vector  
+... Correct. This representation has exactly one element equal to 1 and all others 0.  
+c) As a probability vector summing to 1  
+... Incorrect. This describes a parameter, not a single observation.  
+d) As a binary vector with two ones  
+... Incorrect. A one-hot vector contains exactly one 1.
+
+Title: concept-check – remember – non-edge – Multinomial likelihood with counts  
+Points: 1  
+1. What is the likelihood function for the multinomial distribution with counts $m_1,\dots,m_K$ and parameters $\mu_1,\dots,\mu_K$?  
+a) $\prod_{k=1}^K \mu_k^{m_k}$  
+... Incorrect. This omits the combinatorial coefficient accounting for sample permutations.  
+*b) $\displaystyle \frac{N!}{m_1!\cdots m_K!}\prod_{k=1}^K \mu_k^{m_k}$  
+... Correct. This is the complete likelihood function, including normalization.  
+c) $\sum_{k=1}^K \mu_k^{m_k}$  
+... Incorrect. Likelihoods for independent outcomes are multiplied, not summed.  
+d) $\prod_{k=1}^K (m_k\,\mu_k)$  
+... Incorrect. This form is incorrect — the likelihood includes exponents and coefficients.
+
+Title: concept-check – remember – non-edge – Constraints on multinomial parameters  
+Points: 1  
+1. What constraints must the parameters $\mu_1,\dots,\mu_K$ of a multinomial distribution satisfy?  
+a) Each $\mu_k > 0$  
+... Incorrect. This condition is necessary but incomplete.  
+b) The sum $\sum_{k=1}^K \mu_k = 1$  
+... Incorrect. The sum must equal 1, but individual parameters must also be nonnegative.  
+*c) Each $\mu_k \ge 0$ and $\sum_{k=1}^K \mu_k = 1$  
+... Correct. These two conditions together define a valid probability distribution over $K$ outcomes.  
+d) Each $\mu_k$ can be any real number  
+... Incorrect. Probabilities must be nonnegative and sum to 1.
+
+Title: concept-check – remember – non-edge – Conjugate prior for multinomial  
+Points: 1  
+1. Which distribution serves as the conjugate prior for the parameters of a multinomial likelihood?  
+a) Beta distribution  
+... Incorrect. The Beta is the special case for $K=2$ categories.  
+*b) Dirichlet distribution  
+... Correct. The Dirichlet distribution is the standard conjugate prior for multinomial parameters.  
+c) Gaussian distribution  
+... Incorrect. Gaussian distributions are not defined over the simplex and are not conjugate to the multinomial.  
+d) Poisson distribution  
+... Incorrect. The Poisson models counts, not probabilities over categories.
+
+Title: concept-check – remember – non-edge – Dirichlet as generalization  
+Points: 1  
+1. The Dirichlet distribution is a multivariate generalization of which distribution?  
+a) Bernoulli distribution  
+... Incorrect. The Bernoulli models binary outcomes, not continuous probability vectors.  
+*b) Beta distribution  
+... Correct. The Beta is the special case of the Dirichlet for $K = 2$ categories.  
+c) Binomial distribution  
+... Incorrect. The Binomial models discrete counts, not distributions over probabilities.  
+d) Uniform distribution  
+... Incorrect. While the uniform distribution arises when all Dirichlet parameters are equal to 1, it is not the correct generalization.
+
+
+Title: medium – apply – non-edge – Posterior update for Dirichlet prior  
+Points: 1
+1. Suppose a Dirichlet prior has parameters $\alpha_1=2$, $\alpha_2=3$, $\alpha_3=4$, and a dataset has observed counts $m_1=1$, $m_2=2$, $m_3=1$. What are the parameters of the posterior Dirichlet distribution?
+a) $\alpha_1=3$, $\alpha_2=5$, $\alpha_3=4$
+... Incorrect. These values do not correctly apply the update rule.
+*b) $\alpha_1=3$, $\alpha_2=5$, $\alpha_3=5$
+... Correct. Each posterior parameter is the sum of prior and observed counts.
+c) $\alpha_1=1$, $\alpha_2=1$, $\alpha_3=1$
+... Incorrect. These are lower than the prior values.
+d) $\alpha_1=2$, $\alpha_2=2$, $\alpha_3=2$
+... Incorrect. This ignores the observed counts.
+
+
+Title: medium – understand – non-edge – Interpretation of Dirichlet parameters  
+Points: 1
+1. In a Dirichlet distribution, what does a larger value of $\alpha_k$ imply about the prior belief?
+a) That the corresponding category is unlikely  
+... Incorrect. Higher $\alpha_k$ reflects stronger belief in category $k$.
+*b) That we have stronger prior belief in category $k$  
+... Correct. Larger $\alpha_k$ corresponds to more pseudo-counts.
+c) That category $k$ has higher variance  
+... Incorrect. Increasing $\alpha_k$ reduces variance.
+d) That category $k$ is excluded  
+... Incorrect. Zero values would suppress the category entirely.
+
+
+Title: hard – evaluate – edge – Effect of small Dirichlet hyperparameters  
+Points: 1
+1. What is the likely effect of choosing very small Dirichlet hyperparameters (e.g., all $\alpha_k < 1$) in a Bayesian multinomial model?
+a) The posterior will be dominated by the prior  
+... Incorrect. Small $\alpha_k$ values make the prior weak.
+b) The model will assume all outcomes are equally likely  
+... Incorrect. That corresponds to $\alpha_k = 1$.
+*c) The model will favor sparse distributions where some categories dominate  
+... Correct. Small $\alpha_k$ encourage distributions near the edges of the simplex.
+d) The prior will have no effect at all  
+... Incorrect. It still influences posterior even if weak.
+
+
+Title: medium – analyze – non-edge – Likelihood vs prior vs posterior  
+Points: 1
+1. In Bayesian multinomial modeling, what distinguishes the likelihood from the prior and the posterior?
+a) The likelihood is a distribution over parameters  
+... Incorrect. That describes the prior or posterior.
+*b) The likelihood is a function of the parameters given observed data  
+... Correct. The likelihood evaluates how well parameters explain the data.
+c) The prior incorporates observed counts  
+... Incorrect. The prior is specified before observing data.
+d) The posterior does not depend on the likelihood  
+... Incorrect. Posterior is proportional to prior times likelihood.
