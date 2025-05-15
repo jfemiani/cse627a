@@ -1,0 +1,81 @@
+Quiz title: 05.2 – Network Training  
+Quiz description: This quiz evaluates understanding of neural network training principles introduced in Section 5.2 of PRML. Topics include the correspondence between likelihood functions and error objectives, use of sigmoid and softmax activations for classification, implications of nonconvex optimization landscapes, and practical considerations such as label smoothing and framework-specific loss function usage.  
+shuffle answers: true  
+show correct answers: false
+
+
+Title: medium – understand – non-edge – Matching Likelihood to Error Function
+Points: 1
+1. When a neural network is used for regression and the likelihood is modeled as a Gaussian, what is the corresponding error function minimized during training?
+a) Cross-entropy error
+... Incorrect. Cross-entropy is used for classification problems, not regression.
+*b) Sum-of-squares error
+... Correct. The negative log-likelihood of a Gaussian leads to a sum-of-squares error.
+c) Hinge loss
+... Incorrect. Hinge loss is used in support vector machines, not derived from a Gaussian likelihood.
+d) Kullback-Leibler divergence
+... Incorrect. KL divergence measures distributional difference, but isn’t the standard loss for Gaussian regression.
+
+
+Title: medium – understand – non-edge – Binary Classification Likelihood Matching
+Points: 1
+1. In binary classification with a neural network, why is the cross-entropy error function used together with a sigmoid activation?
+a) Because the sigmoid ensures the output is discrete, allowing exact class prediction.
+... Incorrect. The sigmoid outputs continuous probabilities, not discrete labels.
+*b) Because it corresponds to the negative log-likelihood under a Bernoulli distribution.
+... Correct. The cross-entropy loss is derived from the log-likelihood of a Bernoulli likelihood model.
+c) Because it guarantees convexity of the loss function with respect to the weights.
+... Incorrect. The overall loss is not convex in the weights due to the network’s structure.
+d) Because it forces the model to avoid overfitting by penalizing large weights.
+... Incorrect. That effect is achieved through regularization, not the choice of error function alone.
+
+
+Title: medium – understand – non-edge – Softmax and Multiclass Cross-Entropy
+Points: 1
+1. Why is the softmax activation function used with cross-entropy loss in multiclass classification tasks?
+a) Because softmax guarantees equal probability for each class before training begins.
+... Incorrect. Softmax does not impose equal probabilities; it normalizes arbitrary scores into a distribution.
+*b) Because softmax converts raw outputs into a valid probability distribution, enabling likelihood-based training with 1-of-K targets.
+... Correct. Softmax ensures outputs sum to 1, making them interpretable as class probabilities.
+c) Because cross-entropy only works if all output activations are equal.
+... Incorrect. Cross-entropy measures the match between predicted and true distributions, not equality of outputs.
+d) Because softmax avoids the need for backpropagation through the output layer.
+... Incorrect. Softmax is differentiable, but backpropagation still applies through all layers.
+
+
+Title: medium – analyze – non-edge – Nonconvex Error Surface Implications
+Points: 1
+1. What is one consequence of the nonconvexity of the neural network error function?
+a) The gradient is always zero at the global minimum.
+... Incorrect. While true at stationary points, this doesn’t distinguish between convex and nonconvex settings.
+*b) Optimization may get stuck in local minima or saddle points rather than finding a global minimum.
+... Correct. Nonconvexity means multiple critical points exist, and not all are global optima.
+c) The error function cannot be minimized using gradient descent.
+... Incorrect. Gradient descent is still usable but may converge to suboptimal points.
+d) Backpropagation becomes non-differentiable.
+... Incorrect. Backpropagation works as long as activation functions are differentiable, regardless of convexity.
+
+
+Title: medium – apply – edge – Pitfall: CrossEntropyLoss and Softmax
+Points: 1
+1. In PyTorch, what is the correct way to compute the loss for multiclass classification using `CrossEntropyLoss`?
+a) Apply softmax to the output layer and then pass the result to `CrossEntropyLoss`.
+... Incorrect. This double-applies softmax and leads to incorrect gradients and numerical instability.
+*b) Pass the raw output logits directly to `CrossEntropyLoss`, which applies softmax internally.
+... Correct. PyTorch expects raw scores and handles softmax + log internally for numerical stability.
+c) Use a sigmoid activation and then apply `BCELoss` for multiclass classification.
+... Incorrect. Sigmoid + BCE is not suited for mutually exclusive classes.
+d) Apply `log_softmax` manually and then use `CrossEntropyLoss`.
+... Incorrect. `CrossEntropyLoss` already includes `log_softmax`, so applying it again is redundant and incorrect.
+
+Title: medium – apply – non-edge – Purpose of Label Smoothing
+Points: 1
+1. What is the main reason for using label smoothing during neural network training?
+a) To make the loss function differentiable with respect to the logits.
+... Incorrect. Cross-entropy is already differentiable; label smoothing affects the targets, not the function.
+*b) To prevent overconfident predictions and improve generalization.
+... Correct. Label smoothing encourages calibrated confidence and reduces overfitting.
+c) To normalize the input features before passing them into the model.
+... Incorrect. That’s input normalization, unrelated to label smoothing.
+d) To ensure that gradients do not vanish during backpropagation.
+... Incorrect. Label smoothing does not directly affect gradient vanishing.

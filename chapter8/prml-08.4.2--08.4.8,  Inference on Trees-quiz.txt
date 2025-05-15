@@ -1,0 +1,235 @@
+Quiz title: PRML Chapter 8 – Inference in Graphical Models  
+Quiz description: This quiz tests understanding of key concepts from Sections 8.4.2 through 8.4.8 of PRML.  
+shuffle answers: true  
+show correct answers: false
+
+
+Title: concept-check – remember – non-edge – Tree definition
+Points: 1
+1. What is the defining property of a tree-structured undirected graph in the context of graphical models?
+a) Every node has exactly one parent.
+... Incorrect. That defines a directed tree, not an undirected one.
+*b) There is exactly one path between any pair of nodes.
+... Correct. This is the defining characteristic of an undirected tree.
+c) The graph can be triangulated without added edges.
+... Incorrect. That applies to junction trees, not trees.
+d) The root node has no children.
+... Incorrect. That is not a standard condition in undirected trees.
+
+
+Title: medium – understand – non-edge – Polytree vs Tree
+Points: 1
+1. In what way does a **polytree** differ from a directed tree?
+a) A polytree allows for cycles if they are directed.
+... Incorrect. Polytrees cannot contain cycles in any direction.
+*b) A polytree allows nodes to have more than one parent.
+... Correct. That is the key difference; nodes may have multiple parents.
+c) A polytree contains a moralized loop by construction.
+... Incorrect. Moralization introduces loops, but the polytree itself does not have loops.
+d) A polytree is fully connected and undirected.
+... Incorrect. It is still directed and not necessarily fully connected.
+
+Title: concept-check – remember – non-edge – Factor graph structure
+Points: 1
+1. What distinguishes a factor graph from a Bayesian network or a Markov random field?
+a) It represents only linear dependencies between variables.
+... Incorrect. Factor graphs are not restricted to linear relationships.
+b) It requires moralization of all directed edges.
+... Incorrect. Moralization applies when converting a Bayesian network to an undirected form, not when creating a factor graph.
+*c) It introduces explicit nodes for each factor in the distribution.
+... Correct. Factor graphs contain both variable nodes and factor nodes, making the factorization structure explicit.
+d) It uses only cliques to represent joint probabilities.
+... Incorrect. That describes how MRFs encode factorization using cliques.
+
+
+
+Title: medium – apply – non-edge – Sum-product base cases
+Points: 1
+1. In the sum-product algorithm, what message does a **leaf variable node** send to its neighboring factor node?
+a) A zero vector indicating no incoming information.
+... Incorrect. A zero message would eliminate information entirely.
+*b) The constant function $\mu_{x \rightarrow f}(x) = 1$
+... Correct. This represents uninformative prior belief (uniform).
+c) A copy of the factor potential.
+... Incorrect. Variable nodes do not send factor functions.
+d) The average of its neighbors' messages.
+... Incorrect. Message passing uses products, not averages.
+
+
+Title: medium – understand – edge – Message direction in max-sum
+Points: 1
+1. Why does the **max-sum algorithm** not require message passing in both directions like the sum-product algorithm does?
+a) Because the max operation is symmetric and reversible.
+... Incorrect. Max is not reversible in that way.
+*b) Because only the single most likely configuration is needed, not all marginals.
+... Correct. Max-sum computes a single MAP configuration, so back-propagation suffices.
+c) Because max-sum includes normalization at each step.
+... Incorrect. Normalization is not part of max-sum.
+d) Because factor graphs in max-sum must be fully connected.
+... Incorrect. The graph structure is not required to be fully connected.
+
+
+Title: concept-check – remember – non-edge – Message product for variable marginals
+Points: 1
+1. In the sum-product algorithm, how is the marginal $p(x_i)$ for a variable node $x_i$ computed after message passing?
+a) By averaging all incoming messages to $x_i$
+... Incorrect. The algorithm uses a product, not an average.
+*b) By taking the product of all incoming messages to $x_i$
+... Correct. The unnormalized marginal is proportional to the product of incoming factor-to-variable messages.
+c) By summing all messages received by neighboring factors
+... Incorrect. Messages are not summed at this step.
+d) By normalizing each individual message at $x_i$
+... Incorrect. Normalization is done globally after computing the product.
+
+
+Title: medium – apply – non-edge – Leaf node base case
+Points: 1
+1. What message does a **leaf factor node** send to its only neighboring variable in the sum-product algorithm?
+a) A constant 1
+... Incorrect. That is the base case for leaf variable nodes, not factor nodes.
+*b) Its own factor function $f(x)$
+... Correct. The factor has no other neighbors, so it sends itself as the message.
+c) The average of all incoming messages
+... Incorrect. There are no incoming messages at a leaf factor.
+d) A normalized version of the joint over the variable
+... Incorrect. This step does not involve normalization yet.
+
+Title: medium – understand – edge – Root handling in max-sum
+Points: 1
+1. In the max-sum algorithm, once messages have reached the root node, what value is computed?
+a) The product of all incoming messages to the root
+... Incorrect. That’s sum-product, not max-sum.
+*b) The maximum value of the log-joint: $\max_x \sum \mu_{f \rightarrow x}(x)$
+... Correct. This gives $\ln p_{\text{max}}$, the log of the highest joint probability.
+c) The minimum entropy configuration
+... Incorrect. Entropy isn’t computed in max-sum.
+d) The marginal distribution over root variables
+... Incorrect. Max-sum computes the single best configuration, not marginals.
+
+
+Title: medium – apply – edge – Why store argmax
+Points: 1
+1. Why must the max-sum algorithm **store argmax values** during the forward pass?
+a) To normalize the posterior probabilities
+... Incorrect. Max-sum does not normalize posteriors.
+*b) To ensure backtracking produces a globally consistent configuration
+... Correct. Without tracking argmax, you may get inconsistent variable assignments during backtracking.
+c) To enforce treewidth constraints
+... Incorrect. Treewidth affects feasibility, not inference logic.
+d) To allow loopy belief propagation
+... Incorrect. Loopy belief propagation is not part of max-sum.
+
+
+Title: concept-check – remember – non-edge – Backtracking meaning
+Points: 1
+1. In max-sum, what does "backtracking" refer to?
+a) Resending messages from the leaves to the root
+... Incorrect. That’s part of the forward pass.
+*b) Recovering the MAP configuration by tracing stored argmax choices
+... Correct. Backtracking uses stored $\phi$ values to reconstruct the best assignment.
+c) Recomputing the full joint distribution
+... Incorrect. The full joint is never computed explicitly.
+d) Reversing the normalization process
+... Incorrect. No normalization is involved in max-sum.
+
+
+Title: medium – apply – edge – Failure of marginal-based MAP
+Points: 1
+1. Why does selecting the most likely value from each marginal $p(x_i)$ not generally produce the MAP configuration?
+a) Because the marginals are always uniform in tree graphs
+... Incorrect. Marginals are not necessarily uniform.
+*b) Because the most likely joint configuration may not align with the individual marginal modes
+... Correct. Marginals maximize individually; MAP maximizes jointly.
+c) Because marginals are conditional on a fixed root variable
+... Incorrect. They are not conditioned this way.
+d) Because marginals are normalized while joint probabilities are not
+... Incorrect. That doesn’t explain the inconsistency.
+
+
+Title: medium – understand – edge – Why sum-product requires both directions
+Points: 1
+1. Why must messages pass in both directions on each edge in the sum-product algorithm?
+a) To ensure the factor graph remains acyclic
+... Incorrect. The structure is already a tree.
+b) To compute all local potentials directly
+... Incorrect. Local potentials are already defined by the factorization.
+*c) Because computing full marginals requires combining upstream and downstream information
+... Correct. Each variable needs messages from all its neighbors.
+d) Because variable-to-factor messages contain normalization constants
+... Incorrect. Normalization is applied after message passing.
+
+Title: medium – apply – non-edge – Message scheduling in loopy BP
+Points: 1
+1. How is message passing scheduled in loopy belief propagation?
+a) A fixed forward-backward order is used
+... Incorrect. That only works for trees.
+*b) Messages are passed iteratively, using local updates on a schedule
+... Correct. Loopy BP passes messages asynchronously or in rounds.
+c) Messages are only passed once per edge
+... Incorrect. Loopy BP requires repeated updates.
+d) Messages are passed only at variable nodes
+... Incorrect. Both factor and variable nodes participate.
+
+
+Title: concept-check – remember – non-edge – Loopy BP convergence
+Points: 1
+1. What is a key limitation of loopy belief propagation when applied to graphs with cycles?
+a) It is guaranteed to compute incorrect marginals.
+... Incorrect. It may be correct but has no guarantee.
+*b) It is not guaranteed to converge.
+... Correct. In graphs with cycles, loopy BP may fail to converge.
+c) It only applies to undirected graphs.
+... Incorrect. It can be applied to factor graphs derived from directed models.
+d) It requires exact inference to initialize.
+... Incorrect. Initialization can be arbitrary; exact inference is not required.
+
+
+Title: medium – apply – edge – When loopy BP is useful
+Points: 1
+1. Despite having no convergence guarantee, why is loopy belief propagation widely used?
+a) It approximates KL divergence between marginals and the joint
+... Incorrect. That’s more related to variational methods.
+*b) It often gives accurate results in practice, especially in sparse graphs
+... Correct. Empirical success makes loopy BP attractive despite its theoretical flaws.
+c) It always converges on DAGs
+... Incorrect. Loopy BP applies to undirected graphs or factor graphs; convergence is not guaranteed.
+d) It performs exact inference in cyclic graphs
+... Incorrect. Exact inference is not feasible with cycles unless converted to a junction tree.
+
+Title: hard – evaluate – edge – Factor-to-variable message interpretation
+Points: 1
+1. What does a message from a factor node to a variable in sum-product represent?
+a) A pointwise marginal distribution over all variables in the factor
+... Incorrect. It marginalizes out all variables *except* the one receiving the message.
+*b) A summary of the factor’s belief over that variable after integrating out other variables
+... Correct. The message encodes how the factor’s structure supports each value of that variable.
+c) An approximation to the KL divergence across all variables
+... Incorrect. This isn't about divergence.
+d) A sampled distribution from Gibbs conditioning
+... Incorrect. Sampling isn't part of sum-product.
+
+
+Title: medium – understand – edge – Root node choice in trees
+Points: 1
+1. Why is the choice of root node arbitrary in sum-product and max-sum algorithms on trees?
+a) Because the message equations change based on the root
+... Incorrect. The equations stay the same; only schedule changes.
+*b) Because trees have a unique path between nodes, so any root leads to the same result
+... Correct. The root defines direction, but results are root-invariant.
+c) Because all leaf nodes contain priors
+... Incorrect. Leaves may or may not encode priors.
+d) Because it is required for loopy belief propagation
+... Incorrect. Loopy BP does not rely on root choice.
+
+
+Title: medium – evaluate – edge – Practical effects of root choice in max-sum
+Points: 1
+1. In the max-sum algorithm on a tree-structured factor graph, how does the choice of root node affect the algorithm?
+a) It determines the MAP configuration that the algorithm converges to
+... Incorrect. The final MAP assignment is invariant to root choice.
+*b) It affects the message schedule and may influence practical runtime efficiency
+... Correct. While correctness is unaffected, a balanced root can reduce stack depth and message size growth.
+c) It changes which variables require backtracking
+... Incorrect. All variables use backtracking, regardless of root.
+d) It determines whether the factor graph needs triangulation
+... Incorrect. Triangulation is only needed for graphs with cycles.

@@ -1,0 +1,195 @@
+Quiz title: PRML Chapter 8.3 – Markov Random Fields  
+Quiz description: This quiz tests understanding of key ideas and structures in Section 8.3 of PRML, including graph separation, clique factorization, potentials, energy functions, and the Hammersley-Clifford theorem.  
+shuffle answers: true  
+show correct answers: false
+
+Title: concept-check – remember – non-edge – clique potential definition  
+Points: 1  
+1. In a Markov Random Field (MRF), what is the role of a potential function $\psi_C(x_C)$?  
+a) It defines a normalized probability over the variables in clique $C$  
+... Incorrect. Potentials are unnormalized; they only need to be non-negative.  
+b) It defines a prior distribution over the entire graph  
+... Incorrect. Potentials operate locally over cliques, not the full graph.  
+*c) It assigns a non-negative compatibility score to configurations of variables in clique $C$  
+... Correct. Potentials are local scoring functions used to build the unnormalized joint.  
+d) It computes the conditional probability of one node given its neighbors  
+... Incorrect. That describes the Gibbs distribution, not the role of $\psi$.  
+
+Title: medium – analyze – edge – graph separation semantics  
+Points: 1  
+2. According to the separation rule in MRFs, when are two variable sets $A$ and $B$ conditionally independent given $C$?  
+*a) When all paths from $A$ to $B$ pass through at least one node in $C$  
+... Correct. This is the graph separation criterion used in undirected models.  
+b) When $A$ and $B$ share no edges in the graph  
+... Incorrect. That implies marginal independence, not conditional.  
+c) When $C$ forms a clique containing both $A$ and $B$  
+... Incorrect. That structure generally induces dependence.  
+d) When $C$ contains all maximal cliques that include variables in $A$ or $B$  
+... Incorrect. Clique coverage does not imply conditional independence.  
+
+Title: hard – apply – edge – Ising model energy terms  
+Points: 1  
+3. In the Ising model energy  
+   $$E(x, y) = \sum_i h x_i - \beta \sum_{\{i,j\}} x_i x_j - \eta \sum_i x_i y_i$$  
+   what is the role of the term $-\beta \sum_{\{i,j\}} x_i x_j$?  
+a) It encourages alignment between latent $x_i$ and observed $y_i$  
+... Incorrect. That’s the role of the $-\eta$ term.  
+*b) It penalizes disagreement between neighboring nodes $x_i$ and $x_j$  
+... Correct. This term encourages neighbors to have the same value when $\beta > 0$.  
+c) It suppresses all configurations except the minimum-energy one  
+... Incorrect. It shapes the distribution, but does not exclude configurations.  
+d) It ensures that the resulting distribution is normalized  
+... Incorrect. Normalization comes from the partition function $Z$.  
+
+
+Title: concept-check – remember – non-edge – partition function role  
+Points: 1  
+4. In an MRF, what is the function of the partition function $Z$?  
+a) It enforces local normalization for each clique  
+... Incorrect. Potentials are not normalized locally.  
+*b) It normalizes the full joint distribution to ensure it sums to 1  
+... Correct. $Z = \sum_x \prod_C \psi_C(x_C)$ makes the distribution valid.  
+c) It computes the log-likelihood for observed data  
+... Incorrect. That would involve evaluating $p(x)$, not computing $Z$ per se.  
+d) It eliminates cycles in the graph  
+... Incorrect. $Z$ is unrelated to the graph structure itself.  
+
+Title: concept-check – understand – non-edge – local Markov property  
+Points: 1  
+5. What does the local Markov property state for a Markov Random Field?  
+*a) A variable is conditionally independent of all others given its immediate neighbors  
+... Correct. This defines the Markov blanket in undirected models.  
+b) A variable's probability depends only on the variables in its maximal clique  
+... Incorrect. Maximal cliques may include non-neighboring nodes.  
+c) A variable is conditionally independent of its neighbors given its parents  
+... Incorrect. That applies to Bayesian networks, not MRFs.  
+d) A variable is only independent if the graph is fully disconnected  
+... Incorrect. Independence depends on graph structure, not isolation.  
+
+Title: concept-check – remember – non-edge – Hammersley-Clifford statement  
+Points: 1  
+6. What does the Hammersley-Clifford theorem say about strictly positive distributions?  
+*a) That separation in the graph implies conditional independence if and only if the distribution factorizes over cliques  
+... Correct. The theorem links separation semantics to clique-based factorization.  
+b) That potentials must form a convex function over the cliques  
+... Incorrect. The theorem does not constrain the shape of potentials.  
+c) That marginal probabilities can be computed locally from any clique  
+... Incorrect. Marginals generally require global normalization.  
+d) That energy functions must be additive over disjoint components  
+... Incorrect. This is true structurally, but not what the theorem asserts.  
+
+Title: medium – apply – edge – conditional independence test  
+Points: 1  
+7. In an MRF, how can you test if $A \perp\!\!\!\perp B \mid C$ using the separation rule?  
+a) Remove all edges in $C$ and check if $A$ and $B$ are d-separated  
+... Incorrect. That describes separation in directed models.  
+*b) Remove all nodes in $C$ and their edges; if $A$ and $B$ are disconnected, they are conditionally independent  
+... Correct. Graph separation in undirected models implies conditional independence.  
+c) Check whether $A$ and $B$ are not part of the same maximal clique  
+... Incorrect. Clique membership does not imply dependence.  
+d) Confirm that $C$ lies on every path between $A$ and $B$ in the moral graph  
+... Incorrect. Moralization applies to directed models, not MRFs.  
+
+
+Title: concept-check – remember – non-edge – MRF neighborhood semantics  
+Points: 1  
+8. What is the Markov blanket of a variable in an MRF?  
+a) Its parents and children  
+... Incorrect. That describes Bayesian networks, not MRFs.  
+*b) Its immediate neighbors in the undirected graph  
+... Correct. In an MRF, the Markov blanket is the set of adjacent nodes.  
+c) All nodes in the same clique  
+... Incorrect. Cliques may include transitive relationships, not just neighbors.  
+d) Nodes that share a potential with the variable  
+... Incorrect. Potentials may span beyond direct adjacency.  
+
+
+Title: hard – analyze – edge – moralization impact  
+Points: 1  
+9. What is a consequence of converting a Bayesian network into an MRF via moralization?  
+*a) The resulting MRF may lose some of the original conditional independencies  
+... Correct. Moralization can create extra edges, destroying some d-separation-based independencies.  
+b) The resulting graph becomes a tree  
+... Incorrect. Cycles are allowed in MRFs; trees are not required.  
+c) The distribution becomes a mixture of directed and undirected components  
+... Incorrect. Moralization results in a fully undirected model.  
+d) The graph must be reparameterized using energy functions  
+... Incorrect. The underlying distribution can stay the same; only the representation changes.  
+
+
+Title: medium – understand – non-edge – perfect map meaning  
+Points: 1  
+10. What does it mean for a graph to be a “perfect map” of a distribution?  
+a) It includes only the dependencies present in the distribution  
+... Incorrect. That’s a D-map.  
+*b) It captures exactly the independencies that hold in the distribution  
+... Correct. A perfect map is both an I-map and a D-map — no more, no less.  
+c) It uses the smallest number of edges needed for a valid factorization  
+... Incorrect. Minimality is desirable but not part of the definition.  
+d) It has disjoint cliques that cover all variables  
+... Incorrect. Cliques can and often do overlap.  
+
+
+Title: concept-check – remember – non-edge – moralization procedure  
+Points: 1  
+11. What are the steps in moralizing a Bayesian network?  
+a) Reverse all arrows and collapse common descendants  
+... Incorrect. That does not preserve dependencies correctly.  
+*b) Add undirected edges between all co-parents, then drop all edge directions  
+... Correct. This produces an undirected graph with preserved dependency scope.  
+c) Remove leaf nodes and triangulate remaining cliques  
+... Incorrect. That’s not part of moralization.  
+d) Convert all deterministic nodes to observed nodes  
+... Incorrect. Moralization is about structure, not node types.  
+
+
+Title: concept-check – remember – non-edge – clique definition  
+Points: 1  
+12. What is a clique in an undirected graph?  
+a) A set of nodes that all have the same degree  
+... Incorrect. Degree uniformity is unrelated to cliques.  
+*b) A subset of nodes where every pair of nodes is connected by an edge  
+... Correct. This is the definition of a clique.  
+c) A maximal connected component of the graph  
+... Incorrect. That refers to components, not cliques.  
+d) A set of nodes that share a common neighbor  
+... Incorrect. That does not imply full connectivity.  
+
+
+Title: concept-check – remember – non-edge – maximal clique definition  
+Points: 1  
+13. What is a maximal clique in a graph?  
+a) A clique that contains the maximum number of nodes in the entire graph  
+... Incorrect. That would be a maximum clique.  
+*b) A clique that cannot be extended by adding another adjacent node  
+... Correct. Maximal means inclusion-wise maximal, not globally largest.  
+c) A clique that is part of every possible factorization  
+... Incorrect. Factorizations can vary.  
+d) A clique that has the lowest energy under the Boltzmann distribution  
+... Incorrect. That confuses structure with inference.  
+
+
+Title: hard – analyze – edge – non-max clique potentials  
+Points: 1  
+14. Why is it acceptable for potential functions to involve non-maximal cliques, even though maximal cliques are often used?  
+a) Only maximal cliques allow exact inference via message passing  
+... Incorrect. Inference depends on structure and algorithm, not clique size.  
+*b) Any product of potentials over smaller subsets can be absorbed into a potential over the containing maximal clique  
+... Correct. Factorizations are equivalent as long as they cover the same variable scopes.  
+c) Only non-maximal cliques are permitted in exponential family distributions  
+... Incorrect. There is no such constraint.  
+d) Boltzmann distributions require one potential per edge only  
+... Incorrect. They may include both unary and pairwise (or higher) potentials.  
+
+
+Title: medium – understand – non-edge – ICM update rule  
+Points: 1  
+16. In the ICM algorithm for MAP inference, what happens during each update step?  
+a) The entire configuration $x$ is resampled jointly from the posterior  
+... Incorrect. ICM updates one variable at a time.  
+*b) A single variable $x_i$ is set to the value that maximizes $p(x_i \mid x_{\setminus i}, y)$  
+... Correct. ICM performs greedy local updates to reduce energy.  
+c) A pair of neighboring variables is updated by sampling from their marginal  
+... Incorrect. That would be a form of Gibbs sampling or block sampling.  
+d) Potentials are recomputed using backpropagation through the energy function  
+... Incorrect. ICM is not a gradient-based method.  

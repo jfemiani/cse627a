@@ -147,6 +147,26 @@ After generating each question, perform this checklist and **report your answers
    - It must not rely on unstated background knowledge or topics not yet introduced
 
 
+## Derivations
+It is important that you provide detailed derivations of the formulas in the chapter. 
+
+A derivation should be a 3-column proof. 
+It is VERY IMPORTANT that the derivation show every step an instructor would write on a chalk board. 
+We cannot take large steps that a student could not easily see in their head. It is okay to break it into multple parts. 
+
+E.g.  end a table, present a lemma, then continue with the original.   If an equation / step is too complex to put in the table we can stop the table to put it on its own line then restart the table.  
+
+Please **do** make excessive use of latex \cancel or \underbrace annotations to show what is being done and why. This is educational, it must be over-complete. 
+
+Example:
+
+| Step | Formula | Reason |
+|------|---------|--------|
+| 1 | $$\min_{w, b} \frac{1}{2} \|w\|^2 \quad \text{subject to } t_n(w^\top \phi(x_n) + b) \ge 1$$ | Primal problem formulation |
+| 2 | $$\mathcal{L}(w, b, a) = \frac{1}{2} \|w\|^2 - \sum_{n=1}^N a_n [t_n(w^\top \phi(x_n) + b) - 1]$$ | Construct Lagrangian with $a_n \ge 0$ |
+| 3a | $$\frac{\partial \mathcal{L}}{\partial w} = \underbrace{\frac{\partial}{\partial w} \left( \frac{1}{2} \|w\|^2 \right)}_{= w} + \underbrace{\frac{\partial}{\partial w} \left( - \sum_n a_n t_n w^\top \phi(x_n) \right)}_{= - \sum_n a_n t_n \phi(x_n)} = 0$$ | Take derivative w.r.t. $w$ |
+... (it continues) ...
+
 
 
 ---

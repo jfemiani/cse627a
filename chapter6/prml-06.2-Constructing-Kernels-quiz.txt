@@ -1,0 +1,41 @@
+Quiz title: 06.2 – Constructing Kernels  
+Quiz description: This quiz tests understanding of key concepts from Section 6.2 of PRML.  
+shuffle answers: true  
+show correct answers: false
+
+
+Title: concept‑check – remember – non‑edge – kernel feature‑map  
+Points: 1  
+1. In the feature‑map approach, the kernel function $k(x,x')$ is defined as  
+a) $\phi(x) + \phi(x')$  
+... Incorrect. Kernels are inner products, not vector sums.  
+*b) $\phi(x)^\top \phi(x')$  
+... Correct. The kernel is the inner product of the two feature vectors.  
+c) $\phi(x)^\top + \phi(x')^\top$  
+... Incorrect. That expression adds row vectors, which is meaningless in this context.  
+d) $\sum_i \phi_i(x) + \phi_i(x')$  
+... Incorrect. That adds basis functions rather than multiplying them.  
+
+Title: concept‑check – remember – non‑edge – Mercer condition  
+Points: 1  
+1. A function $k(x,x')$ is a valid kernel if and only if:  
+a) The function $\phi(x)$ can be written in closed form.  
+... Incorrect. A kernel can be valid even if $\phi(x)$ is unknown or infinite-dimensional.  
+*b) For every set of inputs $\{x_1, \dots, x_N\}$, the Gram matrix $K$ with $K_{ij} = k(x_i, x_j)$ is positive semidefinite.  
+... Correct. Mercer’s condition states this is necessary and sufficient.  
+c) $k(x,x')$ depends only on $\|x - x'\|$.  
+... Incorrect. That defines a stationary kernel, not necessarily a valid one.  
+d) $k(x,x')$ is symmetric and differentiable.  
+... Incorrect. Symmetry is required, but differentiability is not.  
+
+Title: medium – apply – non‑edge – closure properties (sum)  
+Points: 1  
+1. If $k_1(x,x')$ and $k_2(x,x')$ are both valid kernels, which of the following constructions is **guaranteed** to produce another valid kernel?  
+a) $k(x,x') = k_1(x,x') - k_2(x,x')$  
+... Incorrect. The difference of two kernels is not guaranteed to preserve positive semidefiniteness.  
+*b) $k(x,x') = k_1(x,x') + k_2(x,x')$  
+... Correct. The sum of two valid kernels is always a valid kernel.  
+c) $k(x,x') = \frac{k_1(x,x')}{k_2(x,x')}$  
+... Incorrect. Division is not a closure operation for kernels.  
+d) $k(x,x') = \log(k_1(x,x'))$  
+... Incorrect. The logarithm of a kernel is not guaranteed to preserve validity.  

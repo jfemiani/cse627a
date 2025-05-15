@@ -1,0 +1,42 @@
+Quiz title: PRML 8.4 – Inference in Chain-Structured Graphical Models  
+Quiz description: This quiz checks your understanding of exact inference in chain-structured MRFs using message passing. Topics include marginal computation, clamping, and complexity analysis.  
+shuffle answers: true  
+show correct answers: false
+
+
+
+Title: concept-check – understand – non-edge – clamping a variable  
+Points: 1  
+1. What happens when a variable is clamped to an observed value in a chain-structured MRF?  
+a) It is removed from the graph entirely  
+... Incorrect. The node remains and participates in inference.  
+*b) Its message becomes a one-hot indicator function centered at the observed value  
+... Correct. Clamping replaces summation with a delta function that filters compatible paths.  
+c) Only the backward message is updated  
+... Incorrect. Clamping affects both forward and backward message flow.  
+d) The variable’s potential is dropped from the model  
+... Incorrect. Potentials remain, and the value is inserted into them.
+
+Title: concept-check – remember – non-edge – single marginal cost  
+Points: 1  
+2. In a chain with 5 variables, each taking $K$ values, what is the cost of computing $p(x_3)$ using message passing?  
+a) $O(K^5)$  
+... Incorrect. That is the cost of brute-force enumeration.  
+*b) $O(K^2 \cdot N)$  
+... Correct. Each message update is $O(K^2)$ and there are $N-1$ messages.  
+c) $O(K \cdot \log K)$  
+... Incorrect. No log terms are involved in exact message passing.  
+d) $O(K^3)$  
+... Incorrect. That would be the cost of interacting three variables jointly.  
+
+Title: medium – analyze – non-edge – cost of all marginals  
+Points: 1  
+3. How does the cost of computing all marginals $p(x_1), \dots, p(x_N)$ compare to computing a single $p(x_n)$ in a chain?  
+a) It requires $N$ times more work than computing one marginal  
+... Incorrect. Messages can be reused across all marginals.  
+*b) It requires only one forward and one backward pass — total cost is $O(NK^2)$  
+... Correct. All marginals can be computed with shared messages in linear time.  
+c) It depends on which node is queried first  
+... Incorrect. Message order doesn’t affect total cost.  
+d) It is exponential in the number of variables  
+... Incorrect. That applies only to naive enumeration, not message passing.  

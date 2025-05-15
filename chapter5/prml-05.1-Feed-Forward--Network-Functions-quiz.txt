@@ -1,3 +1,9 @@
+Quiz title: 05.1 – Feed Forward Network Functions  
+Quiz description: This quiz tests conceptual and practical understanding of feed-forward neural networks as introduced in PRML Chapter 5. Topics include the structure and function of multilayer perceptrons (MLPs), forward and backward propagation, activation functions, weight-space symmetries, and the universal approximation property. Additional questions address common training pitfalls, optimization behaviors, and historical misconceptions that have shaped the development of neural networks.  
+shuffle answers: true  
+show correct answers: false
+
+
 Title: concept-check – remember – non-edge – Universal Approximation Property
 Points: 1
 1. Which statement correctly describes the universal approximation property of neural networks?
@@ -136,3 +142,93 @@ c) Hidden units reduce the expressiveness of the network by restricting the lear
 ... Incorrect. More hidden units increase expressiveness, not reduce it.
 d) Increasing hidden units automatically removes regularization, making the model untrainable.
 ... Incorrect. Regularization must be explicitly applied; it’s not automatically disabled by increasing size.
+
+
+Title: medium – analyze – non-edge – Hessian Eigenvalues and Curvature
+Points: 1
+1. In the local quadratic approximation of the error function, what does a small eigenvalue of the Hessian matrix indicate?
+a) A direction in which the error surface is steep and changes rapidly.
+... Incorrect. That would correspond to a large eigenvalue.
+*b) A direction in which the error surface is flat and changes slowly.
+... Correct. Small eigenvalues indicate low curvature along their eigenvector direction.
+c) That the network has reached a global minimum.
+... Incorrect. Small eigenvalues don’t distinguish global from local minima.
+d) That the error function is convex in that direction.
+... Incorrect. Convexity depends on all eigenvalues being positive — not just one being small.
+
+Title: medium – understand – non-edge – Batch vs Stochastic Gradient Descent
+Points: 1
+1. What is one reason stochastic gradient descent (SGD) may perform better than full batch gradient descent in training neural networks?
+a) SGD uses the exact gradient, making convergence more precise.
+... Incorrect. SGD uses noisy estimates of the gradient, not exact values.
+*b) SGD introduces noise that can help escape shallow local minima and saddle points.
+... Correct. The stochasticity allows exploration of the error surface, potentially avoiding poor minima.
+c) SGD computes gradients faster by ignoring the loss function altogether.
+... Incorrect. SGD still computes gradients based on the loss function; it just uses fewer samples per update.
+d) SGD guarantees convergence to the global minimum if the learning rate is small enough.
+... Incorrect. SGD may still get stuck in local minima, especially in nonconvex problems.
+
+
+Title: medium – apply – edge – Debugging with Small Data Subsets
+Points: 1
+1. Why is it recommended to train on a small subset of the data before launching a full training run?
+a) It guarantees better generalization on the test set by preventing overfitting.
+... Incorrect. A small dataset is more prone to overfitting, not less.
+*b) It allows quick detection of bugs in the training loop, such as NaNs or poor convergence.
+... Correct. Small subsets run faster and let you catch issues early in the training process.
+c) It forces the optimizer to explore the loss landscape more thoroughly.
+... Incorrect. Small datasets usually reduce variability and do not guarantee better exploration.
+d) It helps ensure that the model performs well even with minimal training data.
+... Incorrect. The goal is debugging, not optimizing for low-data performance.
+
+
+Title: medium – apply – edge – Multi-Term Loss Function Design
+Points: 1
+1. In practical neural network training, why might the loss function be written as a sum of weighted components like $\mathcal{L} = \alpha_0 \mathcal{L}_0 + \alpha_1 \mathcal{L}_1 + \dots$?
+a) To increase the number of optimization steps during training.
+... Incorrect. The number of steps is unrelated to how many terms are in the loss.
+*b) To capture multiple objectives or constraints that reflect desirable properties of the output.
+... Correct. Real-world training often balances several loss terms, such as accuracy, smoothness, or domain-specific constraints.
+c) To reduce the dimensionality of the parameter space.
+... Incorrect. Adding more loss terms doesn't change the number of model parameters.
+d) To enforce dropout and batch normalization implicitly.
+... Incorrect. Regularization techniques like dropout are separate from multi-term loss formulations.
+
+
+Title: medium – apply – edge – Softmax Numerical Stability Trick
+Points: 1
+1. Why is it common practice to subtract the maximum activation from all logits before applying the softmax function?
+a) It increases the confidence of the predicted class by sharpening the output distribution.
+... Incorrect. It doesn’t change the output probabilities’ relative values.
+*b) It improves numerical stability by preventing large exponentials from overflowing.
+... Correct. Subtracting the max ensures that all exponentials are ≤ 1, avoiding overflow.
+c) It ensures that all outputs lie strictly between 0 and 1.
+... Incorrect. Softmax already produces values in (0, 1), regardless of shifting.
+d) It forces the average output probability to be 1/K across all classes.
+... Incorrect. The mean of the output depends on the input values, not a uniform prior.
+
+
+Title: medium – understand – non-edge – Minimizing Negative Log-Likelihood
+Points: 1
+1. Why is training a neural network typically formulated as minimizing the negative log-likelihood (error) rather than maximizing the likelihood directly?
+a) Minimizing the loss allows gradient descent to converge to a unique global minimum.
+... Incorrect. The loss surface is nonconvex, and gradient descent may converge to local minima regardless of sign convention.
+*b) Minimization aligns with optimization conventions and allows interpreting the loss as an energy function.
+... Correct. Negative log-likelihood minimization is mathematically equivalent to maximizing likelihood and aligns with common optimization paradigms.
+c) Maximizing the likelihood directly would require computing the full partition function of the model.
+... Incorrect. This concern applies to some probabilistic models (like CRFs), not neural networks with standard output layers.
+d) Loss minimization guarantees that the model assigns high confidence to all predictions.
+... Incorrect. Minimization doesn't guarantee high confidence — only alignment with the training targets.
+
+
+Title: medium – apply – edge – Pitfall: CrossEntropyLoss and Softmax
+Points: 1
+1. In PyTorch, what is the correct way to compute the loss for multiclass classification using `CrossEntropyLoss`?
+a) Apply softmax to the output layer and then pass the result to `CrossEntropyLoss`.
+... Incorrect. This double-applies softmax and leads to incorrect gradients and numerical instability.
+*b) Pass the raw output logits directly to `CrossEntropyLoss`, which applies softmax internally.
+... Correct. PyTorch expects raw scores and handles softmax + log internally for numerical stability.
+c) Use a sigmoid activation and then apply `BCELoss` for multiclass classification.
+... Incorrect. Sigmoid + BCE is not suited for mutually exclusive classes.
+d) Apply `log_softmax` manually and then use `CrossEntropyLoss`.
+... Incorrect. `CrossEntropyLoss` already includes `log_softmax`, so applying it again is redundant and incorrect.

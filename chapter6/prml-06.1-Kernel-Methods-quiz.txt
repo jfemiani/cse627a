@@ -1,0 +1,132 @@
+Quiz title: PRML 6.2 – Kernel Methods  
+Quiz description: This quiz tests understanding of key concepts from Chapter 6 of PRML.  
+shuffle answers: true  
+show correct answers: false
+
+Title: concept‑check – remember – non‑edge – kernel symmetry  
+Points: 1  
+1. Which of the following properties must any valid kernel function $k(x,x')$ satisfy?  
+a) $k(x,x') = \phi(x)^\top\phi(x')$ but not necessarily symmetric  
+... Incorrect. A valid kernel is defined as an inner product in feature space, which is symmetric.  
+*b) $k(x,x') = k(x',x)$ and the Gram matrix is positive‑definite  
+... Correct. Kernels correspond to symmetric, positive‑definite Gram matrices.  
+c) $k(x,x') = k(x',x)$ only for linear kernels  
+... Incorrect. Symmetry holds for all kernels defined via an inner product.  
+d) $k(x,x') = x^\top x'$ only  
+... Incorrect. That’s just the special case of the linear kernel.  
+
+Title: medium – apply – non‑edge – dual least squares coefficients  
+Points: 1  
+1. In the dual formulation of regularized least squares, the coefficient vector $a$ is given by which expression?  
+a) $a = \Phi(\Phi^\top\Phi + \lambda I)^{-1}t$  
+... Incorrect. That’s a hybrid of primal and dual forms.  
+*b) $a = (K + \lambda I_N)^{-1} \, t$  
+... Correct. The dual solution solves $(K + \lambda I)a = t$ where $K = \Phi\Phi^\top$.  
+c) $a = (\Phi^\top\Phi + \lambda I_M)^{-1}\,\Phi^\top t$  
+... Incorrect. That’s the primal weight solution for $w$, not $a$.  
+d) $a = \Phi^\top (K + \lambda I_N)^{-1}\,t$  
+... Incorrect. There is no extra $\Phi^\top$ for the dual coefficients.  
+
+Title: medium – understand – non‑edge – kernel trick applicability  
+Points: 1  
+1. Which of these algorithms cannot generally be kernelized by simply replacing inner products with $k(x,x')$?  
+a) Support Vector Machines  
+... Incorrect. SVMs are the classic example of kernel methods.  
+b) Kernel Principal Component Analysis  
+... Incorrect. PCA is kernelized by using the Gram matrix.  
+c) Kernel Fisher Discriminant  
+... Incorrect. Fisher discriminant extends naturally via kernels.  
+*d) Decision tree classifiers  
+... Correct. Decision trees split on individual features, not on dot products, so they can’t be kernelized by substitution.  
+
+Title: medium – analyze – non‑edge – stationary vs non‑stationary  
+Points: 1  
+1. Which of these kernels is **stationary**, meaning $k(x,x')=k(x-x')$?  
+a) Linear kernel $k(x,x')=x^\top x'$  
+... Incorrect. Depends on both $x$ and $x'$, not only their difference.  
+b) Polynomial kernel $k(x,x')=(x^\top x' + 1)^2$  
+... Incorrect. The constant term breaks translation‑invariance.  
+*c) Gaussian RBF kernel $k(x,x')=\exp\bigl(-\|x-x'\|^2/(2\sigma^2)\bigr)$  
+... Correct. It depends only on $x-x'$.  
+d) Sigmoid kernel $k(x,x')=\tanh(\alpha\,x^\top x' + c)$  
+... Incorrect. Also not a function of $x-x'$ alone.  
+
+Title: hard – apply – edge – polynomial feature map  
+Points: 1  
+1. For 2‑dimensional inputs $x=(x_1,x_2)$, which feature mapping $\phi(x)$ yields the kernel  
+   $$k(x,z) = (x^\top z)^2\;?$$  
+a) $\phi(x) = (x_1^2,\;x_2^2,\;x_1x_2)^\top$  
+... Incorrect. The cross‑term requires a scaling factor for correct reconstruction.  
+*b) $\phi(x) = \bigl(x_1^2,\;\sqrt{2}\,x_1x_2,\;x_2^2\bigr)^\top$  
+... Correct. Then $\phi(x)^\top\phi(z)=x_1^2z_1^2 +2x_1x_2z_1z_2 + x_2^2z_2^2=(x^\top z)^2$.  
+c) $\phi(x) = (x_1^2,\;2x_1x_2,\;x_2^2)^\top$  
+... Incorrect. The middle term is over‑scaled.  
+d) $\phi(x) = (x_1^2,\;x_2^2)^\top$  
+... Incorrect. Missing the cross‑term entirely.  
+
+
+Title: concept‑check – remember – non‑edge – memory‑based method  
+Points: 1  
+1. Which of the following is an example of a memory‑based method?  
+a) Regularized least squares regression  
+... Incorrect. That method discards training data after determining parameters.  
+*b) Parzen window density estimation  
+... Correct. Parzen estimation retains training points to compute densities at prediction time.  
+c) Kernel Principal Component Analysis  
+... Incorrect. Though kernelized, PCA uses only the Gram matrix, not raw data points directly.  
+d) Bayesian logistic regression  
+... Incorrect. It summarizes data via posterior distributions, not by storing each example.  
+
+
+Title: medium – apply – non‑edge – prediction kernel vector  
+Points: 1  
+1. In the dual predictor  
+   $$y(x) = k(x)^\top\,(K + \lambda I)^{-1}t,$$  
+   the vector $k(x)$ has components  
+a) $k_n(x) = \phi(x_n)^\top \phi(x_n)$  
+... Incorrect. That’s the Gram diagonal, not the cross‑kernel.  
+b) $k_n(x) = \phi(x)^\top \phi(x)$  
+... Incorrect. That’s a self‑inner product at $x$.  
+*c) $k_n(x) = k(x_n,x)$  
+... Correct. Each entry is the kernel between the training point and the new input.  
+d) $k_n(x) = t_n$  
+... Incorrect. $t_n$ are target values, not kernel evaluations.  
+
+
+Title: concept‑check – understand – non‑edge – kernel trick principle  
+Points: 1  
+1. The “kernel trick” refers to the ability to  
+a) compute $\phi(x)$ explicitly for any nonlinear mapping.  
+... Incorrect. It avoids computing $\phi(x)$ directly.  
+*b) replace inner products $x^\top x'$ with $k(x,x')$ without ever forming $\phi(x)$.  
+... Correct. That substitution enables implicit feature‑space operations.  
+c) store all training data for memory‑based prediction.  
+... Incorrect. That describes memory‑based methods, not the kernel trick.  
+d) guarantee that any function of $\|x - x'\|$ is a valid kernel.  
+... Incorrect. Validity also requires positive definiteness.  
+
+
+Title: medium – analyze – non‑edge – primal vs dual cost  
+Points: 1  
+1. The dual formulation of regularized least squares becomes less efficient than the primal when  
+a) the feature dimension $M$ is much larger than the number of data points $N$.  
+... Incorrect. Then inverting an $M\times M$ matrix (primal) is worse.  
+b) $N \approx M$.  
+... Incorrect. Costs are similar in that case.  
+*c) the number of training points $N$ is much larger than the feature dimension $M$.  
+... Correct. The dual must invert an $N\times N$ matrix, which is costly when $N\gg M$.  
+d) regularization parameter $\lambda$ approaches zero.  
+... Incorrect. That affects stability, not matrix size.  
+
+
+Title: concept‑check – analyze – edge – valid kernel  
+Points: 1  
+1. Which of the following functions **cannot** serve as a valid kernel on $\mathbb{R}^d$?  
+a) $k(x,z) = \exp\bigl(-\tfrac{\|x - z\|^2}{2\sigma^2}\bigr)$  
+... Incorrect. The Gaussian RBF is a positive‑definite kernel.  
+b) $k(x,z) = (1 + x^\top z)^3$  
+... Incorrect. Polynomial kernels of this form are valid.  
+*c) $k(x,z) = \|x\| + \|z\|\,$  
+... Correct. This fails to define a positive‑definite Gram matrix in general.  
+d) $k(x,z) = \tanh(\alpha\,x^\top z + c)$  
+... Incorrect. Under certain parameter choices it’s a valid Mercer kernel.  

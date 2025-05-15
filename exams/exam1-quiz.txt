@@ -1,0 +1,1288 @@
+Quiz title: Mid-Term Exam 1
+shuffle answers: true
+  
+
+Title: Overfitting in Polynomial Models  
+Points: 1  
+1. What typically happens when a polynomial model is too complex for the given data?  
+a) The model generalizes well to new data  
+... Incorrect. Overly complex models tend to overfit and fail to generalize.  
+*b) The model fits the training data well but performs poorly on unseen data  
+... Correct. This is characteristic of overfitting.  
+c) The model has lower variance  
+... Incorrect. Complex models often have high variance.  
+d) The model always produces lower error  
+... Incorrect. It may reduce training error but increase test error.  
+
+Title: Maximum Likelihood Estimation  
+Points: 1  
+1. In the polynomial curve fitting example, how are the coefficients of the polynomial determined?  
+a) By minimizing the sum of squared test errors  
+... Incorrect. The test data is not used in model fitting.  
+*b) By maximizing the likelihood of the observed data  
+... Correct. The parameters are fitted via maximum likelihood.  
+c) By choosing weights that perfectly fit the training data  
+... Incorrect. Perfect fit may overfit and is not the fitting criterion.  
+d) By minimizing the degree of the polynomial  
+... Incorrect. The degree is fixed; coefficients are optimized.
+
+Title: Regularization Purpose  
+Points: 1  
+1. What is the purpose of the regularization term added to the error function in polynomial curve fitting?  
+a) To increase the model’s training accuracy  
+... Incorrect. Regularization usually decreases training accuracy.  
+*b) To reduce overfitting by penalizing large coefficients  
+... Correct. Regularization discourages complexity by shrinking weights.  
+c) To ensure that the model fits all training points exactly  
+... Incorrect. That’s what regularization tries to avoid.  
+d) To select the degree of the polynomial  
+... Incorrect. The degree is chosen separately, not via regularization.
+
+Title: Root Mean Square Error  
+Points: 1  
+1. Why is root-mean-square (RMS) error a useful metric in the curve fitting example?  
+*a) It provides a scale-sensitive measure of how well the model fits the data  
+... Correct. RMS is in the same units as the data and measures residual spread.  
+b) It always decreases as model complexity increases  
+... Incorrect. It decreases on training data, but not necessarily on test data.  
+c) It selects the best polynomial degree automatically  
+... Incorrect. RMS is used for evaluation, not selection.  
+d) It ensures maximum likelihood  
+... Incorrect. RMS is related, but maximum likelihood depends on distributional assumptions.
+
+Title: Behavior of High-Degree Polynomials  
+Points: 1  
+1. In the polynomial curve fitting example, what is a common behavior of high-degree polynomials?  
+a) They fit the training data poorly  
+... Incorrect. They typically interpolate the training data.  
+*b) They oscillate wildly between data points  
+... Correct. This is especially visible at boundaries.  
+c) They always generalize better to new data  
+... Incorrect. High-degree polynomials often overfit.  
+d) They minimize bias  
+... Incorrect. While bias may decrease, variance increases.
+
+  
+
+Title: Log-Likelihood Use  
+Points: 1  
+1. Why use the log-likelihood in maximum likelihood estimation?  
+*a) It simplifies computation  
+... Correct. Products become sums, making math easier.  
+b) It ensures unbiasedness  
+... Incorrect. Bias is unrelated to this transformation.  
+c) It guarantees convexity  
+... Incorrect. Not generally true.  
+d) It improves stability  
+... Incorrect. That’s a side benefit, not the core reason.
+
+Title: Importance of Gaussian  
+Points: 1  
+1. Why is the Gaussian distribution so widely used in ML?  
+a) It's the only one usable in Bayesian analysis  
+... Incorrect. Many distributions are used.  
+b) It best fits all natural data  
+... Incorrect. Not universally true.  
+c) It’s popular in software packages  
+... Incorrect. Convenience ≠ importance.  
+*d) It has interpretable, tractable properties  
+... Correct. It is analytically convenient and flexible.  
+
+Title: Marginal Probability from Joint  
+Points: 1  
+1. If $p(X, Y) = p(Y|X)p(X)$, how can we compute the marginal probability $p(Y)$?  
+a) $p(Y) = \frac{p(X, Y)}{p(X)}$  
+... Incorrect. That’s the definition of conditional probability.  
+*b) $p(Y) = \sum_X p(Y|X)p(X)$  
+... Correct. This is marginalization using the law of total probability.  
+c) $p(Y) = p(X) + p(Y|X)$  
+... Incorrect. This does not follow any valid rule.  
+d) $p(Y) = p(X) \cdot p(Y)$  
+... Incorrect. This is only valid under independence.
+
+Title: Bayes’ Theorem Application  
+Points: 1  
+1. Which of the following expresses Bayes’ theorem?  
+a) $p(X|Y) = p(X)p(Y)$  
+... Incorrect. That assumes independence.  
+b) $p(X|Y) = \frac{p(Y|X)}{p(X)}$  
+... Incorrect. That reverses the roles of conditional and marginal.  
+*c) $p(Y|X) = \frac{p(X|Y)p(Y)}{p(X)}$  
+... Correct. This is the standard form of Bayes’ theorem.  
+d) $p(X, Y) = \frac{p(Y)}{p(X|Y)}$  
+... Incorrect. This is not a valid identity.
+
+Title: Independence Definition  
+Points: 1  
+1. What condition must hold for two variables $X$ and $Y$ to be independent?  
+a) $p(X|Y) = 0$  
+... Incorrect. That would mean they are mutually exclusive.  
+*b) $p(X, Y) = p(X)p(Y)$  
+... Correct. Independence implies the joint equals the product of marginals.  
+c) $p(Y|X) = p(X|Y)$  
+... Incorrect. That may hold in some cases, but it's not the definition.  
+d) $p(X, Y) = p(X|Y)$  
+... Incorrect. This is only valid if $p(Y) = 1$.
+
+Title: Expectation of a Function  
+Points: 1  
+1. How is the expectation $\mathbb{E}[f(x)]$ defined in the _discrete_ case?  
+a) $\sum_x f(x)$  
+... Incorrect. This ignores the probability weights.  
+*b) $\sum_x p(x) f(x)$  
+... Correct. Expectation is a weighted average.  
+c) $\int f(x) dx$  
+... Incorrect. That’s the continuous case.  
+d) $\mathbb{E}[f(x)] = f(\mathbb{E}[x])$  for any function $f$. 
+... Incorrect. That’s only true for linear functions.
+
+Title: Variance Identity  
+Points: 1  
+1. Which identity is valid for variance of a variable $x$?  
+a) $\mathrm{Var}[x] = \mathbb{E}[x]^2$  
+... Incorrect. That’s the square of the mean, not variance.  
+*b) $\mathrm{Var}[x] = \mathbb{E}[x^2] - (\mathbb{E}[x])^2$  
+... Correct. This is the decomposition of variance.  
+c) $\mathrm{Var}[x] = \mathbb{E}[x + c]$  
+... Incorrect. Variance is unaffected by constant shifts.  
+d) $\mathrm{Var}[x] = \mathbb{E}[x]^2 + \mathbb{E}[x^2]$  
+... Incorrect. This incorrectly sums components.
+
+  
+
+Title: Avoiding Overfitting  
+Points: 1  
+1. Which technique helps prevent overfitting?  
+a) More training data  
+... Not the best answer. Helpful, but not always available.  
+b) More model complexity  
+... Incorrect. Increases overfitting.  
+c) Better evaluation metric  
+... Incorrect. Doesn’t change training behavior.  
+*d) Regularization  
+... Correct. It penalizes complexity directly.
+
+Title: Purpose of Validation Set  
+Points: 1  
+1. What is a validation set used for?  
+*a) Assessing model generalization  
+... Correct. Helps tune hyperparameters and select models.  
+b) Training the model  
+... Incorrect. That’s the training set.  
+c) Choosing architecture  
+... Incorrect. Indirectly, but not its main role.  
+d) None of the above  
+... Incorrect. Option A is best.
+
+Title: AIC and Model Complexity  
+Points: 1  
+1. Why use AIC for model selection?  
+*a) It penalizes complex models  
+... Correct. AIC helps prevent overfitting by penalizing the number of parameters.  
+b) It uses parameter priors  
+... Incorrect. That’s a feature of Bayesian model selection, not AIC.  
+c) It guarantees the best test error  
+... Incorrect. AIC provides an estimate based on training likelihood, not a guarantee.  
+d) It directly measures model interpretability  
+... Incorrect. AIC balances fit and complexity, not interpretability.
+
+Title: Occam’s Razor  
+Points: 1  
+1. What does Occam’s Razor suggest in ML?  
+a) Pick model based on dataset size  
+... Incorrect. Not the core idea.  
+b) Pick model with least squared error  
+... Incorrect. That can lead to overfitting.  
+*c) Prefer simpler models when accuracy is equal  
+... Correct. This is the core principle.  
+d) Choose models with more parameters  
+... Incorrect. That leads to overfitting.
+
+Title: Role of Model Selection  
+Points: 1  
+1. What is the purpose of model selection?  
+a) Pick most complex model  
+... Incorrect. Complexity is not the goal.  
+b) Pick simplest model  
+... Incorrect. Simplicity alone isn’t sufficient.  
+*c) Balance accuracy, complexity, generalizability  
+... Correct. This is model selection’s goal.  
+d) Pick model with highest variance  
+... Incorrect. High variance harms generalization.  
+
+
+Title: Behavior of Training vs Test Error  
+Points: 1  
+1. As model complexity increases, what typically happens to training and test error?  
+a) Both training and test error decrease  
+... Incorrect. Only training error always decreases.  
+*b) Training error decreases, but test error eventually increases  
+... Correct. This is the classic symptom of overfitting.  
+c) Training error increases, and test error decreases  
+... Incorrect. This would indicate underfitting.  
+d) Both errors remain constant  
+... Incorrect. Complexity impacts both metrics.
+
+
+
+
+Title: Purpose of Cross-Validation  
+Points: 1  
+1. Why is cross-validation often used in model selection, especially with limited data?  
+a) It removes the need to evaluate performance on a separate test set  
+... Incorrect. A final test set is still necessary to assess unbiased generalization.  
+*b) It gives a more stable estimate of generalization by averaging across different splits.  
+... Correct. This reduces variance from a single split and helps when data is limited.  
+c) It allows the model to train on a larger portion of the data while still being validated  
+... Incorrect. This sounds appealing, but each fold is trained on *less* data than the full set.  
+d) It guarantees that the selected model generalizes better than alternatives  
+... Incorrect. Cross-validation estimates generalization but does not guarantee outcomes.
+
+
+
+Title: concept-check – understand – non-edge – Volume of central subcube  
+Points: 1  
+1. In a $D$-dimensional unit cube, what happens to the volume of the central subcube $[0, 0.5]^D$ as $D$ increases?  
+a) It stays the same  
+... Incorrect. The volume shrinks exponentially with dimension.  
+*b) It decreases exponentially  
+... Correct. The volume is $(0.5)^D$, which vanishes as $D$ grows.  
+c) It increases linearly  
+... Incorrect. Volume increases only if the subcube expands.  
+d) It fluctuates but stays near 0.5  
+... Incorrect. The decline is consistent and exponential.
+
+
+Title: medium – apply – edge – Shell concentration in high-dimensional Gaussians  
+Points: 1  
+1. Why does a standard Gaussian distribution in $\mathbb{R}^D$ concentrate its mass in a thin shell as $D$ increases?  
+a) The density increases with distance from the origin  
+... Incorrect. Gaussian density decreases exponentially with distance.  
+*b) Most samples occur near the radius where shell volume and density balance  
+... Correct. The shell volume increases with radius, offsetting the drop in density until a peak at $r \approx \sqrt{D}$.  
+c) Most samples lie near the origin because the density is highest there  
+... Incorrect. The origin has highest density but negligible volume in high dimensions.  
+d) The distribution spreads uniformly over all radii  
+... Incorrect. The mass concentrates sharply around a specific radius.
+
+
+Title: medium – analyze – non-edge – Behavior of nearest neighbor distances  
+Points: 1  
+1. Why do distance-based methods like k-nearest neighbors degrade in high-dimensional spaces?  
+a) Because distances become infinite as dimension increases  
+... Incorrect. Distances do grow in magnitude, but their relative values are what matter.  
+*b) Because the difference between the nearest and farthest neighbors becomes small  
+... Correct. In high dimensions, distances concentrate — making "nearest" points no longer meaningfully closer than others.  
+c) Because the number of neighbors becomes too large to compute  
+... Incorrect. The number of neighbors is fixed by $k$, not by the dimensionality.  
+d) Because the Gaussian density drops to zero in high dimensions  
+... Incorrect. Falling density doesn't explain the collapse of distance contrast between points.
+
+
+Title: concept-check – remember – non-edge – Axis length needed to retain cube volume  
+Points: 1  
+1. In a uniform distribution over the $[0,1]^D$ cube, how much of each axis must be retained to keep 95% of the total volume as $D$ increases?  
+a) A fixed central subregion like $[0.25, 0.75]^D$  
+... Incorrect. This subregion’s volume shrinks exponentially with dimension.  
+*b) Nearly the full length of each axis  
+... Correct. To preserve 95% of the volume, each axis must span nearly $[0,1]$ as $D \to \infty$.  
+c) Exactly half of each axis  
+... Incorrect. That only retains $(0.5)^D$ of the volume.  
+d) Any range of fixed width, as long as it’s centered  
+... Incorrect. Fixed-width ranges shrink to negligible volume in high dimensions.
+
+Title: medium – understand – edge – Misinterpretation of the Gaussian shell  
+Points: 1  
+1. What is the most accurate interpretation of the “Gaussian shell” phenomenon in high dimensions?  
+a) Most points lie exactly on a spherical surface at radius $\sqrt{D}$  
+... Incorrect. There is no literal surface; points cluster in a narrow range of radii.  
+*b) Most points lie within a thin range of distances from the origin centered around $\sqrt{D}$  
+... Correct. This reflects the concentration of norm values due to high dimension.  
+c) Most points lie near the origin due to high density there  
+... Incorrect. While the origin has high density, its volume is negligible.  
+d) Most points are spread evenly across all distances  
+... Incorrect. The distribution concentrates strongly near a characteristic radius.
+
+
+  
+
+
+
+
+Title: Loss Function in Decision Theory  
+Points: 1  
+1. What is a loss function in decision theory?  
+a) A function that maps inputs to outputs  
+... Incorrect. That describes a predictive model, not a loss function.  
+*b) A function that measures the quality of a decision  
+... Correct. Loss functions quantify the cost of incorrect decisions.  
+c) A function that describes a distribution  
+... Incorrect. That would be a probability distribution.  
+
+
+Title: Decision Boundary  
+Points: 1  
+1. What is a decision boundary in binary classification?  
+*a) A surface separating different predicted classes  
+... Correct. It defines the point of decision switching.  
+b) The value of a prediction function  
+... Incorrect. That’s a threshold, not a boundary.  
+c) The cost function value  
+... Incorrect. That relates to optimization, not decision surfaces.  
+
+
+Title: Bayes Decision Rule  
+Points: 1  
+1. What does the Bayes decision rule prescribe?   (Not Bayes Thm!)
+a) Classify based on posterior probability > threshold  
+... Incorrect. That’s a heuristic, not the Bayes-optimal decision.  
+b) Classify based on prior probability  
+... Incorrect. Prior alone is insufficient.  
+*c) Classify to minimize expected loss  
+... Correct. This is the essence of the Bayes decision rule.  
+
+
+
+Title: medium – understand – non-edge – Posterior vs Decision
+Points: 1
+1. When does choosing the most probable class match the Bayes optimal decision rule?
+a) Only when the classes are linearly separable  
+... Incorrect. Separability affects modeling, not decision rules.  
+b) When the loss function is asymmetric  
+... Incorrect. Asymmetric loss shifts the optimal decision away from the most probable class.  
+*c) When the loss matrix penalizes all misclassifications equally  
+... Correct. This corresponds to uniform loss, where minimizing expected loss is equivalent to choosing the most probable class.  
+d) When the prior is uniform  
+... Incorrect. Priors affect posteriors, but not the equivalence between posterior-maximization and loss-minimization.
+
+
+Title: hard – analyze – edge – Effect of Asymmetric Loss
+Points: 1
+1. How does asymmetric loss affect the decision boundary between two classes?
+a) It moves the boundary toward the class with higher prior  
+... Incorrect. Priors influence posteriors, but boundary shifts are driven by the loss matrix.  
+*b) It moves the boundary toward the class with lower misclassification cost  
+... Correct. A lower loss makes that class more "favored" under uncertainty.  
+c) It makes the boundary disappear  
+... Incorrect. The decision rule still partitions space, just differently.  
+d) It equalizes the posterior probabilities at the boundary  
+... Incorrect. That only happens when losses are symmetric.
+
+
+Title: medium – apply – non-edge – Regression Loss and the Mean
+Points: 1
+1. In regression, minimizing expected squared error leads to what prediction?
+a) The mode of $p(y \mid \mathbf{x})$  
+... Incorrect. The mode gives the most likely value, not the one minimizing squared error.  
+*b) The mean of $p(y \mid \mathbf{x})$  
+... Correct. The mean minimizes expected squared error.  
+c) The median of $p(y \mid \mathbf{x})$  
+... Incorrect. That minimizes absolute error, not squared.  
+d) The MAP estimate of $y$  
+... Incorrect. MAP may differ from mean, especially for skewed distributions.
+
+  
+
+Title: concept-check – remember – non-edge – Definition of entropy  
+Points: 1  
+1. What does the entropy $H[x]$ measure for a discrete random variable $x$?  
+a) The probability of the most likely outcome  
+... Incorrect. That’s the mode, not entropy.  
+*b) The average uncertainty or surprise across all outcomes  
+... Correct. Entropy is the expected information content of the distribution.  
+c) The number of distinct values $x$ can take  
+... Incorrect. This affects entropy but is not what it measures.  
+d) The expected value of $x$  
+... Incorrect. Expectation and entropy are distinct concepts.
+
+Title: medium – understand – non-edge – Why KL divergence is non-negative  
+Points: 1  
+1. Why is the KL divergence $\text{KL}(p \| q)$ always non-negative?  
+a) Because $p(x)$ and $q(x)$ are normalized probability distributions  
+... Incorrect. Normalization is necessary but doesn’t explain why KL is $\ge 0$.  
+*b) Because $H[p]$ is the minimum possible expected code length, and using $q(x)$ only increases it  
+... Correct. KL measures the penalty for encoding with $q$ instead of the optimal $p$; that penalty is never negative.  
+c) Because the log-ratio $\log \frac{p(x)}{q(x)}$ is positive  
+... Incorrect. The log-ratio can be negative or positive — only the overall average matters.  
+d) Because the log function is concave  
+... Incorrect. Concavity is used in the proof but not the conceptual reason for non-negativity.
+
+
+Title: medium – understand – non-edge – Entropy and optimal encoding  
+Points: 1  
+1. What does the entropy $H[x]$ of a distribution tell us about data encoding?  
+a) The shortest codeword needed to represent the most likely outcome  
+... Incorrect. That’s related to specific symbol codes, not the expected length.  
+*b) The minimum expected number of bits needed to encode outcomes from $x$  
+... Correct. Entropy quantifies the best achievable average code length using an optimal lossless code.  
+c) The total number of bits needed to encode all possible outcomes  
+... Incorrect. That depends on the number of values, not their probabilities.  
+d) The amount of compression achieved by using Huffman coding  
+... Incorrect. Huffman coding may approximate entropy, but this is not its definition.
+
+
+Title: medium – understand – non-edge – Meaning of mutual information  
+Points: 1  
+1. What does mutual information $I(x; y)$ represent between two random variables $x$ and $y$?  
+a) The probability that $x = y$  
+... Incorrect. Mutual information measures dependence, not equality.  
+*b) The reduction in uncertainty about $x$ given knowledge of $y$  
+... Correct. Mutual information quantifies how much knowing one variable reduces uncertainty about the other.  
+c) The joint entropy of $x$ and $y$  
+... Incorrect. Joint entropy measures combined uncertainty, not reduction.  
+d) The sum of the individual entropies of $x$ and $y$  
+... Incorrect. That would be true only if $x$ and $y$ were independent.
+
+ 
+
+Title: concept-check – remember – non-edge – Supervised vs. unsupervised learning  
+Points: 1  
+1. Which best differentiates supervised from unsupervised learning?  
+*a) Supervised uses labeled data; unsupervised does not  
+... Correct. This is the fundamental difference.  
+b) Supervised memorizes; unsupervised generalizes  
+... Incorrect. Both can generalize or overfit.  
+c) Supervised uses unlabeled data  
+... Incorrect. That’s reversed.  
+
+
+Title: concept-check – understand – non-edge – Goal of ML algorithms  
+Points: 1  
+1. What is the main goal of machine learning algorithms?  
+a) Predict with 100% accuracy  
+... Incorrect. Perfection is not feasible; generalization is key.  
+*b) Learn from data to make predictions or decisions  
+... Correct. This is the fundamental objective of ML.  
+c) Analyze data for scientific discovery  
+... Incorrect. This is an application, not the goal itself.  
+d) Generate new theories  
+... Incorrect. Theory generation may result from ML, but it’s not the primary goal.
+
+
+
+Title: concept-check – remember – non-edge – Generative vs. discriminative  
+Points: 1  
+1. What is the key difference between generative and discriminative models?  
+*a) Generative models learn $p(x, y)$; discriminative learn $p(y|x)$  
+... Correct. This is the textbook distinction.  
+b) Generative models are more flexible  
+... Incorrect. Flexibility depends on model class, not this distinction.  
+c) Discriminative models assume fewer priors  
+... Incorrect. This is vague and not generally true.  
+d) None of the above  
+... Incorrect. Option A is accurate.
+
+
+
+
+Title: medium – understand – non-edge – Generative vs. discriminative: modeling trade-offs  
+Points: 1  
+1. Why might discriminative models like logistic regression outperform generative models like Naive Bayes in classification tasks?  
+a) Discriminative models require more parameters and are more expressive  
+... Incorrect. Generative models typically require more parameters, as they model $p(x, y)$ rather than just $p(y|x)$.  
+*b) Discriminative models avoid modeling unnecessary aspects of the data distribution  
+... Correct. They directly optimize for predictive performance by focusing only on $p(y|x)$.  
+c) Generative models assume linear decision boundaries  
+... Incorrect. Many generative models allow for nonlinear decision surfaces.  
+d) Discriminative models use prior knowledge about the input distribution  
+... Incorrect. That is typically a characteristic of generative models, not discriminative ones.
+Title: concept-check – remember – non-edge – Definition of conjugate prior  
+Points: 1  
+1. What is a conjugate prior in Bayesian inference?  
+a) A prior unrelated to the likelihood function.  
+... Incorrect. A conjugate prior is specifically chosen so that the posterior retains the same functional form as the prior.  
+*b) A prior that results in a posterior distribution of the same form.  
+... Correct. This is the standard definition of a conjugate prior.  
+c) A prior that always increases the likelihood value.  
+... Incorrect. The purpose of a conjugate prior is not to increase the likelihood, but to simplify the computation of the posterior.  
+d) A prior that gives a flat posterior distribution.  
+... Incorrect. A flat (noninformative) prior is not necessarily conjugate.  
+
+Title: concept-check – remember – non-edge – Likelihood of binary variable  
+Points: 1  
+1. For a binary variable $x \in \{0,1\}$ with success probability $\mu$, which expression correctly represents the likelihood for a single observation?  
+a) $p(x|\mu)= \mu$, regardless of $x$.  
+... Incorrect. This does not distinguish between the cases $x=0$ and $x=1$.  
+*b) $p(x|\mu)= \mu^x (1-\mu)^{1-x}$.  
+... Correct. When $x=1$, the expression gives $\mu$, and when $x=0$, it gives $1-\mu$.  
+c) $p(x|\mu)= \mu+(1-\mu)$.  
+... Incorrect. This sums to 1 regardless of $x$ and does not vary with the observed value.  
+d) $p(x|\mu)= x\,\mu\,(1-\mu)^{1-x}$.  
+... Incorrect. Multiplying by $x$ incorrectly forces the likelihood to be 0 when $x=0$.  
+
+Title: concept-check – remember – non-edge – MLE for Bernoulli parameter  
+Points: 1  
+1. Given $N$ independent observations of a binary variable, what is the maximum likelihood estimate for $\mu$?  
+*a) The fraction of observations equal to 1.  
+... Correct. The MLE for $\mu$ is calculated as the number of successes divided by $N$.  
+b) The sum of the observations.  
+... Incorrect. While the sum equals the number of 1's, it must be divided by $N$ to obtain the probability estimate.  
+c) The ratio of zeros to total observations.  
+... Incorrect. This gives $1-\mu$, not $\mu$.  
+d) The prior mean of $\mu$.  
+... Incorrect. The prior mean is used in Bayesian inference, not in maximum likelihood estimation.  
+
+Title: concept-check – remember – non-edge – Conjugate prior for Bernoulli  
+Points: 1  
+1. Which distribution is commonly used as the conjugate prior for a Bernoulli or binomial likelihood?  
+a) Gaussian distribution.  
+... Incorrect. Gaussians are not conjugate to the Bernoulli/binomial likelihood.  
+b) Gamma distribution.  
+... Incorrect. The Gamma distribution is conjugate to the Poisson or exponential likelihood, not the binomial.  
+*c) Beta distribution.  
+... Correct. The Beta distribution is the standard conjugate prior for Bernoulli and binomial models.  
+d) Uniform distribution.  
+... Incorrect. Although a uniform prior (Beta(1,1)) is a special case, it is not generally referred to as the conjugate prior.  
+
+Title: concept-check – remember – non-edge – Beta distribution functional form  
+Points: 1  
+1. Which expression best represents the Beta distribution density for $\mu$ (ignoring normalization)?  
+a) $\mu^{a}(1-\mu)^{b}$  
+... Incorrect. The proper exponents are $a-1$ and $b-1$, not $a$ and $b$.  
+*b) $\mu^{a-1}(1-\mu)^{b-1}$  
+... Correct. This is the functional form of the Beta density (up to the normalizing constant).  
+c) $\mu^{a+1}(1-\mu)^{b+1}$  
+... Incorrect. The exponents are incorrect by an additive factor.  
+d) $\exp(-a\mu-b(1-\mu))$  
+... Incorrect. This is not the form of the Beta distribution.
+
+Title: medium – apply – edge – Entropy of Bernoulli variable  
+Points: 1  
+1. Which of the following expressions correctly gives the entropy of a Bernoulli random variable with parameter $\mu$?  
+a) $\mu \ln \mu + (1-\mu) \ln (1-\mu)$  
+... Incorrect. The entropy formula requires a negative sign to ensure a nonnegative result.  
+*b) $-\mu \ln \mu - (1-\mu) \ln (1-\mu)$  
+... Correct. This is the standard formula for the entropy of a Bernoulli variable.  
+c) $\mu(1-\mu)$  
+... Incorrect. This is the variance of a Bernoulli random variable, not its entropy.  
+d) $\ln(\mu) - \ln(1-\mu)$  
+... Incorrect. This does not correspond to the entropy formula.  
+
+Title: medium – apply – edge – Bernoulli over $\{-1,1\}$  
+Points: 1  
+1. For a binary variable $x \in \{-1,1\}$ with parameter $\mu \in [-1,1]$, which of the following forms is equivalent to its probability mass function?  
+a) $p(x|\mu)= \left(\frac{1-\mu}{2}\right)^{\frac{1+x}{2}} \left(\frac{1+\mu}{2}\right)^{\frac{1-x}{2}}$  
+... Incorrect. This formulation reverses the roles for $x=1$ and $x=-1$.  
+b) $p(x|\mu)= \left(\frac{1+\mu}{2}\right)^{\frac{1-x}{2}} \left(\frac{1-\mu}{2}\right)^{\frac{1+x}{2}}$  
+... Incorrect. This also does not correctly match the conventional parameterization.  
+*c) $p(x|\mu)= \frac{1}{2}\Bigl(1+\mu\,x\Bigr)$  
+... Correct. This is the standard representation for a binary variable on $\{-1,1\}$.  
+d) $p(x|\mu)= \frac{1}{2}\Bigl(1-\mu\,x\Bigr)$  
+... Incorrect. This would reverse the probabilities for $x=1$ and $x=-1$.  
+
+Title: medium – understand – non-edge – Binomial theorem and normalization  
+Points: 1  
+1. The binomial theorem states that  $$ (1+x)^N = \sum_{m=0}^{N} \binom{N}{m} x^m. $$  
+    Which of the following uses this identity to prove that the binomial distribution is normalized?  
+a) Applying the law of large numbers.  
+... Incorrect. The law of large numbers is not used to show normalization.  
+b) Using the combinatorial identity $\binom{N}{m} + \binom{N}{m-1} = \binom{N+1}{m}$.  
+... Incorrect. Although true, this identity is not needed for normalization.  
+*c) Recognizing that the sum of probabilities $\sum_{m=0}^{N} \binom{N}{m} \mu^m (1-\mu)^{N-m} = (\mu+(1-\mu))^N = 1^N$.  
+... Correct. This directly uses the binomial theorem to confirm that the probabilities sum to one.  
+d) Differentiating the generating function of the binomial coefficients.  
+... Incorrect. Differentiation is unnecessary for demonstrating normalization.  
+
+Title: concept-check – remember – non-edge – Variance of binomial distribution  
+Points: 1  
+1. What is the variance of a binomial distribution with parameters $N$ and $\mu$?  
+a) $N\mu$  
+... Incorrect. This is the expected value, not the variance.  
+b) $\mu(1-\mu)$  
+... Incorrect. This is the variance of a single Bernoulli trial; it must be scaled by $N$.  
+*c) $N\mu(1-\mu)$  
+... Correct. This is the well-known formula for the variance of a binomial distribution.  
+d) $N^2\mu(1-\mu)$  
+... Incorrect. Over-scaling the variance by an extra factor of $N$.  
+
+
+Title: medium – understand – non-edge – Posterior mean as weighted average  
+Points: 1  
+1. In Bayesian updating for a Bernoulli variable with a Beta prior, what does the posterior mean represent?  
+a) The average of the prior mean and 0.5  
+... Incorrect. The posterior mean depends on the observed data, not a fixed midpoint.  
+*b) A weighted average of the prior mean and the maximum likelihood estimate (sample mean)  
+... Correct. The posterior mean balances prior belief with observed data.  
+c) The variance of the posterior distribution  
+... Incorrect. Variance and mean are distinct concepts.  
+d) The mode of the prior distribution  
+... Incorrect. The posterior mean is not determined by the prior mode.  
+
+
+Title: medium – analyze – edge – Why conjugate priors are useful  
+Points: 1  
+1. Why are conjugate priors often chosen in Bayesian analysis?  
+a) They provide the most accurate predictions  
+... Incorrect. Accuracy depends on model fit, not conjugacy.  
+*b) They ensure the posterior remains in the same family, simplifying computation  
+... Correct. Conjugate priors lead to analytically tractable posteriors.  
+c) They eliminate the influence of the prior after updating  
+... Incorrect. The prior still affects the posterior.  
+d) They increase the entropy of the posterior  
+... Incorrect. Entropy change depends on data and distribution, not conjugacy. 
+
+Title: hard – analyze – non-edge – Posterior form from Beta prior and Bernoulli likelihood  
+Points: 1  
+1. Suppose we observe $N$ Bernoulli trials with $m$ successes and use a Beta$(a, b)$ prior for $\mu$. What is the posterior distribution for $\mu$?  
+a) Beta$(m+a-1, N-m+b-1)$  
+... Incorrect. These parameters would correspond to a posterior mode under certain assumptions, not the full posterior.  
+*b) Beta$(m + a, N - m + b)$  
+... Correct. The posterior combines observed counts with prior pseudo-counts.  
+c) Beta$(a + N, b + m)$  
+... Incorrect. The parameters are misaligned; $m$ must be matched with successes.  
+d) Beta$(N + a + b, N - m)$  
+... Incorrect. This incorrectly sums all prior and observed counts into one parameter. 
+
+Title: concept-check – remember – non-edge – Multinomial observation representation  
+Points: 1  
+1. In the multinomial model, how is each observation typically represented?  
+a) As a scalar index between 1 and $K$  
+... Incorrect. While categories can be indexed this way in code, the model assumes a richer representation.  
+*b) As a $K$-dimensional one-hot encoded vector  
+... Correct. This representation has exactly one element equal to 1 and all others 0.  
+c) As a probability vector summing to 1  
+... Incorrect. This describes a parameter, not a single observation.  
+d) As a binary vector with two ones  
+... Incorrect. A one-hot vector contains exactly one 1.
+
+Title: concept-check – remember – non-edge – Multinomial likelihood with counts  
+Points: 1  
+1. What is the likelihood function for the multinomial distribution with counts $m_1,\dots,m_K$ and parameters $\mu_1,\dots,\mu_K$?  
+a) $\prod_{k=1}^K \mu_k^{m_k}$  
+... Incorrect. This omits the combinatorial coefficient accounting for sample permutations.  
+*b) $\displaystyle \frac{N!}{m_1!\cdots m_K!}\prod_{k=1}^K \mu_k^{m_k}$  
+... Correct. This is the complete likelihood function, including normalization.  
+c) $\sum_{k=1}^K \mu_k^{m_k}$  
+... Incorrect. Likelihoods for independent outcomes are multiplied, not summed.  
+d) $\prod_{k=1}^K (m_k\,\mu_k)$  
+... Incorrect. This form is incorrect — the likelihood includes exponents and coefficients.
+
+Title: concept-check – remember – non-edge – Constraints on multinomial parameters  
+Points: 1  
+1. What constraints must the parameters $\mu_1,\dots,\mu_K$ of a multinomial distribution satisfy?  
+a) Each $\mu_k > 0$  
+... Incorrect. This condition is necessary but incomplete.  
+b) The sum $\sum_{k=1}^K \mu_k = 1$  
+... Incorrect. The sum must equal 1, but individual parameters must also be nonnegative.  
+*c) Each $\mu_k \ge 0$ and $\sum_{k=1}^K \mu_k = 1$  
+... Correct. These two conditions together define a valid probability distribution over $K$ outcomes.  
+d) Each $\mu_k$ can be any real number  
+... Incorrect. Probabilities must be nonnegative and sum to 1.
+
+Title: concept-check – remember – non-edge – Conjugate prior for multinomial  
+Points: 1  
+1. Which distribution serves as the conjugate prior for the parameters of a multinomial likelihood?  
+a) Beta distribution  
+... Incorrect. The Beta is the special case for $K=2$ categories.  
+*b) Dirichlet distribution  
+... Correct. The Dirichlet distribution is the standard conjugate prior for multinomial parameters.  
+c) Gaussian distribution  
+... Incorrect. Gaussian distributions are not defined over the simplex and are not conjugate to the multinomial.  
+d) Poisson distribution  
+... Incorrect. The Poisson models counts, not probabilities over categories.
+
+Title: concept-check – remember – non-edge – Dirichlet as generalization  
+Points: 1  
+1. The Dirichlet distribution is a multivariate generalization of which distribution?  
+a) Bernoulli distribution  
+... Incorrect. The Bernoulli models binary outcomes, not continuous probability vectors.  
+*b) Beta distribution  
+... Correct. The Beta is the special case of the Dirichlet for $K = 2$ categories.  
+c) Binomial distribution  
+... Incorrect. The Binomial models discrete counts, not distributions over probabilities.  
+d) Uniform distribution  
+... Incorrect. While the uniform distribution arises when all Dirichlet parameters are equal to 1, it is not the correct generalization.
+
+
+Title: medium – apply – non-edge – Posterior update for Dirichlet prior  
+Points: 1
+1. Suppose a Dirichlet prior has parameters $\alpha_1=2$, $\alpha_2=3$, $\alpha_3=4$, and a dataset has observed counts $m_1=1$, $m_2=2$, $m_3=1$. What are the parameters of the posterior Dirichlet distribution?
+a) $\alpha_1=3$, $\alpha_2=5$, $\alpha_3=4$
+... Incorrect. These values do not correctly apply the update rule.
+*b) $\alpha_1=3$, $\alpha_2=5$, $\alpha_3=5$
+... Correct. Each posterior parameter is the sum of prior and observed counts.
+c) $\alpha_1=1$, $\alpha_2=1$, $\alpha_3=1$
+... Incorrect. These are lower than the prior values.
+d) $\alpha_1=2$, $\alpha_2=2$, $\alpha_3=2$
+... Incorrect. This ignores the observed counts.
+
+
+Title: medium – understand – non-edge – Interpretation of Dirichlet parameters  
+Points: 1
+1. In a Dirichlet distribution, what does a larger value of $\alpha_k$ imply about the prior belief?
+a) That the corresponding category is unlikely  
+... Incorrect. Higher $\alpha_k$ reflects stronger belief in category $k$.
+*b) That we have stronger prior belief in category $k$  
+... Correct. Larger $\alpha_k$ corresponds to more pseudo-counts.
+c) That category $k$ has higher variance  
+... Incorrect. Increasing $\alpha_k$ reduces variance.
+d) That category $k$ is excluded  
+... Incorrect. Zero values would suppress the category entirely.
+
+
+Title: hard – evaluate – edge – Effect of small Dirichlet hyperparameters  
+Points: 1
+1. What is the likely effect of choosing very small Dirichlet hyperparameters (e.g., all $\alpha_k < 1$) in a Bayesian multinomial model?
+a) The posterior will be dominated by the prior  
+... Incorrect. Small $\alpha_k$ values make the prior weak.
+b) The model will assume all outcomes are equally likely  
+... Incorrect. That corresponds to $\alpha_k = 1$.
+*c) The model will favor sparse distributions where some categories dominate  
+... Correct. Small $\alpha_k$ encourage distributions near the edges of the simplex.
+d) The prior will have no effect at all  
+... Incorrect. It still influences posterior even if weak.
+
+
+Title: medium – analyze – non-edge – Likelihood vs prior vs posterior  
+Points: 1
+1. In Bayesian multinomial modeling, what distinguishes the likelihood from the prior and the posterior?
+a) The likelihood is a distribution over parameters  
+... Incorrect. That describes the prior or posterior.
+*b) The likelihood is a function of the parameters given observed data  
+... Correct. The likelihood evaluates how well parameters explain the data.
+c) The prior incorporates observed counts  
+... Incorrect. The prior is specified before observing data.
+d) The posterior does not depend on the likelihood  
+... Incorrect. Posterior is proportional to prior times likelihood.
+
+
+
+Title: concept-check – remember – non-edge – Univariate Gaussian Normalization
+Points: 1
+1. Which term in the univariate Gaussian formula 
+   $$\mathcal{N}(x|\mu,\sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\!\Bigl\{-\frac{1}{2\sigma^2}(x-\mu)^2\Bigr\}$$ 
+   ensures that the distribution is normalized (i.e., integrates to 1)?
+a) $\exp\!\Bigl\{-\frac{1}{2\sigma^2}(x-\mu)^2\Bigr\}$
+... Incorrect. This term determines the shape of the curve.
+*b) $\frac{1}{\sqrt{2\pi\sigma^2}}$
+... Correct. This constant ensures the total area under the curve is 1.
+c) $(x-\mu)^2$
+... Incorrect. This is part of the exponent that measures deviation.
+d) $\sqrt{2\pi\sigma^2}$
+... Incorrect. This term appears in the denominator's reciprocal.
+
+Title: concept-check – understand – non-edge – Quadratic Form Interpretation
+Points: 1
+1. In the multivariate Gaussian distribution, what does the quadratic form 
+   $$(x-\mu)^\top\Sigma^{-1}(x-\mu)$$ 
+   represent?
+a) The Euclidean distance squared between $x$ and $\mu$.
+... Incorrect. This form adjusts the Euclidean distance using covariance information.
+*b) The Mahalanobis distance squared between $x$ and $\mu$.
+... Correct. It measures distance while accounting for the variance and correlation.
+c) A measure of the variance of $x$.
+... Incorrect. Variance is described by $\Sigma$, not the quadratic form.
+d) The normalization factor of the Gaussian.
+... Incorrect. The normalization factor is given separately.
+
+
+Title: concept-check – remember – non-edge – Jacobian Determinant Value
+Points: 1
+1. When transforming $x$ to the whitened variable $y = U(x-\mu)$ using an orthogonal matrix $U$, what is the value of the Jacobian determinant $|J|$?
+a) $|\Sigma|$
+... Incorrect. This value is related to the covariance, not the transformation.
+b) $\prod_{j=1}^D \lambda_j^{1/2}$
+... Incorrect. This is the square root of the determinant of $\Sigma$, not the Jacobian.
+*c) 1
+... Correct. Since $U$ is orthogonal, the transformation preserves volume.
+d) 0
+... Incorrect. A zero determinant would imply a degenerate transformation.
+
+Title: concept-check – understand – non-edge – Determinant and Eigenvalues
+Points: 1
+1. How is the determinant of the covariance matrix $\Sigma$ related to its eigenvalues?
+a) $|\Sigma| = \sum_{j=1}^D \lambda_j$
+... Incorrect. The determinant is the product of the eigenvalues, not the sum.
+b) $|\Sigma|^{1/2} = \prod_{j=1}^D \lambda_j$
+... Incorrect. The square root of the determinant requires taking the square root of each eigenvalue.
+*c) $|\Sigma|^{1/2} = \prod_{j=1}^D \lambda_j^{1/2}$
+... Correct. The square root of the determinant is the product of the square roots of the eigenvalues.
+d) $|\Sigma|^{1/2} = \sum_{j=1}^D \lambda_j^{1/2}$
+... Incorrect. The determinant involves the product, not the sum, of the eigenvalue square roots.
+
+
+Title: concept-check – understand – non-edge – Whitening Transformation Effect
+Points: 1
+1. After applying the transformation 
+    $$
+    y = U(x-\mu)
+    $$ 
+    where $U$ is an orthogonal matrix whose rows are the eigenvectors of $\Sigma$, what is the form of the covariance matrix in the $y$ coordinates?
+a) $\Sigma$
+... Incorrect. In the $y$-space, the covariance does not remain the same.
+*b) A diagonal matrix with entries equal to the eigenvalues of $\Sigma$.
+... Correct. The transformation diagonalizes $\Sigma$, resulting in a diagonal covariance matrix.
+c) The identity matrix.
+... Incorrect. That would occur only if $\Sigma$ were isotropic.
+d) A matrix with all entries equal.
+... Incorrect. This does not describe the effect of the whitening transformation.
+
+
+Title: concept-check – understand – non-edge – Restricted Covariance Implications
+Points: 1
+1. What is a primary benefit of using an isotropic covariance matrix $\Sigma = \sigma^2 I$ in a Gaussian model?
+a) It allows modeling different variances in each direction.
+... Incorrect. Isotropic covariance assumes the same variance in every direction.
+*b) It significantly reduces the number of free parameters, simplifying computation.
+... Correct. Isotropic covariance reduces complexity and limits the number of parameters.
+c) It captures all correlations between different dimensions.
+... Incorrect. Isotropic covariance assumes no correlation between dimensions.
+d) It increases the flexibility of the model.
+... Incorrect. It reduces flexibility by enforcing the same variance in all directions.
+
+
+Title: concept-check – remember – non-edge – Gaussian Second-Order Moment
+Points: 1
+1. For a Gaussian distribution with mean $\mu$ and covariance $\Sigma$, which expression correctly represents the second-order moment $E[xx^\top]$?
+a) $\Sigma$
+... Incorrect. This is only the covariance.
+b) $\mu\mu^\top$
+... Incorrect. This is just the outer product of the mean.
+*c) $\mu\mu^\top + \Sigma$
+... Correct. The second-order moment includes both the outer product of the mean and the covariance.
+d) $\mu + \Sigma$
+... Incorrect. The dimensions of $\mu$ and $\Sigma$ are not compatible for addition.
+
+
+Title: concept-check – understand – non-edge – Central Limit Theorem Relevance
+Points: 1
+1. Why is the Central Limit Theorem relevant to the Gaussian distribution in PRML?
+a) It shows that any individual random variable becomes Gaussian as the sample size increases.
+... Incorrect. The theorem concerns the sum or average of random variables, not individual ones.
+*b) It explains why the sum (or average) of many independent random variables tends to be Gaussian, regardless of their original distributions.
+... Correct. This is the key insight of the Central Limit Theorem.
+c) It states that the variance of a Gaussian distribution decreases with larger sample sizes.
+... Incorrect. The CLT does not address changes in variance with sample size.
+d) It implies that all distributions are inherently Gaussian if enough data is collected.
+... Incorrect. The CLT only applies to the distribution of sums (or averages), not to arbitrary distributions.
+
+
+Title: concept-check – remember – non-edge – Orthogonality of Eigenvectors
+Points: 1
+1. Which property of a covariance matrix $\Sigma$ guarantees that its eigenvectors can be chosen to be orthonormal?
+a) $\Sigma$ is positive semidefinite.
+... Incorrect. While positive semidefiniteness is necessary for a covariance matrix, it is not the property that guarantees orthonormal eigenvectors.
+*b) $\Sigma$ is symmetric.
+... Correct. A symmetric matrix always has a complete set of orthonormal eigenvectors.
+c) $\Sigma$ is diagonal.
+... Incorrect. Diagonal matrices trivially have orthonormal eigenvectors, but a covariance matrix need not be diagonal to have this property.
+d) $\Sigma$ has distinct eigenvalues.
+... Incorrect. Even if eigenvalues are repeated, symmetry ensures the eigenvectors can be chosen to be orthonormal.
+
+
+
+
+Title: medium – understand – non-edge – Weight-space Symmetry
+Points: 1
+1. Which scenario demonstrates the concept of weight-space symmetry in neural networks?
+a) Scaling all weights entering a hidden unit by a positive constant and dividing all outgoing weights from the same hidden unit by the same constant leaves the network output unchanged.
+... Incorrect. Nonlinear activation functions do not generally allow such simple linear rescaling without altering outputs.
+*b) Swapping two hidden units (including all their incoming and outgoing connections) does not alter the input-output mapping of the network.
+... Correct. Hidden units can be permuted without changing the network's function due to symmetry.
+c) Changing the activation function of a hidden unit and adjusting its biases correspondingly leaves the network's input-output mapping unchanged.
+... Incorrect. Changing the activation function fundamentally alters the nonlinear transformation, even with bias adjustments.
+d) Increasing all bias terms by the same nonzero constant uniformly leaves the network output unchanged.
+... Incorrect. Uniform bias shifts typically change the activations and thus alter the output.
+
+Title: medium – understand – non-edge – Neural Networks vs. Linear Models
+Points: 1
+1. What primarily distinguishes neural networks from linear models, such as polynomial or logistic regression?
+a) Neural networks can only handle linear relationships in data.
+... Incorrect. Neural networks specifically address nonlinear relationships.
+b) Neural networks always use fewer parameters than linear models.
+... Incorrect. Neural networks typically have many parameters.
+*c) Neural networks learn nonlinear transformations adaptively from data.
+... Correct. Adaptively learned nonlinear transformations distinguish neural networks from traditional linear models.
+d) Neural networks require less computational effort during training.
+... Incorrect. Neural networks usually require more computation during training compared to simpler linear models.
+
+Title: concept-check – remember – non-edge – Hidden Units Definition
+Points: 1
+1. In a neural network, what is the primary role of hidden units?
+a) Generate final output predictions by applying the output activation function directly to raw input features.
+... Incorrect. Hidden units do not directly produce final outputs from raw inputs; this is the role of output units.
+*b) Perform intermediate nonlinear transformations to extract useful features from input data.
+... Correct. Hidden units apply nonlinear transformations, capturing intermediate features.
+c) Linearly combine the predictions from multiple neural networks to improve accuracy.
+... Incorrect. Combining predictions is ensemble learning, not the function of hidden units.
+d) Adjust weights and biases automatically during forward propagation.
+... Incorrect. Weight and bias adjustments occur during training (via backpropagation), not during forward propagation or by hidden units themselves.
+
+
+Title: concept-check – remember – non-edge – Backpropagation Purpose
+Points: 1
+1. What is the primary purpose of the backpropagation algorithm in neural networks?
+a) To select the best activation functions for hidden units automatically during training.
+... Incorrect. Backpropagation uses fixed activation functions chosen by the designer.
+b) To generate predictions by propagating inputs through the network layers.
+... Incorrect. This describes forward propagation, not backpropagation.
+*c) To efficiently compute gradients of the loss function with respect to network parameters.
+... Correct. Backpropagation calculates these gradients efficiently for optimization.
+d) To prevent overfitting by automatically removing redundant hidden units.
+... Incorrect. Backpropagation doesn't automatically remove units; network pruning is a separate step.
+
+
+Title: concept-check – understand – non-edge – Activation Function Purpose
+Points: 1
+1. Why do neural networks typically use nonlinear activation functions in hidden units?
+a) Nonlinear functions always reduce the number of parameters required by the network.
+... Incorrect. Nonlinear activations don't inherently reduce parameter count; they add representational power.
+b) Nonlinear functions ensure the neural network outputs remain linearly related to inputs.
+... Incorrect. Nonlinear activation functions break linearity, enabling more complex transformations.
+*c) Nonlinear functions enable neural networks to model complex, nonlinear relationships in data.
+... Correct. Nonlinear activations provide the expressive power needed to capture complex patterns.
+d) Nonlinear functions speed up the forward propagation computation during inference.
+... Incorrect. Nonlinear functions do not inherently speed up inference; they typically increase computational complexity.
+
+
+Title: medium – understand – non-edge – Feed-forward Structure and Gradient Computation
+Points: 1
+1. Why is the feed-forward (acyclic) structure useful for efficiently training neural networks with backpropagation?
+a) It ensures all computations within the network are linear, simplifying gradient calculations.
+... Incorrect. Feed-forward networks typically involve nonlinear functions, not linear.
+b) It automatically prevents overfitting by limiting the complexity of network architectures.
+... Incorrect. Feed-forward structure alone doesn't directly limit complexity or prevent overfitting.
+*c) It allows straightforward calculation of gradients by defining a clear computational order for forward and backward passes.
+... Correct. Feed-forward structure ensures a clearly defined order of computations, making gradient calculations straightforward.
+d) It eliminates the need for activation functions in hidden layers, reducing complexity.
+... Incorrect. Feed-forward structure does not eliminate the use of activation functions; they remain essential for modeling nonlinearities.
+
+
+Title: hard – analyze – non-edge – Historical Misconception on Network Depth
+Points: 1
+1. Historically, what misconception arose from the universal approximation theorem regarding neural network depth?
+a) It suggested that neural networks with nonlinear activations were fundamentally limited compared to linear models.
+... Incorrect. The theorem emphasizes the power of nonlinear activations, not their limitations.
+b) It implied that deeper networks would always overfit, discouraging researchers from building deeper architectures.
+... Incorrect. Concerns about overfitting apply generally, not uniquely to deeper networks.
+*c) It led researchers to underestimate the practical advantages of deeper networks, believing shallow networks were sufficient.
+... Correct. The theorem suggested shallow networks could approximate any function, leading to neglect of deeper architectures.
+d) It encouraged researchers to discard hidden layers entirely, advocating purely linear network structures.
+... Incorrect. The theorem specifically highlights the necessity of nonlinear hidden layers, not their removal.
+
+
+Title: medium – understand – non-edge – Forward Propagation and Differentiability
+Points: 1
+1. Why is differentiability of each step in forward propagation important for training neural networks?
+a) Because differentiable functions require fewer parameters to approximate a target function.
+... Incorrect. Differentiability affects optimization, not parameter count.
+*b) Because it enables gradient-based optimization methods to compute parameter updates effectively.
+... Correct. Differentiability is essential for computing gradients during training.
+c) Because non-differentiable functions produce more accurate outputs for classification tasks.
+... Incorrect. Non-differentiable functions can disrupt training, not improve accuracy.
+d) Because forward propagation is only possible for differentiable activation functions.
+... Incorrect. Forward propagation can compute outputs even for non-differentiable functions; the issue arises in training.
+
+
+Title: medium – analyze – non-edge – Limitations of Universal Approximation
+Points: 1
+1. What is a practical limitation of the universal approximation theorem in real-world neural network applications?
+a) It assumes the training data must span all possible inputs to guarantee good test performance.
+... Incorrect. The theorem makes no claim about generalization; it concerns approximation capacity on a compact domain.
+*b) It does not specify how many hidden units are required to reach a desired approximation accuracy.
+... Correct. The theorem is existential—it guarantees the existence of a solution, not the architecture or efficiency.
+c) It only applies to networks trained with gradient descent.
+... Incorrect. The theorem is independent of the training algorithm; it's a representational result.
+d) It requires that the input data be normally distributed to ensure convergence.
+... Incorrect. The theorem makes no distributional assumptions about the input data.
+
+
+Title: medium – analyze – non-edge – Generalization and Model Complexity
+Points: 1
+1. Why might increasing the number of hidden units in a neural network hurt its generalization performance, even if training error decreases?
+a) More hidden units always lead to better generalization because the model has greater capacity.
+... Incorrect. Greater capacity can lead to overfitting if not properly regularized.
+*b) The network may overfit the training data, capturing noise rather than underlying patterns.
+... Correct. Excessive capacity allows the model to memorize training data instead of generalizing.
+c) Hidden units reduce the expressiveness of the network by restricting the learned function class.
+... Incorrect. More hidden units increase expressiveness, not reduce it.
+d) Increasing hidden units automatically removes regularization, making the model untrainable.
+... Incorrect. Regularization must be explicitly applied; it’s not automatically disabled by increasing size.
+
+
+Title: medium – analyze – non-edge – Hessian Eigenvalues and Curvature
+Points: 1
+1. In the local quadratic approximation of the error function, what does a small eigenvalue of the Hessian matrix indicate?
+a) A direction in which the error surface is steep and changes rapidly.
+... Incorrect. That would correspond to a large eigenvalue.
+*b) A direction in which the error surface is flat and changes slowly.
+... Correct. Small eigenvalues indicate low curvature along their eigenvector direction.
+c) That the network has reached a global minimum.
+... Incorrect. Small eigenvalues don’t distinguish global from local minima.
+d) That the error function is convex in that direction.
+... Incorrect. Convexity depends on all eigenvalues being positive — not just one being small.
+
+Title: medium – understand – non-edge – Batch vs Stochastic Gradient Descent
+Points: 1
+1. What is one reason stochastic gradient descent (SGD) may perform better than full batch gradient descent in training neural networks?
+a) SGD uses the exact gradient, making convergence more precise.
+... Incorrect. SGD uses noisy estimates of the gradient, not exact values.
+*b) SGD introduces noise that can help escape shallow local minima and saddle points.
+... Correct. The stochasticity allows exploration of the error surface, potentially avoiding poor minima.
+c) SGD computes gradients faster by ignoring the loss function altogether.
+... Incorrect. SGD still computes gradients based on the loss function; it just uses fewer samples per update.
+d) SGD guarantees convergence to the global minimum if the learning rate is small enough.
+... Incorrect. SGD may still get stuck in local minima, especially in nonconvex problems.
+
+
+Title: medium – apply – edge – Debugging with Small Data Subsets
+Points: 1
+1. Why is it recommended to train on a small subset of the data before launching a full training run?
+a) It guarantees better generalization on the test set by preventing overfitting.
+... Incorrect. A small dataset is more prone to overfitting, not less.
+*b) It allows quick detection of bugs in the training loop, such as NaNs or poor convergence.
+... Correct. Small subsets run faster and let you catch issues early in the training process.
+c) It forces the optimizer to explore the loss landscape more thoroughly.
+... Incorrect. Small datasets usually reduce variability and do not guarantee better exploration.
+d) It helps ensure that the model performs well even with minimal training data.
+... Incorrect. The goal is debugging, not optimizing for low-data performance.
+
+
+Title: medium – apply – edge – Multi-Term Loss Function Design
+Points: 1
+1. In practical neural network training, why might the loss function be written as a sum of weighted components like $\mathcal{L} = \alpha_0 \mathcal{L}_0 + \alpha_1 \mathcal{L}_1 + \dots$?
+a) To increase the number of optimization steps during training.
+... Incorrect. The number of steps is unrelated to how many terms are in the loss.
+*b) To capture multiple objectives or constraints that reflect desirable properties of the output.
+... Correct. Real-world training often balances several loss terms, such as accuracy, smoothness, or domain-specific constraints.
+c) To reduce the dimensionality of the parameter space.
+... Incorrect. Adding more loss terms doesn't change the number of model parameters.
+d) To enforce dropout and batch normalization implicitly.
+... Incorrect. Regularization techniques like dropout are separate from multi-term loss formulations.
+
+
+Title: medium – apply – edge – Softmax Numerical Stability Trick
+Points: 1
+1. Why is it common practice to subtract the maximum activation from all logits before applying the softmax function?
+a) It increases the confidence of the predicted class by sharpening the output distribution.
+... Incorrect. It doesn’t change the output probabilities’ relative values.
+*b) It improves numerical stability by preventing large exponentials from overflowing.
+... Correct. Subtracting the max ensures that all exponentials are ≤ 1, avoiding overflow.
+c) It ensures that all outputs lie strictly between 0 and 1.
+... Incorrect. Softmax already produces values in (0, 1), regardless of shifting.
+d) It forces the average output probability to be 1/K across all classes.
+... Incorrect. The mean of the output depends on the input values, not a uniform prior.
+
+
+Title: medium – understand – non-edge – Minimizing Negative Log-Likelihood
+Points: 1
+1. Why is training a neural network typically formulated as minimizing the negative log-likelihood (error) rather than maximizing the likelihood directly?
+a) Minimizing the loss allows gradient descent to converge to a unique global minimum.
+... Incorrect. The loss surface is nonconvex, and gradient descent may converge to local minima regardless of sign convention.
+*b) Minimization aligns with optimization conventions and allows interpreting the loss as an energy function.
+... Correct. Negative log-likelihood minimization is mathematically equivalent to maximizing likelihood and aligns with common optimization paradigms.
+c) Maximizing the likelihood directly would require computing the full partition function of the model.
+... Incorrect. This concern applies to some probabilistic models (like CRFs), not neural networks with standard output layers.
+d) Loss minimization guarantees that the model assigns high confidence to all predictions.
+... Incorrect. Minimization doesn't guarantee high confidence — only alignment with the training targets.
+
+
+Title: medium – apply – edge – Pitfall: CrossEntropyLoss and Softmax
+Points: 1
+1. In PyTorch, what is the correct way to compute the loss for multiclass classification using `CrossEntropyLoss`?
+a) Apply softmax to the output layer and then pass the result to `CrossEntropyLoss`.
+... Incorrect. This double-applies softmax and leads to incorrect gradients and numerical instability.
+*b) Pass the raw output logits directly to `CrossEntropyLoss`, which applies softmax internally.
+... Correct. PyTorch expects raw scores and handles softmax + log internally for numerical stability.
+c) Use a sigmoid activation and then apply `BCELoss` for multiclass classification.
+... Incorrect. Sigmoid + BCE is not suited for mutually exclusive classes.
+d) Apply `log_softmax` manually and then use `CrossEntropyLoss`.
+... Incorrect. `CrossEntropyLoss` already includes `log_softmax`, so applying it again is redundant and incorrect.
+
+
+
+
+Title: medium – understand – non-edge – Matching Likelihood to Error Function
+Points: 1
+1. When a neural network is used for regression and the likelihood is modeled as a Gaussian, what is the corresponding error function minimized during training?
+a) Cross-entropy error
+... Incorrect. Cross-entropy is used for classification problems, not regression.
+*b) Sum-of-squares error
+... Correct. The negative log-likelihood of a Gaussian leads to a sum-of-squares error.
+c) Hinge loss
+... Incorrect. Hinge loss is used in support vector machines, not derived from a Gaussian likelihood.
+d) Kullback-Leibler divergence
+... Incorrect. KL divergence measures distributional difference, but isn’t the standard loss for Gaussian regression.
+
+
+Title: medium – understand – non-edge – Binary Classification Likelihood Matching
+Points: 1
+1. In binary classification with a neural network, why is the cross-entropy error function used together with a sigmoid activation?
+a) Because the sigmoid ensures the output is discrete, allowing exact class prediction.
+... Incorrect. The sigmoid outputs continuous probabilities, not discrete labels.
+*b) Because it corresponds to the negative log-likelihood under a Bernoulli distribution.
+... Correct. The cross-entropy loss is derived from the log-likelihood of a Bernoulli likelihood model.
+c) Because it guarantees convexity of the loss function with respect to the weights.
+... Incorrect. The overall loss is not convex in the weights due to the network’s structure.
+d) Because it forces the model to avoid overfitting by penalizing large weights.
+... Incorrect. That effect is achieved through regularization, not the choice of error function alone.
+
+
+Title: medium – understand – non-edge – Softmax and Multiclass Cross-Entropy
+Points: 1
+1. Why is the softmax activation function used with cross-entropy loss in multiclass classification tasks?
+a) Because softmax guarantees equal probability for each class before training begins.
+... Incorrect. Softmax does not impose equal probabilities; it normalizes arbitrary scores into a distribution.
+*b) Because softmax converts raw outputs into a valid probability distribution, enabling likelihood-based training with 1-of-K targets.
+... Correct. Softmax ensures outputs sum to 1, making them interpretable as class probabilities.
+c) Because cross-entropy only works if all output activations are equal.
+... Incorrect. Cross-entropy measures the match between predicted and true distributions, not equality of outputs.
+d) Because softmax avoids the need for backpropagation through the output layer.
+... Incorrect. Softmax is differentiable, but backpropagation still applies through all layers.
+
+
+Title: medium – analyze – non-edge – Nonconvex Error Surface Implications
+Points: 1
+1. What is one consequence of the nonconvexity of the neural network error function?
+a) The gradient is always zero at the global minimum.
+... Incorrect. While true at stationary points, this doesn’t distinguish between convex and nonconvex settings.
+*b) Optimization may get stuck in local minima or saddle points rather than finding a global minimum.
+... Correct. Nonconvexity means multiple critical points exist, and not all are global optima.
+c) The error function cannot be minimized using gradient descent.
+... Incorrect. Gradient descent is still usable but may converge to suboptimal points.
+d) Backpropagation becomes non-differentiable.
+... Incorrect. Backpropagation works as long as activation functions are differentiable, regardless of convexity.
+
+
+
+Title: medium – apply – non-edge – Purpose of Label Smoothing
+Points: 1
+1. What is the main reason for using label smoothing during neural network training?
+a) To make the loss function differentiable with respect to the logits.
+... Incorrect. Cross-entropy is already differentiable; label smoothing affects the targets, not the function.
+*b) To prevent overconfident predictions and improve generalization.
+... Correct. Label smoothing encourages calibrated confidence and reduces overfitting.
+c) To normalize the input features before passing them into the model.
+... Incorrect. That’s input normalization, unrelated to label smoothing.
+d) To ensure that gradients do not vanish during backpropagation.
+... Incorrect. Label smoothing does not directly affect gradient vanishing.
+
+
+
+Title: concept-check – remember – non-edge – Sigmoid Derivative
+Points: 1
+1. What is the derivative of the sigmoid function \(\sigma(a) = \frac{1}{1 + e^{-a}}\)?
+a) \(\sigma(a)\)
+... Incorrect. This option is the sigmoid function itself, not its derivative.
+b) \(1 - \sigma^2(a)\)
+... Incorrect. This is the derivative of the tanh function, not the sigmoid function.
+*c) \(\sigma(a) \big(1 - \sigma(a)\big)\)
+... Correct. The derivative of the sigmoid function is \(\sigma(a) \big(1 - \sigma(a)\big)\).
+d) \(\sigma(a)^2\)
+... Incorrect. This option incorrectly squares the sigmoid function.
+
+Title: concept-check – remember – non-edge – Tanh Derivative
+Points: 1
+1. What is the derivative of the tanh function \(\tanh(a) = \frac{e^a - e^{-a}}{e^a + e^{-a}}\)?
+a) \(\tanh(a)(1 - \tanh(a))\)
+... Incorrect. This option incorrectly mixes the tanh value and its derivative.
+b) \(1 - \tanh(a)\)
+... Incorrect. This is not the correct formulation for the derivative of tanh.
+*c) \(1 - \tanh^2(a)\)
+... Correct. The derivative of tanh is \(1 - \tanh^2(a)\).
+d) \(\tanh^2(a)\)
+... Incorrect. This option only squares the tanh value rather than subtracting it from 1.
+
+Title: concept-check – remember – non-edge – MSE Weight Update (Concepts)
+Points: 1
+1. In an MSE loss scenario with a tanh hidden layer and linear output neurons, what is the conceptual form of the gradient for updating the weight that connects a hidden neuron to an output neuron?
+a) It is the product of the input value and the difference between the network’s prediction and the target.
+... Incorrect. This expression describes the gradient for weights connecting the input layer to the hidden layer.
+b) It is the product of the derivative of the hidden activation and the network’s prediction error.
+... Incorrect. This expression mixes up the role of the activation function derivative, which is used in updating weights for hidden layers.
+*c) It is the product of the output error and the activation level of the hidden neuron.
+... Correct. The weight update is conceptually given by multiplying the error at the output by the activation of the hidden neuron feeding into it.
+d) It is the sum of the output error and the activation level of the hidden neuron.
+... Incorrect. Gradients are computed via a product, not a sum.
+
+
+Title: hard – analyze – non-edge – Hidden Unit Gradient Chain Rule
+Points: 1
+1. Consider the backpropagation formula for a hidden neuron:  
+    $$\delta_j = h'(a_j) \sum_k w_{kj} \delta_k.$$  
+    Which of the following best explains the role of the summation term \(\sum_k w_{kj} \delta_k\) in this equation?
+a) It aggregates the local error computed independently at the hidden neuron.
+... Incorrect. The local error at the hidden neuron is given by the derivative \(h'(a_j)\); the summation aggregates contributions from the next layer.
+b) It sums the weighted inputs from the previous layer to form the neuron's activation.
+... Incorrect. This summation is part of the forward pass computation, not the error backpropagation.
+*c) It accumulates the contributions of the error signals from all neurons in the subsequent layer that receive input from the hidden neuron.
+... Correct. The summation term combines the backpropagated errors, weighted by their corresponding connections, from all neurons influenced by the hidden neuron.
+d) It computes the derivative of the activation function with respect to the neuron's output.
+... Incorrect. The derivative of the activation function is provided by \(h'(a_j)\), not by the summation term.
+
+
+
+Title: concept-check – remember – non-edge – Efficiency of Backpropagation
+Points: 1
+1. Which of the following best explains why backpropagation is computationally efficient for computing gradients in neural networks?
+a) It computes each gradient independently using finite differences.
+... Incorrect. Finite differences require perturbing each weight individually, which is computationally expensive.
+*b) It reuses intermediate computations from the forward pass to calculate gradients in a single backward pass.
+... Correct. Backpropagation leverages the chain rule and reuses computed activations to efficiently determine all gradients.
+c) It uses a recursive update that adjusts weights without explicitly computing any derivatives.
+... Incorrect. Backpropagation computes derivatives using the chain rule; it does not avoid them.
+d) It requires only one forward pass through the network to determine all gradients.
+... Incorrect. Both a forward pass and a backward pass are necessary to compute gradients.
+
+
+Title: concept-check – remember – non-edge – Backpropagation Efficiency
+Points: 1
+1. Why is backpropagation generally more efficient than using finite differences for computing gradients in neural networks?
+a) Because backpropagation requires two forward passes per parameter, reducing the overall computation.
+... Incorrect. Requiring two forward passes per parameter is characteristic of finite differences, not backpropagation.
+*b) Because finite differences require two forward passes per parameter—leading to a computational cost of $O(W^2)$ for $W$ parameters—while backpropagation reuses intermediate computations in a single backward pass, achieving $O(W)$ efficiency.
+... Correct. Finite differences are computationally expensive (approximately $O(W^2)$) due to two forward passes per parameter, whereas backpropagation efficiently computes gradients in $O(W)$ time.
+c) Because backpropagation approximates gradients using random perturbations, which is faster than the exact method used in finite differences.
+... Incorrect. Backpropagation computes exact gradients using the chain rule, not approximations.
+d) Because finite differences bypass the chain rule, resulting in higher computational overhead compared to backpropagation.
+... Incorrect. Finite differences do not use the chain rule; their inefficiency arises from requiring separate forward passes for each parameter.
+
+
+
+Title: hard – analyze – edge – Gradient Stability and Network Depth
+Points: 1
+1. In a deep feedforward network with $N$ hidden layers and scalar output, how many multiplicative terms affect the loss gradient as it propagates backward to the first hidden layer?
+a) One — the gradient is only scaled by the loss derivative at the output.
+... Incorrect. The gradient is propagated backward through each layer, accumulating multiplicative terms.
+*b) $N$ — each layer contributes one multiplicative term from its activation derivative or weight matrix.
+... Correct. Backpropagation applies the chain rule across all $N$ layers, so the gradient is effectively multiplied by $N$ activation derivatives and/or weight-related terms.
+c) $2^N$ — the number of gradient terms doubles at each layer due to branching.
+... Incorrect. Gradient propagation is linear in the number of layers, not exponential.
+d) $\log N$ — the gradient is aggregated logarithmically as it propagates.
+... Incorrect. There is no logarithmic compression in the structure of standard feedforward backpropagation.
+
+Title: hard – analyze – edge – All-Zero Activations
+Points: 1
+1. Suppose that all hidden layer activations in a network are exactly zero during forward propagation. What is the most likely consequence during backpropagation?
+a) The gradient will be large because the zero activations highlight strong corrective error signals.
+... Incorrect. Zero activations typically lead to zero derivatives, not large gradients.
+*b) The gradient with respect to many weights will be zero, leading to no learning for those parameters.
+... Correct. If all activations are zero, then weight gradients like $\frac{\partial E}{\partial w} = \delta \cdot z$ will also be zero, resulting in no updates.
+c) The network will experience exploding gradients due to unstable activation patterns.
+... Incorrect. Exploding gradients occur with large values, not zeros.
+d) The optimizer will regularize the weights more aggressively to compensate.
+... Incorrect. Regularization is not triggered by zero activations; it is controlled separately.
+
+Title: hard – analyze – edge – Gradient Attenuation with Tanh
+Points: 1
+1. Why does using $\tanh(a)$ activation in every layer of a deep network cause gradients to shrink as they propagate backward?
+*a) Because the derivative of $\tanh(a)$ is always less than 1, so the gradient is scaled down at each layer.
+... Correct. Since $\tanh'(a) = 1 - \tanh^2(a) < 1$ for all $a$, backpropagated gradients are multiplicatively attenuated across layers.
+b) Because $\tanh(a)$ always outputs zero for large input magnitudes, killing the gradient.
+... Incorrect. While $\tanh(a)$ saturates at large values, its output is not always zero.
+c) Because the derivative of $\tanh(a)$ randomly flips sign, leading to unstable updates.
+... Incorrect. The derivative is smooth and continuous; instability arises from attenuation, not sign flipping.
+d) Because $\tanh'(a)$ increases with depth, amplifying the gradient to instability.
+... Incorrect. It decreases with saturation and is always less than 1, leading to vanishing gradients, not explosion.
+
+Title: medium – apply – edge – Purpose of Batch Normalization  
+Points: 1  
+1. What is the main purpose of applying batch normalization in neural networks during training?  
+a) To directly reduce the model's complexity by removing redundant parameters  
+... Incorrect. Batch normalization does not reduce model complexity directly; it normalizes layer inputs.  
+*b) To stabilize and accelerate training by normalizing inputs to each layer, reducing internal covariate shift  
+... Correct. This is precisely the motivation behind batch normalization.  
+c) To enforce sparsity in hidden layer activations  
+... Incorrect. Batch normalization normalizes activations but does not inherently encourage sparsity.  
+d) To ensure the output probabilities sum to one across all classes  
+... Incorrect. Ensuring outputs sum to one is the role of softmax, not batch normalization.

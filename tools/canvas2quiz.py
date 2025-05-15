@@ -1,3 +1,11 @@
+"""Create a Text2QTI formatted quiz from Canvas quiz questions.
+This script retrieves quiz questions from a Canvas course and formats them into a Text2QTI format for export.
+It uses the Canvas API to fetch quiz data and the dotenv library to manage environment variables.
+It requires the canvasapi library to interact with the Canvas LMS.
+Usage:
+    python canvas2quiz.py
+"""
+
 import os
 from canvasapi import Canvas
 from dotenv import load_dotenv

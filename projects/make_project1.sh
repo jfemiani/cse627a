@@ -1,0 +1,1 @@
+pandoc project1.md --to html --mathjax --template=../page-template.html --no-highlight -o project1.html

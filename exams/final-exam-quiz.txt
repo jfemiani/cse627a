@@ -1,0 +1,1211 @@
+Quiz title: CSE627 Final Exam
+Quiz description:  This final exam evaluates your understanding of foundational and advanced topics covered in CSE627.
+   Questions are designed to test both conceptual mastery and applied reasoning, reflecting the progression of 
+   the course from theory to implementation. 
+shuffle answers: true  
+show correct answers: false
+
+
+Title: medium – understand – edge – Parzen interpretation of Nadaraya–Watson
+Points: 1
+1. When all training targets are 1, what does the Nadaraya–Watson model reduce to?
+a) A hard decision boundary based on the largest kernel response
+... Incorrect. NW performs smoothing, not thresholding.
+*b) A Parzen window estimate of the input probability-density
+... Correct. This follows directly from summing normalized kernels with constant targets.
+c) A support vector machine with Gaussian kernel
+... Incorrect. That’s a discriminative classifier, not density estimation.
+d) A histogram of the training data
+... Incorrect. Histograms are not kernel-based and lack smoothness.
+
+Title: concept-check – remember – non-edge – Definition of RBF
+Points: 1
+1. What defines a radial basis function (RBF)?
+a) A function that depends on both $x$ and $\mu_j$ independently
+... Incorrect. RBFs depend only on the distance between $x$ and $\mu_j$.
+*b) A function that depends only on $\|x - \mu_j\|$
+... Correct. Radial basis functions are isotropic and depend only on the distance to a center.
+c) A feature map that includes all polynomial terms of $x$
+... Incorrect. That's related to polynomial kernels, not RBFs.
+d) A linear function of the input vector $x$
+... Incorrect. Linear functions are not basis functions of radial type.
+
+Title: medium – understand – non-edge – RBF design matrix
+Points: 1
+1. What does the design matrix $\Phi$ represent in an RBF network?
+a) The covariance matrix of the RBF kernel
+... Incorrect. That would be the Gram matrix $K$, not $\Phi$.
+*b) The activations of all basis functions for each training input
+... Correct. $\Phi_{nj} = \phi_j(x_n)$ encodes how inputs activate the RBFs.
+c) A matrix of learned parameters between the input and hidden layer
+... Incorrect. RBF weights are not learned per input dimension.
+d) The projection of the inputs into a higher-dimensional feature space
+... Incorrect. This is a generic description of feature maps, not $\Phi$ specifically.
+
+Title: medium – understand – edge – Convex combinations in normalized RBFs
+Points: 1
+1. Why do normalized RBF networks always produce outputs within the range of training targets?
+a) Because the network minimizes squared error between the predicted and actual outputs
+... Incorrect. Minimizing squared error does not imply constraints on output range.
+*b) Because predictions are convex combinations of training targets with non-negative weights summing to 1
+... Correct. This ensures predictions lie in the convex hull of target values.
+c) Because the output layer has a softmax activation
+... Incorrect. Softmax is not part of RBF networks.
+d) Because the kernel matrix $K$ is positive definite
+... Incorrect. Positive definiteness affects uniqueness, not range of outputs.
+
+Title: medium – understand – non-edge – Role of bandwidth in Gaussian RBFs
+Points: 1
+1. How does increasing the bandwidth (σ) in a Gaussian RBF affect the model?
+a) It makes the basis functions more peaked and localized
+... Incorrect. Larger σ makes them wider and smoother.
+*b) It causes each basis function to respond to a wider neighborhood of inputs
+... Correct. Higher σ broadens the influence of each center.
+c) It removes the need for normalization
+... Incorrect. Bandwidth and normalization are orthogonal.
+d) It reduces the model to a nearest-neighbor predictor
+... Incorrect. That would occur with very small σ, not large.
+
+Title: medium – understand – edge – Exact interpolation with RBFs
+Points: 1
+1. What is a drawback of using one RBF centered at each training point without regularization?
+a) The model cannot fit nonlinear functions
+... Incorrect. It can model nonlinearities.
+*b) The model will interpolate the training data and overfit noisy observations
+... Correct. Exact interpolation leads to poor generalization with noisy data.
+c) The model will ignore distant training points completely
+... Incorrect. Gaussian RBFs decay but do not ignore.
+d) The model cannot be trained using least squares
+... Incorrect. Least squares is still applicable.
+
+Title: medium – understand – non-edge – Why not center RBFs on all points?
+Points: 1
+1. Why is it often undesirable to use one RBF center per training point in practice?
+a) It leads to underfitting due to lack of expressiveness
+... Incorrect. More centers increase, not limit, expressiveness.
+*b) It becomes computationally expensive at prediction time
+... Correct. Each prediction must sum over all basis functions.
+c) It increases training error due to overfitting
+... Incorrect. Overfitting increases test error, not training error.
+d) It prevents the use of Gaussian kernels
+... Incorrect. Kernel type is unrelated to center count.
+
+Title: medium – apply – non-edge – Choosing centers for RBFs
+Points: 1
+1. Why might one choose to place RBF centers using K-means clustering rather than randomly?
+a) It guarantees optimal generalization performance
+... Incorrect. No such guarantee is provided.
+*b) It summarizes the input distribution by covering high-density regions more efficiently
+... Correct. Clustering places centers where data is denser.
+c) It ensures all training examples are exactly interpolated
+... Incorrect. That would require one center per training point.
+d) It simplifies the loss function to a closed-form solution
+... Incorrect. The loss function form is not affected by center selection strategy.
+
+Title: medium – understand – non-edge – Locality of RBFs
+Points: 1
+1. Why are RBF networks considered “local” models?
+a) Because they use a separate model for each input region
+... Incorrect. That describes mixture-of-experts models, not RBFs.
+*b) Because each basis function responds most strongly to nearby inputs and decays with distance
+... Correct. RBFs have localized support centered around specific points.
+c) Because they divide the input space into non-overlapping Voronoi cells
+... Incorrect. That describes nearest-neighbor or K-means quantization.
+d) Because they learn separate weights for every input dimension
+... Incorrect. Weight sharing is not dimension-specific in RBFs.
+
+Title: medium – understand – non-edge – Why margin can be fixed to 1  
+Points: 1  
+1. Why is it valid to impose the constraint $t_n(w^\top \phi(x_n) + b) \ge 1$ when formulating the SVM optimization problem?  
+a) Because all training points are scaled to have unit norm, so this margin condition holds by construction  
+... Incorrect. No such normalization of inputs is assumed or required in the SVM formulation.  
+*b) Because the margin is defined in a scaled space; fixing the margin and shrinking the scale, or fixing the scale and increasing the margin, are equivalent  
+... Correct. The optimization is scale-invariant, so we can fix the margin arbitrarily without changing the decision boundary.  
+c) Because the kernel function enforces unit distance between support vectors and the separating hyperplane  
+... Incorrect. The kernel computes similarity; it does not enforce specific distances or margins.  
+d) Because the constraint ensures that the hinge loss will be exactly zero for correctly classified points  
+... Incorrect. The hinge loss becomes zero beyond the margin, but the margin value itself is a modeling choice, not a loss property.
+
+Title: medium – understand – non-edge – Why only support vectors matter  
+Points: 1  
+1. Why do only support vectors appear in the SVM prediction function?  
+a) Because they are closest to the decision boundary and define the margin directly  
+... Incorrect. That’s true descriptively, but not the reason they contribute in the formula.  
+*b) Because only training points with nonzero weights ($a_n > 0$) matter in the final model, and those are the support vectors  
+... Correct. All other points have $a_n = 0$ and do not contribute to prediction.  
+c) Because the kernel evaluates to zero for points far from the decision boundary  
+... Incorrect. Kernel values are unrelated to margin or sparsity, especially if they are multiplied by $a_n=0$!  
+d) Because prediction confidence is used to filter non-support vectors during optimization  
+... Incorrect. SVMs do not remove points based on prediction confidence.
+
+Title: concept-check – understand – non-edge – Horizontal axis of hinge loss  
+Points: 1  
+1. In a graph of the hinge loss function used in soft-margin SVMs, what quantity is plotted on the horizontal axis?  
+a) The distance from the input $x_n$ to the decision boundary in input space  
+... Incorrect. The hinge loss is not based on input-space distances.  
+*b) The product of the true label and the model output, $t_n y_n$  
+... Correct. This signed value measures margin confidence — it determines when loss is zero or positive.  
+c) The squared norm of the weight vector, $\|w\|^2$  
+... Incorrect. That appears in the regularization term, not the loss axis.  
+d) The kernel similarity between the input and a support vector  
+... Incorrect. Kernel values aren't plotted on the hinge loss curve.
+
+Title: concept-check – remember – non-edge – Zero region of hinge loss  
+Points: 1  
+1. For which values of $t_n y_n$ does the hinge loss become exactly zero?  
+a) Whenever $y_n > 0$  
+... Incorrect. That’s not sufficient — the prediction must also be confident and correct.  
+*b) When $t_n y_n \ge 1$  
+... Correct. The hinge loss is zero when the prediction is correct and the margin is at least 1.  
+c) Only if $t_n y_n = 0$  
+... Incorrect. That value gives maximal loss — not zero.  
+d) For all correctly classified training points  
+... Incorrect. Only those classified correctly with a margin of at least 1 have zero loss.
+
+Title: medium – analyze – edge – Comparing hinge loss to squared error  
+Points: 1  
+1. Compared to squared error loss, what is a key advantage of hinge loss for classification tasks?  
+a) It penalizes large-margin predictions more strongly, improving generalization  
+... Incorrect. Hinge loss ignores large-margin predictions, which is the opposite  
+*b) It penalizes only points near or within the margin, leading to sparser solutions  
+... Correct. This selective penalty reduces unnecessary weight updates  
+c) It ensures the model is probabilistic and outputs calibrated confidence  
+... Incorrect. Hinge loss does not produce probability estimates  
+d) It converges faster because it uses second-order derivatives  
+... Incorrect. Hinge loss is non-smooth; second-order optimization is harder, not easier
+
+Title: medium – apply – non-edge – Support vector condition from hinge loss  
+Points: 1  
+1. What condition determines whether a training point becomes a support vector in a soft-margin SVM?  
+a) The point must be misclassified by the current model  
+... Incorrect. Even correctly classified points can be support vectors if they lie on the margin  
+*b) The point must have nonzero hinge loss, or lie exactly on the margin boundary  
+... Correct. These points correspond to $0 < t_n y_n \le 1$ and yield $a_n > 0$  
+c) The point must have a dual variable equal to C  
+... Incorrect. That only happens for misclassified or heavily penalized points  
+d) The point must have highest kernel similarity to the decision boundary  
+... Incorrect. Kernel similarity does not determine support vector status
+
+Title: medium – apply – non-edge – Kernel in the SVM prediction function  
+Points: 1  
+1. In the dual form of the SVM, how is the prediction $y(x)$ computed for a test input?  
+a) By applying the kernel function between $x$ and all training points, then summing the results with their targets and weights  
+... Incorrect. Only support vectors are used in the summation — not all training points.  
+*b) By summing over support vectors: $y(x) = \sum_{n \in S} a_n t_n k(x, x_n) + b$  
+... Correct. The kernel computes similarity between $x$ and each support vector, weighted by $a_n t_n$.  
+c) By projecting $x$ onto the weight vector $w$ learned in the primal  
+... Incorrect. The primal form uses $w$, but in the dual, $w$ is never explicitly formed.  
+d) By selecting the training point most similar to $x$ and copying its label  
+... Incorrect. That’s nearest-neighbor classification, not SVM.
+
+Title: medium – understand – non-edge – Effect of $C$ in soft-margin SVM  
+Points: 1  
+1. In a soft-margin SVM, what happens when you increase the value of $C$?  
+a) The margin becomes wider to reduce the influence of noisy points  
+... Incorrect. A larger $C$ makes the model focus more on minimizing errors, not on margin width.  
+*b) The model allows fewer margin violations and may overfit the training data  
+... Correct. A larger $C$ increases the penalty for mistakes, so the model fits the data more tightly.  
+c) More points are forced to lie exactly on the margin boundary  
+... Incorrect. This depends on the data and doesn't follow directly from $C$.  
+d) The model becomes less sensitive to outliers in the training set  
+... Incorrect. Larger $C$ makes the model **more** sensitive to outliers, not less.
+
+Title: medium – understand – non-edge – Why maximize the margin  
+Points: 1  
+1. Why does an SVM choose the separating hyperplane that maximizes the margin between classes?  
+a) To ensure the smallest possible training error on the dataset  
+... Incorrect. Margin maximization doesn’t guarantee zero training error, especially in soft-margin SVMs.  
+*b) To improve generalization by reducing sensitivity to small changes in input data  
+... Correct. A wider margin creates a buffer zone, making the classifier more robust to new data.  
+c) To reduce the number of support vectors needed for classification  
+... Incorrect. The number of support vectors depends on the data, not on a goal of minimization.  
+d) Because kernel methods require the margin to be fixed before training  
+... Incorrect. The kernel does not depend on margin width — margin arises from optimization.
+
+Title: medium – understand – non-edge – Margin and model complexity  
+Points: 1  
+1. Why does the SVM choose the hyperplane with the largest margin among all that separate the data?  
+a) Because it minimizes the training error on the support vectors  
+... Incorrect. All separating hyperplanes have zero training error in the hard-margin case.  
+*b) Because it selects the lowest-capacity (simplest) classifier that still fits the training data  
+... Correct. A wider margin corresponds to a simpler model, which improves generalization.  
+c) Because the kernel function requires a fixed margin size to operate correctly  
+... Incorrect. Kernels apply regardless of margin width.  
+d) Because it minimizes the number of features needed in the decision function  
+... Incorrect. The number of features is fixed — margin width doesn’t reduce dimensionality.
+
+Title: medium – analyze – edge – SVM vs. logistic regression  
+Points: 1  
+1. How does the SVM differ from logistic regression in how it treats well-classified points?  
+a) Logistic regression ignores these points, while SVM penalizes them to improve margin  
+... Incorrect. Logistic regression continues to adjust weights for all points; SVM ignores well-classified ones beyond the margin.  
+*b) SVM ignores well-classified points beyond the margin, while logistic regression continues to adjust for them  
+... Correct. The hinge loss becomes flat past the margin, leading to sparsity; logistic loss keeps contributing.  
+c) SVM uses probabilistic outputs, while logistic regression does not  
+... Incorrect. Logistic regression is probabilistic; SVM is not.  
+d) Logistic regression enforces a hard margin; SVM allows soft violations  
+... Incorrect. SVM can have hard or soft margins; logistic regression has no explicit margin at all.
+
+Title: medium – understand – non-edge – Kernel-induced decision boundaries  
+Points: 1  
+1. What role does the kernel function play in shaping the SVM decision boundary?  
+a) It guarantees that the decision boundary remains linear in input space  
+... Incorrect. The boundary becomes nonlinear in input space when kernels are used.  
+*b) It allows a linear separation in a transformed feature space, resulting in a nonlinear boundary in input space  
+... Correct. The kernel implicitly computes dot products in a high-dimensional space, enabling nonlinear separation.  
+c) It adds noise to the decision function to prevent overfitting  
+... Incorrect. Kernels reshape similarity; they don’t introduce noise.  
+d) It removes the need for support vectors by embedding all data into a lower-dimensional subspace  
+... Incorrect. Kernels typically **increase**, not decrease, dimensionality, and support vectors are still needed.
+
+Title: medium – understand – non-edge – Kernel validity criteria  
+Points: 1  
+1. What must be true for a function $k(x, x')$ to be a valid kernel in an SVM?  
+a) It must be normalized so that $k(x, x) = 1$ for all $x$  
+... Incorrect. Kernels need not be normalized — only symmetric and positive semi-definite.  
+*b) It must be symmetric and generate a positive semi-definite Gram matrix for all input sets  
+... Correct. This ensures the kernel corresponds to an inner product in some feature space.  
+c) It must compute Euclidean distance between inputs  
+... Incorrect. Distance is not required — similarity is encoded via inner products.  
+d) It must output values between 0 and 1 for all inputs  
+... Incorrect. Kernel values can be negative or unbounded, depending on the function.
+
+Title: medium – understand – non-edge – Support vectors and model complexity  
+Points: 1  
+1. What does a large number of support vectors typically indicate about an SVM model?  
+a) That the margin is unusually wide and generalization is excellent  
+... Incorrect. More support vectors usually occur with smaller margins.  
+*b) That the decision boundary is highly sensitive to the training data  
+... Correct. Many support vectors suggest the model fits closely to the data and may overfit.  
+c) That the model is underfitting and not learning patterns  
+... Incorrect. Underfitting would likely lead to fewer support vectors and larger errors.  
+d) That the kernel function is not symmetric  
+... Incorrect. Kernel symmetry is unrelated to the number of support vectors.
+
+Title: concept-check – remember – non-edge – SVM classifier type  
+Points: 1  
+1. How is a standard SVM best categorized in terms of model type?  
+a) A generative model that estimates $p(x, t)$ and samples new data  
+... Incorrect. SVMs do not model the joint distribution or generate data.  
+*b) A discriminative model that defines a decision boundary without modeling probabilities  
+... Correct. SVMs directly define decision boundaries through margin maximization.  
+c) A probabilistic classifier that estimates posterior class probabilities  
+... Incorrect. Standard SVMs produce scores, not calibrated probabilities.  
+d) A hierarchical model trained by maximizing likelihood over a latent space  
+... Incorrect. That describes models like EM for GMMs or deep generative models.
+
+Title: medium – understand – edge – Idea behind SVM regression  
+Points: 1  
+1. What is the key idea behind SVM regression (support vector regression)?  
+a) To assign each output to a discrete bin based on support vector similarity  
+... Incorrect. SVR performs continuous regression, not classification into bins.  
+*b) To fit the simplest function that stays within an $\epsilon$-margin of the target values, even if it underfits the trend  
+... Correct. SVR minimizes complexity and tolerates deviations inside the $\epsilon$-tube.  
+c) To minimize squared error while ensuring that predictions remain maximally separated  
+... Incorrect. SVR does not use squared error and does not seek maximal separation in regression.  
+d) To learn a probability distribution over outputs using a likelihood-based loss function  
+... Incorrect. SVR is not probabilistic and does not model distributions over outputs.
+
+Title: medium – understand – edge – Margin location relative to class boundaries  
+Points: 1  
+1. In a linear SVM trained with a hard margin, where does the decision boundary lie relative to the training data?  
+a) It passes through the positive class and avoids the negative class using slack variables  
+... Incorrect. Hard-margin SVMs use no slack; the boundary does not pass through any data points.  
+*b) It is equidistant from the nearest points of each class and maximizes the gap between them  
+... Correct. The margin is symmetric between the closest oppositely labeled points.  
+c) It is positioned to ensure an equal number of misclassifications from each class  
+... Incorrect. Hard-margin SVMs make no misclassifications — they separate the data completely.  
+d) It aligns with the direction of the largest principal component in the input space  
+... Incorrect. SVMs optimize for margin, not variance like PCA does.
+
+Title: medium – analyze – edge – Biased predictions and class imbalance  
+Points: 1  
+1. You train a binary SVM and observe that it predicts the majority class on nearly all test inputs. What’s the most likely cause, and what could help address it?  
+a) The SVM loss penalizes misclassifications too symmetrically; you should retrain using a kernel with stronger curvature  
+... Incorrect. Kernel curvature affects boundary shape, not class bias.  
+*b) The SVM objective does not account for class imbalance; you could adjust the prediction threshold or, more robustly, use a weighted SVM  
+... Correct. Standard SVMs optimize margin, not class balance — both thresholding and class-weighted training are valid responses.  
+c) The support vectors are overfit to the majority class; remove them and retrain  
+... Incorrect. Support vectors are learned — removing them breaks the model entirely.  
+d) The regularization parameter $C$ is too large; reducing it ensures more margin violations from the majority class  
+... Incorrect. Changing $C$ affects margin softness, not class balance.
+
+Title: concept-check – remember – non-edge – Tree definition
+Points: 1
+1. What is the defining property of a tree-structured undirected graph in the context of graphical models?
+a) Every node has exactly one parent.
+... Incorrect. That defines a directed tree, not an undirected one.
+*b) There is exactly one path between any pair of nodes.
+... Correct. This is the defining characteristic of an undirected tree.
+c) The graph can be triangulated without added edges.
+... Incorrect. That applies to junction trees, not trees.
+d) The root node has no children.
+... Incorrect. That is not a standard condition in undirected trees.
+
+Title: medium – understand – non-edge – Polytree vs Tree
+Points: 1
+1. In what way does a **polytree** differ from a directed tree?
+a) A polytree allows for cycles if they are directed.
+... Incorrect. Polytrees cannot contain cycles in any direction.
+*b) A polytree allows nodes to have more than one parent.
+... Correct. That is the key difference; nodes may have multiple parents.
+c) A polytree contains a moralized loop by construction.
+... Incorrect. Moralization introduces loops, but the polytree itself does not have loops.
+d) A polytree is fully connected and undirected.
+... Incorrect. It is still directed and not necessarily fully connected.
+
+Title: concept-check – remember – non-edge – Factor graph structure
+Points: 1
+1. What distinguishes a factor graph from a Bayesian network or a Markov random field?
+a) It represents only linear dependencies between variables.
+... Incorrect. Factor graphs are not restricted to linear relationships.
+b) It requires moralization of all directed edges.
+... Incorrect. Moralization applies when converting a Bayesian network to an undirected form, not when creating a factor graph.
+*c) It introduces explicit nodes for each factor in the distribution.
+... Correct. Factor graphs contain both variable nodes and factor nodes, making the factorization structure explicit.
+d) It uses only cliques to represent joint probabilities.
+... Incorrect. That describes how MRFs encode factorization using cliques.
+
+Title: medium – apply – non-edge – Sum-product base cases
+Points: 1
+1. In the sum-product algorithm, what message does a **leaf variable node** send to its neighboring factor node?
+a) A zero vector indicating no incoming information.
+... Incorrect. A zero message would eliminate information entirely.
+*b) The constant function $\mu_{x \rightarrow f}(x) = 1$
+... Correct. This represents uninformative prior belief (uniform).
+c) A copy of the factor potential.
+... Incorrect. Variable nodes do not send factor functions.
+d) The average of its neighbors' messages.
+... Incorrect. Message passing uses products, not averages.
+
+Title: medium – understand – edge – Message direction in max-sum
+Points: 1
+1. Why does the **max-sum algorithm** not require message passing in both directions like the sum-product algorithm does?
+a) Because the max operation is symmetric and reversible.
+... Incorrect. Max is not reversible in that way.
+*b) Because only the single most likely configuration is needed, not all marginals.
+... Correct. Max-sum computes a single MAP configuration, so back-propagation suffices.
+c) Because max-sum includes normalization at each step.
+... Incorrect. Normalization is not part of max-sum.
+d) Because factor graphs in max-sum must be fully connected.
+... Incorrect. The graph structure is not required to be fully connected.
+
+Title: medium – apply – non-edge – Leaf node base case
+Points: 1
+1. What message does a **leaf factor node** send to its only neighboring variable in the sum-product algorithm?
+a) A constant 1
+... Incorrect. That is the base case for leaf variable nodes, not factor nodes.
+*b) Its own factor function $f(x)$
+... Correct. The factor has no other neighbors, so it sends itself as the message.
+c) The average of all incoming messages
+... Incorrect. There are no incoming messages at a leaf factor.
+d) A normalized version of the joint over the variable
+... Incorrect. This step does not involve normalization yet.
+
+Title: medium – understand – edge – Root handling in max-sum
+Points: 1
+1. In the max-sum algorithm, once messages have reached the root node, what value is computed?
+a) The product of all incoming messages to the root
+... Incorrect. That’s sum-product, not max-sum.
+*b) The maximum value of the log-joint: $\max_x \sum \mu_{f \rightarrow x}(x)$
+... Correct. This gives $\ln p_{\text{max}}$, the log of the highest joint probability.
+c) The minimum entropy configuration
+... Incorrect. Entropy isn’t computed in max-sum.
+d) The marginal distribution over root variables
+... Incorrect. Max-sum computes the single best configuration, not marginals.
+
+Title: medium – apply – edge – Why store argmax
+Points: 1
+1. Why must the max-sum algorithm **store argmax values** during the forward pass?
+a) To normalize the posterior probabilities
+... Incorrect. Max-sum does not normalize posteriors.
+*b) To ensure backtracking produces a globally consistent configuration
+... Correct. Without tracking argmax, you may get inconsistent variable assignments during backtracking.
+c) To enforce treewidth constraints
+... Incorrect. Treewidth affects feasibility, not inference logic.
+d) To allow loopy belief propagation
+... Incorrect. Loopy belief propagation is not part of max-sum.
+
+Title: medium – apply – edge – Failure of marginal-based MAP
+Points: 1
+1. Why does selecting the most likely value from each marginal $p(x_i)$ not generally produce the MAP configuration?
+a) Because the marginals are always uniform in tree graphs
+... Incorrect. Marginals are not necessarily uniform.
+*b) Because the most likely joint configuration may not align with the individual marginal modes
+... Correct. Marginals maximize individually; MAP maximizes jointly.
+c) Because marginals are conditional on a fixed root variable
+... Incorrect. They are not conditioned this way.
+d) Because marginals are normalized while joint probabilities are not
+... Incorrect. That doesn’t explain the inconsistency.
+
+Title: medium – understand – edge – Why sum-product requires both directions
+Points: 1
+1. Why must messages pass in both directions on each edge in the sum-product algorithm?
+a) To ensure the factor graph remains acyclic
+... Incorrect. The structure is already a tree.
+b) To compute all local potentials directly
+... Incorrect. Local potentials are already defined by the factorization.
+*c) Because computing full marginals requires combining upstream and downstream information
+... Correct. Each variable needs messages from all its neighbors.
+d) Because variable-to-factor messages contain normalization constants
+... Incorrect. Normalization is applied after message passing.
+
+Title: medium – understand – edge – Root node choice in trees
+Points: 1
+1. Why is the choice of root node arbitrary in sum-product and max-sum algorithms on trees?
+a) Because the message equations change based on the root
+... Incorrect. The equations stay the same; only schedule changes.
+*b) Because trees have a unique path between nodes, so any root leads to the same result
+... Correct. The root defines direction, but results are root-invariant.
+c) Because all leaf nodes contain priors
+... Incorrect. Leaves may or may not encode priors.
+d) Because it is required for loopy belief propagation
+... Incorrect. Loopy BP does not rely on root choice.
+
+Title: medium – evaluate – edge – Practical effects of root choice in max-sum
+Points: 1
+1. In the max-sum algorithm on a tree-structured factor graph, how does the choice of root node affect the algorithm?
+a) It determines the MAP configuration that the algorithm converges to
+... Incorrect. The final MAP assignment is invariant to root choice.
+*b) It affects the message schedule and may influence practical runtime efficiency
+... Correct. While correctness is unaffected, a balanced root can reduce stack depth and message size growth.
+c) It changes which variables require backtracking
+... Incorrect. All variables use backtracking, regardless of root.
+d) It determines whether the factor graph needs triangulation
+... Incorrect. Triangulation is only needed for graphs with cycles.
+
+Title: concept-check – remember – non-edge – conditional independence definition  
+Points: 1  
+1. What does it mean for variables $a$ and $b$ to be conditionally independent given $c$?  
+a) $p(a, b \mid c) = p(a \mid b, c)$  
+... Incorrect. This expression omits the full independence relationship.  
+*b) $p(a \mid b, c) = p(a \mid c)$  
+... Correct. This is the definition of conditional independence.  
+c) $p(a \mid b, c) = p(b \mid a, c)$  
+... Incorrect. This suggests symmetry of conditional distributions, which is not implied.  
+d) $p(a, b) = p(a) p(b \mid c)$  
+... Incorrect. This mixes marginal and conditional distributions inconsistently.
+
+Title: medium – understand – edge – head-to-head unblocking  
+Points: 1  
+2. In a head-to-head structure $a \rightarrow c \leftarrow b$, what happens if we observe $c$?  
+a) $a$ and $b$ become independent  
+... Incorrect. Observing $c$ introduces dependence between $a$ and $b$.  
+*b) $a$ and $b$ become dependent (path is unblocked)  
+... Correct. Conditioning on a collider or its descendant activates the path.  
+c) $a$ and $c$ become marginally independent  
+... Incorrect. The structure implies dependency, not independence.  
+d) $a$ and $b$ are deterministically linked  
+... Incorrect. The relationship remains probabilistic.
+
+Title: medium – apply – non-edge – Markov blanket membership  
+Points: 1  
+4. Which of the following is NOT part of the Markov blanket for a node $x_i$?  
+   ![Diagram to help understand the options](chapter8/images/sketch-whats-not-markov-blanket.png)
+a) A parent of $x_i$  
+... Incorrect. Parents are always in the Markov blanket.  
+b) A child of $x_i$  
+... Incorrect. Children are included.  
+*c) A node that shares a parent with $x_i$ but is not a child of $x_i$  
+... Correct. Co-parents of $x_i$’s children are included, but not arbitrary nodes.  
+d) A co-parent of $x_i$’s child  
+... Incorrect. Co-parents of children are part of the Markov blanket.
+
+Title: medium – understand – edge – explaining away intuition  
+Points: 1  
+5. In the gauge example ($B \rightarrow G \leftarrow F$), what effect does observing $G$ have?  
+a) It makes $B$ and $F$ independent  
+... Incorrect. Observing $G$ creates dependence.  
+*b) It induces dependence between $B$ and $F$  
+... Correct. This is the explaining away effect.  
+c) It forces $G$ to be deterministic  
+... Incorrect. $G$ remains probabilistic with conditional uncertainty.  
+d) It removes all information about $B$  
+... Incorrect. Observation of $G$ updates beliefs about $B$.
+
+Title: medium – apply – edge – collider structure inference  
+Points: 1  
+6. If a path contains $a \rightarrow c \leftarrow b$, and neither $c$ nor any of its descendants are in the conditioning set, what is true?  
+a) The path is active  
+... Incorrect. A collider blocks the path unless conditioned on.  
+*b) The path is blocked  
+... Correct. The collider blocks unless conditioned on itself or its descendants.  
+c) $a$ and $b$ are conditionally independent given $c$  
+... Incorrect. The conditioning set excludes $c$, so the path is still blocked.  
+d) $a$ and $b$ are deterministically related  
+... Incorrect. No deterministic relationship exists.
+
+Title: medium – understand – edge – d-separation over multiple paths  
+Points: 1  
+7. To confirm that $X \perp\!\!\!\perp Y \mid Z$ via d-separation, what must be true?  
+a) At least one path from $X$ to $Y$ must be blocked  
+... Incorrect. All paths must be blocked.  
+*b) Every path from $X$ to $Y$ must be blocked given $Z$  
+... Correct. d-separation requires blocking all undirected paths.  
+c) $X$ must be a root node in the graph  
+... Incorrect. Root status is irrelevant to d-separation.  
+d) There must be a head-to-tail path between $X$ and $Y$  
+... Incorrect. That’s a possible structure, not a requirement.
+
+Title: medium – apply – non-edge – naive Bayes conditional independence  
+Points: 1  
+9. In a naive Bayes model, all features $x_1, \dots, x_D$ are conditionally independent given class $C$. What does this imply?  
+a) $x_i \perp\!\!\!\perp x_j$  
+... Incorrect. They are not unconditionally independent.  
+*b) $x_i \perp\!\!\!\perp x_j \mid C$  
+... Correct. This is the defining assumption of naive Bayes.  
+c) $C$ must be a deterministic function of the $x_i$  
+... Incorrect. $C$ is modeled probabilistically.  
+d) Each $x_i$ must be marginally independent of $C$  
+... Incorrect. Each $x_i$ depends on $C$ by design.
+
+Title: concept-check – remember – non-edge – clique potential definition  
+Points: 1  
+1. In a Markov Random Field (MRF), what is the role of a potential function $\psi_C(x_C)$?  
+a) It defines a normalized probability over the variables in clique $C$  
+... Incorrect. Potentials are unnormalized; they only need to be non-negative.  
+b) It defines a prior distribution over the entire graph  
+... Incorrect. Potentials operate locally over cliques, not the full graph.  
+*c) It assigns a non-negative compatibility score to configurations of variables in clique $C$  
+... Correct. Potentials are local scoring functions used to build the unnormalized joint.  
+d) It computes the conditional probability of one node given its neighbors  
+... Incorrect. That describes the Gibbs distribution, not the role of $\psi$.
+
+Title: concept-check – remember – non-edge – partition function role  
+Points: 1  
+4. In an MRF, what is the function of the partition function $Z$?  
+a) It enforces local normalization for each clique  
+... Incorrect. Potentials are not normalized locally.  
+*b) It normalizes the full joint distribution to ensure it sums to 1  
+... Correct. $Z = \sum_x \prod_C \psi_C(x_C)$ makes the distribution valid.  
+c) It computes the log-likelihood for observed data  
+... Incorrect. That would involve evaluating $p(x)$, not computing $Z$ per se.  
+d) It eliminates cycles in the graph  
+... Incorrect. $Z$ is unrelated to the graph structure itself.
+
+Title: concept-check – understand – non-edge – local Markov property  
+Points: 1  
+5. What does the local Markov property state for a Markov Random Field?  
+*a) A variable is conditionally independent of all others given its immediate neighbors  
+... Correct. This defines the Markov blanket in undirected models.  
+b) A variable's probability depends only on the variables in its maximal clique  
+... Incorrect. Maximal cliques may include non-neighboring nodes.  
+c) A variable is conditionally independent of its neighbors given its parents  
+... Incorrect. That applies to Bayesian networks, not MRFs.  
+d) A variable is only independent if the graph is fully disconnected  
+... Incorrect. Independence depends on graph structure, not isolation.
+
+Title: medium – apply – edge – conditional independence test  
+Points: 1  
+7. In an MRF, how can you test if $A \perp\!\!\!\perp B \mid C$ using the separation rule?  
+a) Remove all edges in $C$ and check if $A$ and $B$ are d-separated  
+... Incorrect. That describes separation in directed models.  
+*b) Remove all nodes in $C$ and their edges; if $A$ and $B$ are disconnected, they are conditionally independent  
+... Correct. Graph separation in undirected models implies conditional independence.  
+c) Check whether $A$ and $B$ are not part of the same maximal clique  
+... Incorrect. Clique membership does not imply dependence.  
+d) Confirm that $C$ lies on every path between $A$ and $B$ in the moral graph  
+... Incorrect. Moralization applies to directed models, not MRFs.
+
+Title: concept-check – remember – non-edge – MRF neighborhood semantics  
+Points: 1  
+8. What is the Markov blanket of a variable in an MRF?  
+a) Its parents and children  
+... Incorrect. That describes Bayesian networks, not MRFs.  
+*b) Its immediate neighbors in the undirected graph  
+... Correct. In an MRF, the Markov blanket is the set of adjacent nodes.  
+c) All nodes in the same clique  
+... Incorrect. Cliques may include transitive relationships, not just neighbors.  
+d) Nodes that share a potential with the variable  
+... Incorrect. Potentials may span beyond direct adjacency.
+
+Title: medium – understand – non-edge – perfect map meaning  
+Points: 1  
+10. What does it mean for a graph to be a “perfect map” of a distribution?  
+a) It includes only the dependencies present in the distribution  
+... Incorrect. That’s a D-map.  
+*b) It captures exactly the independencies that hold in the distribution  
+... Correct. A perfect map is both an I-map and a D-map — no more, no less.  
+c) It uses the smallest number of edges needed for a valid factorization  
+... Incorrect. Minimality is desirable but not part of the definition.  
+d) It has disjoint cliques that cover all variables  
+... Incorrect. Cliques can and often do overlap.
+
+Title: concept-check – remember – non-edge – moralization procedure  
+Points: 1  
+11. What are the steps in moralizing a Bayesian network?  
+a) Reverse all arrows and collapse common descendants  
+... Incorrect. That does not preserve dependencies correctly.  
+*b) Add undirected edges between all co-parents, then drop all edge directions  
+... Correct. This produces an undirected graph with preserved dependency scope.  
+c) Remove leaf nodes and triangulate remaining cliques  
+... Incorrect. That’s not part of moralization.  
+d) Convert all deterministic nodes to observed nodes  
+... Incorrect. Moralization is about structure, not node types.
+
+Title: concept-check – remember – non-edge – clique definition  
+Points: 1  
+12. What is a clique in an undirected graph?  
+a) A set of nodes that all have the same degree  
+... Incorrect. Degree uniformity is unrelated to cliques.  
+*b) A subset of nodes where every pair of nodes is connected by an edge  
+... Correct. This is the definition of a clique.  
+c) A maximal connected component of the graph  
+... Incorrect. That refers to components, not cliques.  
+d) A set of nodes that share a common neighbor  
+... Incorrect. That does not imply full connectivity.
+
+Title: concept-check – remember – non-edge – maximal clique definition  
+Points: 1  
+13. What is a maximal clique in a graph?  
+a) A clique that contains the maximum number of nodes in the entire graph  
+... Incorrect. That would be a maximum clique.  
+*b) A clique that cannot be extended by adding another adjacent node  
+... Correct. Maximal means inclusion-wise maximal, not globally largest.  
+c) A clique that is part of every possible factorization  
+... Incorrect. Factorizations can vary.  
+d) A clique that has the lowest energy under the Boltzmann distribution  
+... Incorrect. That confuses structure with inference.
+
+Title: concept-check – understand – non-edge – CPD parameter count  
+Points: 1  
+1. A discrete variable has $K$ possible values and no parent nodes. How many independent parameters are required to specify its conditional probability distribution (CPD)?  
+a) $K$  
+... Incorrect. This would overparameterize the distribution; the probabilities must sum to one.  
+*b) $K - 1$  
+... Correct. One degree of freedom is lost due to the normalization constraint.  
+c) $K^2$  
+... Incorrect. This applies only in the case of dependencies on other discrete variables.  
+d) $2K$  
+... Incorrect. There's no multiplication of degrees of freedom in the no-parent case.
+
+Title: medium – understand – non-edge – deterministic vs observed  
+Points: 1  
+4. What distinguishes a deterministic variable from an observed variable in a Bayesian network?  
+a) A deterministic variable is fixed by data; an observed variable is not  
+... Incorrect. Both may have known values, but that’s not the defining difference.  
+*b) A deterministic variable is not a random variable; an observed variable is a random variable that has been assigned a value  
+... Correct. Deterministic variables have no probability distribution; observed variables do, but their value is known.  
+c) Observed variables are functions of their parents; deterministic variables are sampled  
+... Incorrect. This reverses the roles.  
+d) A deterministic variable must be shaded; an observed variable must be dotted  
+... Incorrect. This swaps the graphical notation.
+
+Title: medium – apply – non-edge – joint distribution via ancestral sampling  
+Points: 1  
+5. Given the Bayesian network in the figure below, what is the correct factorization of the joint distribution?  
+   ![alt text](chapter8/images/bayes-net-example.png)
+a) $p(x_1)\, p(x_2)\, p(x_3)\, p(x_4)\, p(x_5)\, p(x_6)\, p(x_7)$  
+... Incorrect. This assumes full independence with no conditioning—does not match the graph structure.  
+*b) $p(x_1)\, p(x_2)\, p(x_3)\, p(x_4 \mid x_1, x_2, x_3)\, p(x_5 \mid x_1, x_3)\, p(x_6 \mid x_4)\, p(x_7 \mid x_4, x_5)$  
+... Correct. Each node is conditioned on its parents, exactly as implied by the graph.  
+c) $p(x_7)\, p(x_6)\, p(x_5)\, p(x_4)\, p(x_3)\, p(x_2)\, p(x_1)$  
+... Incorrect. This reverses topological order and omits conditioning structure.  
+d) $p(x_1, x_2, x_3, x_4, x_5, x_6, x_7)$  
+... Incorrect. This is an undecomposed joint—not useful for generative modeling or inference.
+
+Title: concept-check – remember – non-edge – sampling order  
+Points: 1  
+6. Why must a Bayesian network be a directed acyclic graph (DAG)?  
+a) So that no variable is ever observed  
+... Incorrect. Observability is unrelated to graph cycles.  
+*b) So that variables can be sampled in a valid ancestral order  
+... Correct. A DAG ensures that each node has its parents defined before sampling.  
+c) So that joint probabilities are always equal to 1  
+... Incorrect. The normalization property holds regardless of cycles.  
+d) So that every node has the same number of parents  
+... Incorrect. Bayesian networks allow variable parent counts.
+
+Title: medium – apply – edge – DFS topological sort logic  
+Points: 1  
+7. How does depth-first search (DFS) help construct a topological ordering for ancestral sampling in a Bayesian network?  
+a) It visits nodes randomly until a consistent sampling order is found  
+... Incorrect. DFS is systematic and does not rely on randomness.  
+b) It explores all paths to leaf nodes before sampling any variables  
+... Incorrect. DFS discovers order, but sampling happens after sorting.  
+*c) It records each node after all its parents are processed, ensuring correct dependency order  
+... Correct. This guarantees that every variable appears after its parents in the ordering.  
+d) It samples variables immediately upon first visit  
+... Incorrect. Sampling must wait until all parent dependencies are resolved.
+
+Title: medium – apply – non-edge – Entropy vs Gini
+Points: 1
+1. Which of the following best describes the difference between entropy and Gini impurity in decision trees?
+a) Entropy favors deeper trees due to steeper gradients.
+... Incorrect. Tree depth is a function of stopping, not impurity steepness.
+*b) Entropy is logarithmic and typically yields slightly different split points than Gini.
+... Correct. Entropy uses log terms and can produce different splits, especially near 50/50 class distributions.
+c) Gini impurity is used only in regression.
+... Incorrect. Gini is used in classification.
+d) Entropy penalizes misclassification more than squared error.
+... Incorrect. That’s comparing a classification and regression metric.
+
+Title: concept-check – remember – non-edge – Cost complexity pruning
+Points: 1
+1. What is the role of the complexity penalty term $\lambda |T|$ in the cost function $C(T)$ for pruning?
+a) It maximizes information gain during splits.
+... Incorrect. It applies during pruning, not splitting.
+*b) It penalizes large trees to prevent overfitting.
+... Correct. The $\lambda |T|$ term discourages overly complex trees.
+c) It is used only for boosting ensembles.
+... Incorrect. Boosting uses additive loss, not this penalty.
+d) It weights leaves by their entropy.
+... Incorrect. Entropy is not weighted by $\lambda$.
+
+Title: medium – understand – non-edge – Axis-aligned boundaries
+Points: 1
+1. What is a limitation of axis-aligned splits in decision trees?
+a) They cannot be used for nominal data.
+... Incorrect. Nominal features are split by subsets, not thresholds.
+*b) They cannot model diagonal decision boundaries unless the tree is deep.
+... Correct. Axis-aligned splits create rectangular regions, not arbitrary directions.
+c) They require feature normalization to work correctly.
+... Incorrect. Trees are invariant to monotonic transformations.
+d) They always produce piecewise linear functions.
+... Incorrect. Tree outputs are piecewise constant.
+
+Title: concept-check – remember – non-edge – Regression tree region prediction
+Points: 1
+1. In a regression tree, how is the predicted value for a region $R_\tau$ computed?
+a) The mode of the target values in the region
+... Incorrect. That’s for classification.
+*b) The mean of the target values in the region
+... Correct. The squared-error optimal prediction is the average.
+c) The median of the feature values in the region
+... Incorrect. Features are not targets.
+d) The average of feature values weighted by depth
+... Incorrect. Prediction depends only on the targets, not depth or features.
+
+Title: medium – understand – non-edge – Pruning strategy
+Points: 1
+1. What is the main motivation for pruning a fully grown decision tree?
+a) To increase information gain at the leaves
+... Incorrect. Pruning does not improve splits.
+*b) To reduce overfitting by removing unnecessary structure
+... Correct. Pruning simplifies trees to improve generalization.
+c) To enable bagging or boosting to be applied
+... Incorrect. Ensembles can be built with or without pruning.
+d) To guarantee axis-aligned splits
+... Incorrect. Trees already use axis-aligned splits by design.
+
+Title: medium – apply – non-edge – Squared error reduction
+Points: 1
+1. In regression trees, which split is preferred when using squared error as the impurity function?
+a) The one that results in the highest total $L_1$ loss
+... Incorrect. Regression trees minimize $L_2$ loss, not $L_1$.
+*b) The one that minimizes the sum of squared deviations within regions
+... Correct. This is the function defined in Equation 14.30.
+c) The split that maximizes the number of unique values in each region
+... Incorrect. Diversity is not the optimization target.
+d) The one that maximizes Gini impurity across leaves
+... Incorrect. Gini is for classification, not regression.
+
+Title: concept-check – remember – non-edge – Tree prediction equation
+Points: 1
+1. In PRML’s tree model, how is the prediction $y(\mathbf{x})$ defined over the input space?
+a) As the mode of all class labels in the dataset
+... Incorrect. That ignores the partitioning structure of trees.
+*b) A constant value selected from the region $R_j$ that contains $\mathbf{x}$
+... Correct. The model assigns a single constant per disjoint region, and $\mathbf{x}$ lies in exactly one.
+c) As a weighted average of all leaves
+... Incorrect. There is no weighting across leaves.
+d) As a linear combination of features and thresholds
+... Incorrect. Trees are non-parametric and non-linear.
+
+Title: concept-check – remember – non-edge – Role of design matrix
+Points: 1
+1. In supervised learning with decision trees, what does the design matrix $X$ represent?
+a) A matrix of target values across all class labels
+... Incorrect. That describes the label vector, not the design matrix.
+*b) A matrix where each row is a sample and each column is a feature
+... Correct. The design matrix encodes input features for all data points.
+c) A square matrix of feature-feature covariances
+... Incorrect. That would be the Gram or covariance matrix.
+d) A distance matrix used for tree clustering
+... Incorrect. Decision trees do not use distance matrices.
+
+Title: medium – apply – non-edge – Handling ordinal vs nominal
+Points: 1
+1. What is a key difference in how decision trees handle ordinal versus nominal features?
+a) Nominal features must be normalized before use
+... Incorrect. Trees are invariant to feature scaling.
+*b) Ordinal features can be thresholded, while nominal features require subset splits
+... Correct. Thresholding is meaningful for ordered variables, but not unordered categories.
+c) Ordinal features must be one-hot encoded
+... Incorrect. That’s not needed; ordering can be used directly.
+d) Nominal features must be binned into percentiles
+... Incorrect. Trees natively handle unordered categories without binning.
+
+Title: medium – understand – non-edge – Overfitting in deep trees
+Points: 1
+1. Why do deep decision trees tend to overfit training data?
+a) They rely on linear combinations of input features
+... Incorrect. Trees split on single features at each node.
+*b) They can create regions with very few samples, fitting noise
+... Correct. Deep trees partition the space finely and capture spurious structure.
+c) They use entropy which always overestimates the true loss
+... Incorrect. Entropy is an impurity measure, not a direct loss estimator.
+d) They minimize training error by pruning aggressively
+... Incorrect. Pruning reduces complexity, not overfitting.
+
+Title: concept-check – remember – non-edge – Committee variance
+Points: 1
+1. If $L$ uncorrelated models each have variance $\sigma^2$, what is the variance of their average?
+a) $\sigma^2$
+... Incorrect. That is the variance of a single model, not the average.
+*b) $\sigma^2 / L$
+... Correct. Averaging $L$ uncorrelated models reduces variance linearly with $L$.
+c) $L \cdot \sigma^2$
+... Incorrect. That is the total variance across all models, not the average.
+d) $\sqrt{\sigma^2 / L}$
+... Incorrect. That would be the standard deviation, not the variance.
+
+Title: medium – understand – non-edge – Why bagging reduces variance
+Points: 1
+1. Why does bagging help reduce generalization error for high-variance models?
+a) It increases training set size by duplicating examples
+... Incorrect. Bagging does not increase the number of unique data points.
+*b) It averages predictions across diverse models trained on bootstrapped samples
+... Correct. This reduces variance by aggregating uncorrelated model errors.
+c) It penalizes complexity via a regularization term
+... Incorrect. Bagging does not modify the loss function.
+d) It reweights examples to emphasize misclassified instances
+... Incorrect. That describes boosting, not bagging.
+
+Title: medium – apply – non-edge – Residuals in boosting
+Points: 1
+1. In boosting with squared error loss, what does each new base learner $h_m(\mathbf{x})$ learn?
+a) The label values $t_n$
+... Incorrect. That would be regression on the original targets.
+*b) The residuals $r_n^{(m)} = t_n - f_{m-1}(\mathbf{x}_n)$
+... Correct. This directly minimizes squared loss by fitting the residuals.
+c) The weights $\beta_m$ directly
+... Incorrect. $\beta_m$ is chosen after $h_m$ is trained.
+d) The margin between class probabilities
+... Incorrect. Margin only applies in classification contexts.
+
+Title: concept-check – remember – non-edge – Exponential loss form
+Points: 1
+1. What is the exponential loss used in AdaBoost for binary classification?
+a) $\mathcal{L}(t, f(\mathbf{x})) = (t - f(\mathbf{x}))^2$
+... Incorrect. That is squared error.
+*b) $\mathcal{L}(t, f(\mathbf{x})) = \exp(-t f(\mathbf{x}))$
+... Correct. AdaBoost minimizes exponential loss to emphasize misclassified points.
+c) $\mathcal{L}(t, f(\mathbf{x})) = \ln(1 + \exp(-t f(\mathbf{x})))$
+... Incorrect. That is log loss (logistic).
+d) $\mathcal{L}(t, f(\mathbf{x})) = -t \ln f(\mathbf{x})$
+... Incorrect. That is cross-entropy.
+
+Title: medium – apply – non-edge – AdaBoost weight update
+Points: 1
+1. After training a weak learner, how are sample weights updated in AdaBoost?
+a) Increased for all examples, then normalized
+... Incorrect. Only misclassified examples have increased weights.
+*b) Multiplied by $\exp(-\beta_m t_n h_m(\mathbf{x}_n))$, then normalized
+... Correct. This updates the distribution to emphasize incorrect classifications.
+c) Replaced by the residual errors from the current model
+... Incorrect. That applies to regression-based boosting, not AdaBoost.
+d) Divided by the learner's accuracy
+... Incorrect. That is not how sample-level weights are updated.
+
+Title: concept-check – remember – non-edge – Final AdaBoost prediction
+Points: 1
+1. How is the final prediction made in AdaBoost after $M$ rounds?
+a) Take the average of all weak predictions
+... Incorrect. AdaBoost uses a weighted sum, not a simple average.
+*b) Compute $f_M(\mathbf{x}) = \sum_{m=1}^M \beta_m h_m(\mathbf{x})$ and take its sign
+... Correct. This forms the additive model and outputs the predicted label.
+c) Use the last weak learner only
+... Incorrect. The ensemble uses all past learners.
+d) Apply cross-validation to select one best weak model
+... Incorrect. AdaBoost does not discard earlier learners.
+
+Title: concept-check – remember – non-edge – Role of normalization in AdaBoost
+Points: 1
+1. Why does AdaBoost normalize weights after updating them?
+a) To turn the weights into posterior probabilities over class labels
+... Incorrect. AdaBoost weights are over training examples, not over labels or parameters.
+*b) To maintain a valid sampling distribution over training examples
+... Correct. Normalization ensures the weights define a proper distribution for weighting the next learner’s loss.
+c) To penalize high-confidence predictions
+... Incorrect. Normalization does not directly affect confidence.
+d) To adjust the learning rate across rounds
+... Incorrect. AdaBoost does not use an explicit learning rate.
+
+Title: concept-check – understand – non-edge – clamping a variable  
+Points: 1  
+1. What happens when a variable is clamped to an observed value in a chain-structured MRF?  
+a) It is removed from the graph entirely  
+... Incorrect. The node remains and participates in inference.  
+*b) Its message becomes a one-hot indicator function centered at the observed value  
+... Correct. Clamping replaces summation with a delta function that filters compatible paths.  
+c) Only the backward message is updated  
+... Incorrect. Clamping affects both forward and backward message flow.  
+d) The variable’s potential is dropped from the model  
+... Incorrect. Potentials remain, and the value is inserted into them.
+
+Title: concept-check – remember – non-edge – single marginal cost  
+Points: 1  
+2. In a chain with 5 variables, each taking $K$ values, what is the cost of computing $p(x_3)$ using message passing?  
+a) $O(K^5)$  
+... Incorrect. That is the cost of brute-force enumeration.  
+*b) $O(K^2 \cdot N)$  
+... Correct. Each message update is $O(K^2)$ and there are $N-1$ messages.  
+c) $O(K \cdot \log K)$  
+... Incorrect. No log terms are involved in exact message passing.  
+d) $O(K^3)$  
+... Incorrect. That would be the cost of interacting three variables jointly.
+
+Title: medium – analyze – non-edge – cost of all marginals  
+Points: 1  
+3. How does the cost of computing all marginals $p(x_1), \dots, p(x_N)$ compare to computing a single $p(x_n)$ in a chain?  
+a) It requires $N$ times more work than computing one marginal  
+... Incorrect. Messages can be reused across all marginals.  
+*b) It requires only one forward and one backward pass — total cost is $O(NK^2)$  
+... Correct. All marginals can be computed with shared messages in linear time.  
+c) It depends on which node is queried first  
+... Incorrect. Message order doesn’t affect total cost.  
+d) It is exponential in the number of variables  
+... Incorrect. That applies only to naive enumeration, not message passing.
+
+Title: concept-check – understand – non-edge – Volume of central subcube  
+Points: 1  
+1. In a $D$-dimensional unit cube, what happens to the volume of the central subcube $[0, 0.5]^D$ as $D$ increases?  
+a) It stays the same  
+... Incorrect. The volume shrinks exponentially with dimension.  
+*b) It decreases exponentially  
+... Correct. The volume is $(0.5)^D$, which vanishes as $D$ grows.  
+c) It increases linearly  
+... Incorrect. Volume increases only if the subcube expands.  
+d) It fluctuates but stays near 0.5  
+... Incorrect. The decline is consistent and exponential.
+
+Title: concept-check – remember – non-edge – Axis length needed to retain cube volume  
+Points: 1  
+1. In a uniform distribution over the $[0,1]^D$ cube, how much of each axis must be retained to keep 95% of the total volume as $D$ increases?  
+a) A fixed central subregion like $[0.25, 0.75]^D$  
+... Incorrect. This subregion’s volume shrinks exponentially with dimension.  
+*b) Nearly the full length of each axis  
+... Correct. To preserve 95% of the volume, each axis must span nearly $[0,1]$ as $D \to \infty$.  
+c) Exactly half of each axis  
+... Incorrect. That only retains $(0.5)^D$ of the volume.  
+d) Any range of fixed width, as long as it’s centered  
+... Incorrect. Fixed-width ranges shrink to negligible volume in high dimensions.
+
+Title: concept-check – remember – non-edge – Definition of entropy  
+Points: 1  
+1. What does the entropy $H[x]$ measure for a discrete random variable $x$?  
+a) The probability of the most likely outcome  
+... Incorrect. That’s the mode, not entropy.  
+*b) The average uncertainty or surprise across all outcomes  
+... Correct. Entropy is the expected information content of the distribution.  
+c) The number of distinct values $x$ can take  
+... Incorrect. This affects entropy but is not what it measures.  
+d) The expected value of $x$  
+... Incorrect. Expectation and entropy are distinct concepts.
+
+Title: concept-check – remember – non-edge – Supervised vs. unsupervised learning  
+Points: 1  
+1. Which best differentiates supervised from unsupervised learning?  
+*a) Supervised uses labeled data; unsupervised does not  
+... Correct. This is the fundamental difference.  
+b) Supervised memorizes; unsupervised generalizes  
+... Incorrect. Both can generalize or overfit.  
+c) Supervised uses unlabeled data  
+... Incorrect. That’s reversed.
+
+Title: concept-check – understand – non-edge – Goal of ML algorithms  
+Points: 1  
+1. What is the main goal of machine learning algorithms?  
+a) Predict with 100% accuracy  
+... Incorrect. Perfection is not feasible; generalization is key.  
+*b) Learn from data to make predictions or decisions  
+... Correct. This is the fundamental objective of ML.  
+c) Analyze data for scientific discovery  
+... Incorrect. This is an application, not the goal itself.  
+d) Generate new theories  
+... Incorrect. Theory generation may result from ML, but it’s not the primary goal.
+
+Title: concept-check – remember – non-edge – Generative vs. discriminative  
+Points: 1  
+1. What is the key difference between generative and discriminative models?  
+*a) Generative models learn $p(x, y)$; discriminative learn $p(y|x)$  
+... Correct. This is the textbook distinction.  
+b) Generative models are more flexible  
+... Incorrect. Flexibility depends on model class, not this distinction.  
+c) Discriminative models assume fewer priors  
+... Incorrect. This is vague and not generally true.  
+d) None of the above  
+... Incorrect. Option A is accurate.
+
+Title: concept-check – remember – non-edge – Definition of conjugate prior  
+Points: 1  
+1. What is a conjugate prior in Bayesian inference?  
+a) A prior unrelated to the likelihood function.  
+... Incorrect. A conjugate prior is specifically chosen so that the posterior retains the same functional form as the prior.  
+*b) A prior that results in a posterior distribution of the same form.  
+... Correct. This is the standard definition of a conjugate prior.  
+c) A prior that always increases the likelihood value.  
+... Incorrect. The purpose of a conjugate prior is not to increase the likelihood, but to simplify the computation of the posterior.  
+d) A prior that gives a flat posterior distribution.  
+... Incorrect. A flat (noninformative) prior is not necessarily conjugate.
+
+Title: concept-check – remember – non-edge – Likelihood of binary variable  
+Points: 1  
+1. For a binary variable $x \in \{0,1\}$ with success probability $\mu$, which expression correctly represents the likelihood for a single observation?  
+a) $p(x|\mu)= \mu$, regardless of $x$.  
+... Incorrect. This does not distinguish between the cases $x=0$ and $x=1$.  
+*b) $p(x|\mu)= \mu^x (1-\mu)^{1-x}$.  
+... Correct. When $x=1$, the expression gives $\mu$, and when $x=0$, it gives $1-\mu$.  
+c) $p(x|\mu)= \mu+(1-\mu)$.  
+... Incorrect. This sums to 1 regardless of $x$ and does not vary with the observed value.  
+d) $p(x|\mu)= x\,\mu\,(1-\mu)^{1-x}$.  
+... Incorrect. Multiplying by $x$ incorrectly forces the likelihood to be 0 when $x=0$.
+
+Title: concept-check – remember – non-edge – MLE for Bernoulli parameter  
+Points: 1  
+1. Given $N$ independent observations of a binary variable, what is the maximum likelihood estimate for $\mu$?  
+*a) The fraction of observations equal to 1.  
+... Correct. The MLE for $\mu$ is calculated as the number of successes divided by $N$.  
+b) The sum of the observations.  
+... Incorrect. While the sum equals the number of 1's, it must be divided by $N$ to obtain the probability estimate.  
+c) The ratio of zeros to total observations.  
+... Incorrect. This gives $1-\mu$, not $\mu$.  
+d) The prior mean of $\mu$.  
+... Incorrect. The prior mean is used in Bayesian inference, not in maximum likelihood estimation.
+
+Title: concept-check – remember – non-edge – Conjugate prior for Bernoulli  
+Points: 1  
+1. Which distribution is commonly used as the conjugate prior for a Bernoulli or binomial likelihood?  
+a) Gaussian distribution.  
+... Incorrect. Gaussians are not conjugate to the Bernoulli/binomial likelihood.  
+b) Gamma distribution.  
+... Incorrect. The Gamma distribution is conjugate to the Poisson or exponential likelihood, not the binomial.  
+*c) Beta distribution.  
+... Correct. The Beta distribution is the standard conjugate prior for Bernoulli and binomial models.  
+d) Uniform distribution.  
+... Incorrect. Although a uniform prior (Beta(1,1)) is a special case, it is not generally referred to as the conjugate prior.
+
+Title: concept-check – remember – non-edge – Beta distribution functional form  
+Points: 1  
+1. Which expression best represents the Beta distribution density for $\mu$ (ignoring normalization)?  
+a) $\mu^{a}(1-\mu)^{b}$  
+... Incorrect. The proper exponents are $a-1$ and $b-1$, not $a$ and $b$.  
+*b) $\mu^{a-1}(1-\mu)^{b-1}$  
+... Correct. This is the functional form of the Beta density (up to the normalizing constant).  
+c) $\mu^{a+1}(1-\mu)^{b+1}$  
+... Incorrect. The exponents are incorrect by an additive factor.  
+d) $\exp(-a\mu-b(1-\mu))$  
+... Incorrect. This is not the form of the Beta distribution.
+
+Title: concept-check – remember – non-edge – Variance of binomial distribution  
+Points: 1  
+1. What is the variance of a binomial distribution with parameters $N$ and $\mu$?  
+a) $N\mu$  
+... Incorrect. This is the expected value, not the variance.  
+b) $\mu(1-\mu)$  
+... Incorrect. This is the variance of a single Bernoulli trial; it must be scaled by $N$.  
+*c) $N\mu(1-\mu)$  
+... Correct. This is the well-known formula for the variance of a binomial distribution.  
+d) $N^2\mu(1-\mu)$  
+... Incorrect. Over-scaling the variance by an extra factor of $N$.
+
+Title: concept-check – remember – non-edge – Multinomial observation representation  
+Points: 1  
+1. In the multinomial model, how is each observation typically represented?  
+a) As a scalar index between 1 and $K$  
+... Incorrect. While categories can be indexed this way in code, the model assumes a richer representation.  
+*b) As a $K$-dimensional one-hot encoded vector  
+... Correct. This representation has exactly one element equal to 1 and all others 0.  
+c) As a probability vector summing to 1  
+... Incorrect. This describes a parameter, not a single observation.  
+d) As a binary vector with two ones  
+... Incorrect. A one-hot vector contains exactly one 1.
+
+Title: concept-check – remember – non-edge – Multinomial likelihood with counts  
+Points: 1  
+1. What is the likelihood function for the multinomial distribution with counts $m_1,\dots,m_K$ and parameters $\mu_1,\dots,\mu_K$?  
+a) $\prod_{k=1}^K \mu_k^{m_k}$  
+... Incorrect. This omits the combinatorial coefficient accounting for sample permutations.  
+*b) $\displaystyle \frac{N!}{m_1!\cdots m_K!}\prod_{k=1}^K \mu_k^{m_k}$  
+... Correct. This is the complete likelihood function, including normalization.  
+c) $\sum_{k=1}^K \mu_k^{m_k}$  
+... Incorrect. Likelihoods for independent outcomes are multiplied, not summed.  
+d) $\prod_{k=1}^K (m_k\,\mu_k)$  
+... Incorrect. This form is incorrect — the likelihood includes exponents and coefficients.
+
+Title: concept-check – remember – non-edge – Constraints on multinomial parameters  
+Points: 1  
+1. What constraints must the parameters $\mu_1,\dots,\mu_K$ of a multinomial distribution satisfy?  
+a) Each $\mu_k > 0$  
+... Incorrect. This condition is necessary but incomplete.  
+b) The sum $\sum_{k=1}^K \mu_k = 1$  
+... Incorrect. The sum must equal 1, but individual parameters must also be nonnegative.  
+*c) Each $\mu_k \ge 0$ and $\sum_{k=1}^K \mu_k = 1$  
+... Correct. These two conditions together define a valid probability distribution over $K$ outcomes.  
+d) Each $\mu_k$ can be any real number  
+... Incorrect. Probabilities must be nonnegative and sum to 1.
+
+Title: concept-check – remember – non-edge – Conjugate prior for multinomial  
+Points: 1  
+1. Which distribution serves as the conjugate prior for the parameters of a multinomial likelihood?  
+a) Beta distribution  
+... Incorrect. The Beta is the special case for $K=2$ categories.  
+*b) Dirichlet distribution  
+... Correct. The Dirichlet distribution is the standard conjugate prior for multinomial parameters.  
+c) Gaussian distribution  
+... Incorrect. Gaussian distributions are not defined over the simplex and are not conjugate to the multinomial.  
+d) Poisson distribution  
+... Incorrect. The Poisson models counts, not probabilities over categories.
+
+Title: concept-check – remember – non-edge – Dirichlet as generalization  
+Points: 1  
+1. The Dirichlet distribution is a multivariate generalization of which distribution?  
+a) Bernoulli distribution  
+... Incorrect. The Bernoulli models binary outcomes, not continuous probability vectors.  
+*b) Beta distribution  
+... Correct. The Beta is the special case of the Dirichlet for $K = 2$ categories.  
+c) Binomial distribution  
+... Incorrect. The Binomial models discrete counts, not distributions over probabilities.  
+d) Uniform distribution  
+... Incorrect. While the uniform distribution arises when all Dirichlet parameters are equal to 1, it is not the correct generalization.
+
+Title: concept-check – remember – non-edge – Univariate Gaussian Normalization
+Points: 1
+1. Which term in the univariate Gaussian formula 
+   $$\mathcal{N}(x|\mu,\sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\!\Bigl\{-\frac{1}{2\sigma^2}(x-\mu)^2\Bigr\}$$ 
+   ensures that the distribution is normalized (i.e., integrates to 1)?
+a) $\exp\!\Bigl\{-\frac{1}{2\sigma^2}(x-\mu)^2\Bigr\}$
+... Incorrect. This term determines the shape of the curve.
+*b) $\frac{1}{\sqrt{2\pi\sigma^2}}$
+... Correct. This constant ensures the total area under the curve is 1.
+c) $(x-\mu)^2$
+... Incorrect. This is part of the exponent that measures deviation.
+d) $\sqrt{2\pi\sigma^2}$
+... Incorrect. This term appears in the denominator's reciprocal.
+
+Title: concept-check – understand – non-edge – Quadratic Form Interpretation
+Points: 1
+1. In the multivariate Gaussian distribution, what does the quadratic form 
+   $$(x-\mu)^\top\Sigma^{-1}(x-\mu)$$ 
+   represent?
+a) The Euclidean distance squared between $x$ and $\mu$.
+... Incorrect. This form adjusts the Euclidean distance using covariance information.
+*b) The Mahalanobis distance squared between $x$ and $\mu$.
+... Correct. It measures distance while accounting for the variance and correlation.
+c) A measure of the variance of $x$.
+... Incorrect. Variance is described by $\Sigma$, not the quadratic form.
+d) The normalization factor of the Gaussian.
+... Incorrect. The normalization factor is given separately.
+
+Title: concept-check – remember – non-edge – Jacobian Determinant Value
+Points: 1
+1. When transforming $x$ to the whitened variable $y = U(x-\mu)$ using an orthogonal matrix $U$, what is the value of the Jacobian determinant $|J|$?
+a) $|\Sigma|$
+... Incorrect. This value is related to the covariance, not the transformation.
+b) $\prod_{j=1}^D \lambda_j^{1/2}$
+... Incorrect. This is the square root of the determinant of $\Sigma$, not the Jacobian.
+*c) 1
+... Correct. Since $U$ is orthogonal, the transformation preserves volume.
+d) 0
+... Incorrect. A zero determinant would imply a degenerate transformation.

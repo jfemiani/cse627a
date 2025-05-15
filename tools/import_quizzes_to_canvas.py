@@ -1,3 +1,10 @@
+"""Prepare quizzes for Canvas from text files using text2qti.
+
+This script converts Text2QTI quiz files into QTI zip files. 
+It does NOT upload them to Canvas - that must be done separately at the moment.
+
+It will only process quiz files that are newer than the corresponding zip file.
+"""
 import os
 import glob
 import subprocess
@@ -7,6 +14,16 @@ from dotenv import load_dotenv
 
 # === Canvas config ===
 load_dotenv()
+
+QUIZ_DIRS = [
+    "chapter1",
+    "chapter5",
+    "chapter6",
+    "chapter7",
+    "chapter8",
+    "chapter14",
+]
+
 API_URL = "https://miamioh.instructure.com"
 API_KEY = os.getenv("CANVAS_ACCESS_TOKEN")
 COURSE_ID = 230947
@@ -16,14 +33,30 @@ TEXT2QTI = '/home/femianjc/Courses/cse627/.conda/bin/text2qti'
 canvas = Canvas(API_URL, API_KEY)
 course = canvas.get_course(COURSE_ID)
 
+
+def is_source_older_than_zip(quiz_txt_path, zip_path):
+    """Check if the quiz text file is older than the zip file."""
+    if not os.path.exists(zip_path):
+        return False
+    
+    txt_mtime = os.path.getmtime(quiz_txt_path)
+    zip_mtime = os.path.getmtime(zip_path)
+    
+    return txt_mtime < zip_mtime
+
 def run_text2qti(quiz_txt_path):
+    zip_path = quiz_txt_path.replace(".txt", ".zip")
+    
+    if is_source_older_than_zip(quiz_txt_path, zip_path):
+        print(f"🔄 Skipping text2qti for {quiz_txt_path} - source file older than zip")
+        return zip_path
+    
     print(f"🔧 Running text2qti on {quiz_txt_path}")
     subprocess.run([
         TEXT2QTI,
         quiz_txt_path,
         "--pandoc-mathml"
     ], check=True)
-    zip_path = quiz_txt_path.replace(".txt", ".zip")
     if not os.path.exists(zip_path):
         raise FileNotFoundError(f"❌ Expected zip file not found: {zip_path}")
     return zip_path
@@ -88,26 +121,15 @@ def add_quiz_to_module(module, quiz, title):
     print(f"✅ Added quiz to module: {title}")
 
 def main():
-    module = get_or_create_module(course, MODULE_NAME)
-    quiz_txt_files = sorted(glob.glob("chapter1/*-quiz.txt"))
+    for quiz_dir in QUIZ_DIRS:
+        quiz_txt_files = sorted(glob.glob(f"{quiz_dir}/*-quiz.txt"))
+        quiz_txt_files += sorted(glob.glob(f"{quiz_dir}/*-quiz.md"))
 
-    for quiz_txt in quiz_txt_files:
-        base_name = os.path.splitext(os.path.basename(quiz_txt))[0]
-        title = base_name.replace("prml-", "").replace("-", " ").title()
-
-        zip_path = run_text2qti(quiz_txt)
+        for quiz_txt in quiz_txt_files:
+            base_name = os.path.splitext(os.path.basename(quiz_txt))[0]
+            title = base_name.replace("prml-", "").replace("-", " ").title()
+            zip_path = run_text2qti(quiz_txt)
         
-        # import_qti_zip(course, zip_path)
-
-        # # Wait for the import to complete
-        # print("⏳ Waiting for import to complete...")
-        # input("Check Canvas. Press Enter to continue...")
-
-        # quiz = find_quiz_by_title(course, title)
-        # if quiz:
-        #     add_quiz_to_module(module, quiz, title)
-        # else:
-        #     print(f"⚠️ Could not find quiz titled '{title}' after import. You may need to wait.")
 
 if __name__ == "__main__":
     main()

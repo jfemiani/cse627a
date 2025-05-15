@@ -1,0 +1,130 @@
+Quiz title: 05.3 Error Backpropagation Quiz
+Quiz description: Questions on backpropagation in Neural Networks. 
+
+
+Title: concept-check – remember – non-edge – Sigmoid Derivative
+Points: 1
+1. What is the derivative of the sigmoid function $\sigma(a) = \frac{1}{1 + e^{-a}}$?
+a) $\sigma(a)$
+... Incorrect. This option is the sigmoid function itself, not its derivative.
+b) $1 - \sigma^2(a)$
+... Incorrect. This is the derivative of the tanh function, not the sigmoid function.
+*c) $\sigma(a) \big(1 - \sigma(a)\big)$
+... Correct. The derivative of the sigmoid function is $\sigma(a) \big(1 - \sigma(a)\big)$.
+d) $\sigma(a)^2$
+... Incorrect. This option incorrectly squares the sigmoid function.
+
+Title: concept-check – remember – non-edge – Tanh Derivative
+Points: 1
+1. What is the derivative of the tanh function $\tanh(a) = \frac{e^a - e^{-a}}{e^a + e^{-a}}$?
+a) $\tanh(a)(1 - \tanh(a))$
+... Incorrect. This option incorrectly mixes the tanh value and its derivative.
+b) $1 - \tanh(a)$
+... Incorrect. This is not the correct formulation for the derivative of tanh.
+*c) $1 - \tanh^2(a)$
+... Correct. The derivative of tanh is $1 - \tanh^2(a)$.
+d) $\tanh^2(a)$
+... Incorrect. This option only squares the tanh value rather than subtracting it from 1.
+
+Title: concept-check – remember – non-edge – MSE Weight Update (Concepts)
+Points: 1
+1. In an MSE loss scenario with a tanh hidden layer and linear output neurons, what is the conceptual form of the gradient for updating the weight that connects a hidden neuron to an output neuron?
+a) It is the product of the input value and the difference between the network’s prediction and the target.
+... Incorrect. This expression describes the gradient for weights connecting the input layer to the hidden layer.
+b) It is the product of the derivative of the hidden activation and the network’s prediction error.
+... Incorrect. This expression mixes up the role of the activation function derivative, which is used in updating weights for hidden layers.
+*c) It is the product of the output error and the activation level of the hidden neuron.
+... Correct. The weight update is conceptually given by multiplying the error at the output by the activation of the hidden neuron feeding into it.
+d) It is the sum of the output error and the activation level of the hidden neuron.
+... Incorrect. Gradients are computed via a product, not a sum.
+
+
+Title: hard – analyze – non-edge – Hidden Unit Gradient Chain Rule
+Points: 1
+1. Consider the backpropagation formula for a hidden neuron:  
+   $$\delta_j = h'(a_j) \sum_k w_{kj} \delta_k.$$  
+   Which of the following best explains the role of the summation term $\sum_k w_{kj} \delta_k$ in this equation?
+a) It aggregates the local error computed independently at the hidden neuron.
+... Incorrect. The local error at the hidden neuron is given by the derivative $h'(a_j)$; the summation aggregates contributions from the next layer.
+b) It sums the weighted inputs from the previous layer to form the neuron's activation.
+... Incorrect. This summation is part of the forward pass computation, not the error backpropagation.
+*c) It accumulates the contributions of the error signals from all neurons in the subsequent layer that receive input from the hidden neuron.
+... Correct. The summation term combines the backpropagated errors, weighted by their corresponding connections, from all neurons influenced by the hidden neuron.
+d) It computes the derivative of the activation function with respect to the neuron's output.
+... Incorrect. The derivative of the activation function is provided by $h'(a_j)$, not by the summation term.
+
+
+Title: concept-check – remember – non-edge – Jacobian Matrix Purpose
+Points: 1
+1. What is the primary purpose of computing the Jacobian matrix $J_{ki} = \frac{\partial y_k}{\partial x_i}$ in neural network analysis?
+a) It determines how the network’s output changes in response to small changes in the input.
+... Incorrect. While this option is close, it is not the most complete description.
+*b) It measures the sensitivity of each output with respect to changes in each input.
+... Correct. The Jacobian quantifies how a small perturbation in an input affects each output.
+c) It computes the gradients required for updating network weights during training.
+... Incorrect. Weight gradients are computed via backpropagation, not by the Jacobian.
+d) It evaluates the curvature of the error surface to improve optimization.
+... Incorrect. Curvature information is captured by the Hessian matrix.
+
+Title: concept-check – remember – non-edge – Efficiency of Backpropagation
+Points: 1
+1. Which of the following best explains why backpropagation is computationally efficient for computing gradients in neural networks?
+a) It computes each gradient independently using finite differences.
+... Incorrect. Finite differences require perturbing each weight individually, which is computationally expensive.
+*b) It reuses intermediate computations from the forward pass to calculate gradients in a single backward pass.
+... Correct. Backpropagation leverages the chain rule and reuses computed activations to efficiently determine all gradients.
+c) It uses a recursive update that adjusts weights without explicitly computing any derivatives.
+... Incorrect. Backpropagation computes derivatives using the chain rule; it does not avoid them.
+d) It requires only one forward pass through the network to determine all gradients.
+... Incorrect. Both a forward pass and a backward pass are necessary to compute gradients.
+
+
+Title: concept-check – remember – non-edge – Backpropagation Efficiency
+Points: 1
+1. Why is backpropagation generally more efficient than using finite differences for computing gradients in neural networks?
+a) Because backpropagation requires two forward passes per parameter, reducing the overall computation.
+... Incorrect. Requiring two forward passes per parameter is characteristic of finite differences, not backpropagation.
+*b) Because finite differences require two forward passes per parameter—leading to a computational cost of $O(W^2)$ for $W$ parameters—while backpropagation reuses intermediate computations in a single backward pass, achieving $O(W)$ efficiency.
+... Correct. Finite differences are computationally expensive (approximately $O(W^2)$) due to two forward passes per parameter, whereas backpropagation efficiently computes gradients in $O(W)$ time.
+c) Because backpropagation approximates gradients using random perturbations, which is faster than the exact method used in finite differences.
+... Incorrect. Backpropagation computes exact gradients using the chain rule, not approximations.
+d) Because finite differences bypass the chain rule, resulting in higher computational overhead compared to backpropagation.
+... Incorrect. Finite differences do not use the chain rule; their inefficiency arises from requiring separate forward passes for each parameter.
+
+
+
+Title: hard – analyze – edge – Gradient Stability and Network Depth
+Points: 1
+1. In a deep feedforward network with $N$ hidden layers and scalar output, how many multiplicative terms affect the loss gradient as it propagates backward to the first hidden layer?
+a) One — the gradient is only scaled by the loss derivative at the output.
+... Incorrect. The gradient is propagated backward through each layer, accumulating multiplicative terms.
+*b) $N$ — each layer contributes one multiplicative term from its activation derivative or weight matrix.
+... Correct. Backpropagation applies the chain rule across all $N$ layers, so the gradient is effectively multiplied by $N$ activation derivatives and/or weight-related terms.
+c) $2^N$ — the number of gradient terms doubles at each layer due to branching.
+... Incorrect. Gradient propagation is linear in the number of layers, not exponential.
+d) $\log N$ — the gradient is aggregated logarithmically as it propagates.
+... Incorrect. There is no logarithmic compression in the structure of standard feedforward backpropagation.
+
+Title: hard – analyze – edge – All-Zero Activations
+Points: 1
+1. Suppose that all hidden layer activations in a network are exactly zero during forward propagation. What is the most likely consequence during backpropagation?
+a) The gradient will be large because the zero activations highlight strong corrective error signals.
+... Incorrect. Zero activations typically lead to zero derivatives, not large gradients.
+*b) The gradient with respect to many weights will be zero, leading to no learning for those parameters.
+... Correct. If all activations are zero, then weight gradients like $\frac{\partial E}{\partial w} = \delta \cdot z$ will also be zero, resulting in no updates.
+c) The network will experience exploding gradients due to unstable activation patterns.
+... Incorrect. Exploding gradients occur with large values, not zeros.
+d) The optimizer will regularize the weights more aggressively to compensate.
+... Incorrect. Regularization is not triggered by zero activations; it is controlled separately.
+
+Title: hard – analyze – edge – Gradient Attenuation with Tanh
+Points: 1
+1. Why does using $\tanh(a)$ activation in every layer of a deep network cause gradients to shrink as they propagate backward?
+*a) Because the derivative of $\tanh(a)$ is always less than 1, so the gradient is scaled down at each layer.
+... Correct. Since $\tanh'(a) = 1 - \tanh^2(a) < 1$ for all $a$, backpropagated gradients are multiplicatively attenuated across layers.
+b) Because $\tanh(a)$ always outputs zero for large input magnitudes, killing the gradient.
+... Incorrect. While $\tanh(a)$ saturates at large values, its output is not always zero.
+c) Because the derivative of $\tanh(a)$ randomly flips sign, leading to unstable updates.
+... Incorrect. The derivative is smooth and continuous; instability arises from attenuation, not sign flipping.
+d) Because $\tanh'(a)$ increases with depth, amplifying the gradient to instability.
+... Incorrect. It decreases with saturation and is always less than 1, leading to vanishing gradients, not explosion.

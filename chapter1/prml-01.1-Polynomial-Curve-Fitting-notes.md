@@ -6,28 +6,34 @@
 - **Polynomial curve fitting**: Modeling a relationship by fitting a polynomial function to data points.
 - **Maximum likelihood estimation (MLE)**: A method to estimate parameters by maximizing the probability of observed data.
 - **Regularization**: A technique to prevent overfitting by adding a penalty term to the error function, discouraging large parameter values.
-- **Root Mean Square (RMS) error**: A performance metric that reflects the average magnitude of prediction errors, in the same units as the target variable.
+- **Root Mean Square ($RMS$) error**: A performance metric that reflects the average magnitude of prediction errors, in the same units as the target variable.
 
 ---
 
 ## Key Formulas
 
-### Polynomial Model:
+### Polynomial Model
+
 $$
-y(x, \mathbf{w}) = \sum_{j=0}^M w_j x^j
+ (x, \mathbf{w}) = \sum_{j=0}^M w_j x^j 
 $$
 
-### Sum-of-Squares Error Function (unregularized):
+
+
+### Sum-of-Squares Error Function (unregularized)
+
 $$
 E(\mathbf{w}) = \frac{1}{2} \sum_{n=1}^N \left( y(x_n, \mathbf{w}) - t_n \right)^2
 $$
 
-### Regularized Error Function:
+### Regularized Error Function
+
 $$
 \tilde{E}(\mathbf{w}) = E(\mathbf{w}) + \frac{\lambda}{2} \|\mathbf{w}\|^2
 $$
 
-### Root Mean Square Error:
+### Root Mean Square Error
+
 $$
 \text{RMS} = \sqrt{\frac{2E(\mathbf{w}^*)}{N}}
 $$

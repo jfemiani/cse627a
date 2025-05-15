@@ -1,0 +1,263 @@
+Quiz title: PRML Section 14.4 – Tree-based Models  
+Quiz description: This quiz tests understanding of decision trees, impurity measures, pruning, axis-aligned splits, and their use in regression and classification.  
+shuffle answers: true  
+show correct answers: false  
+
+
+Title: concept-check – remember – non-edge – Gini index formula
+Points: 1
+1. What is the correct formula for the Gini index used in classification trees?
+a) $Q = -\sum_k p_k \ln p_k$
+... Incorrect. That is the entropy impurity.
+*b) $Q = \sum_k p_k (1 - p_k)$
+... Correct. This is the standard Gini index, minimized when one class dominates.
+c) $Q = \sum_k p_k^2$
+... Incorrect. That increases with purity, not impurity.
+d) $Q = 1 - \sum_k p_k$
+... Incorrect. That reduces to $0$ always.
+
+
+Title: medium – apply – non-edge – Entropy vs Gini
+Points: 1
+1. Which of the following best describes the difference between entropy and Gini impurity in decision trees?
+a) Entropy favors deeper trees due to steeper gradients.
+... Incorrect. Tree depth is a function of stopping, not impurity steepness.
+*b) Entropy is logarithmic and typically yields slightly different split points than Gini.
+... Correct. Entropy uses log terms and can produce different splits, especially near 50/50 class distributions.
+c) Gini impurity is used only in regression.
+... Incorrect. Gini is used in classification.
+d) Entropy penalizes misclassification more than squared error.
+... Incorrect. That’s comparing a classification and regression metric.
+
+
+Title: concept-check – remember – non-edge – Cost complexity pruning
+Points: 1
+1. What is the role of the complexity penalty term $\lambda |T|$ in the cost function $C(T)$ for pruning?
+a) It maximizes information gain during splits.
+... Incorrect. It applies during pruning, not splitting.
+*b) It penalizes large trees to prevent overfitting.
+... Correct. The $\lambda |T|$ term discourages overly complex trees.
+c) It is used only for boosting ensembles.
+... Incorrect. Boosting uses additive loss, not this penalty.
+d) It weights leaves by their entropy.
+... Incorrect. Entropy is not weighted by $\lambda$.
+
+
+Title: medium – understand – non-edge – Axis-aligned boundaries
+Points: 1
+1. What is a limitation of axis-aligned splits in decision trees?
+a) They cannot be used for nominal data.
+... Incorrect. Nominal features are split by subsets, not thresholds.
+*b) They cannot model diagonal decision boundaries unless the tree is deep.
+... Correct. Axis-aligned splits create rectangular regions, not arbitrary directions.
+c) They require feature normalization to work correctly.
+... Incorrect. Trees are invariant to monotonic transformations.
+d) They always produce piecewise linear functions.
+... Incorrect. Tree outputs are piecewise constant.
+
+Title: concept-check – remember – non-edge – Regression tree region prediction
+Points: 1
+1. In a regression tree, how is the predicted value for a region $R_\tau$ computed?
+a) The mode of the target values in the region
+... Incorrect. That’s for classification.
+*b) The mean of the target values in the region
+... Correct. The squared-error optimal prediction is the average.
+c) The median of the feature values in the region
+... Incorrect. Features are not targets.
+d) The average of feature values weighted by depth
+... Incorrect. Prediction depends only on the targets, not depth or features.
+
+
+Title: medium – apply – edge – Categorical feature handling
+Points: 1
+1. How are nominal (unordered categorical) features typically handled in decision trees?
+a) By assigning them numerical ranks and using thresholds
+... Incorrect. That treats them as ordinal, which they are not.
+*b) By evaluating binary splits over all nontrivial subsets of categories
+... Correct. Nominal features are split by subset membership.
+c) By one-hot encoding and using linear models at leaves
+... Incorrect. That applies to non-tree models like logistic regression.
+d) By discretizing them into bins
+... Incorrect. Nominal categories are not numeric and don’t need binning.
+
+
+Title: medium – understand – non-edge – Pruning strategy
+Points: 1
+1. What is the main motivation for pruning a fully grown decision tree?
+a) To increase information gain at the leaves
+... Incorrect. Pruning does not improve splits.
+*b) To reduce overfitting by removing unnecessary structure
+... Correct. Pruning simplifies trees to improve generalization.
+c) To enable bagging or boosting to be applied
+... Incorrect. Ensembles can be built with or without pruning.
+d) To guarantee axis-aligned splits
+... Incorrect. Trees already use axis-aligned splits by design.
+
+
+Title: medium – apply – non-edge – Squared error reduction
+Points: 1
+1. In regression trees, which split is preferred when using squared error as the impurity function?
+a) The one that results in the highest total $L_1$ loss
+... Incorrect. Regression trees minimize $L_2$ loss, not $L_1$.
+*b) The one that minimizes the sum of squared deviations within regions
+... Correct. This is the function defined in Equation 14.30.
+c) The split that maximizes the number of unique values in each region
+... Incorrect. Diversity is not the optimization target.
+d) The one that maximizes Gini impurity across leaves
+... Incorrect. Gini is for classification, not regression.
+
+
+Title: concept-check – remember – non-edge – Equation 14.31 meaning
+Points: 1
+1. What does the term $C(T) = \sum_{\tau=1}^{|T|} Q_\tau(T) + \lambda |T|$ represent?
+a) The average impurity across all internal nodes
+... Incorrect. It includes only terminal regions (leaves), not internal splits.
+*b) The regularized total cost of a tree, balancing fit and complexity
+... Correct. $Q_\tau$ is the region cost; $\lambda |T|$ penalizes complexity.
+c) The entropy of the tree structure
+... Incorrect. There is no such concept defined here.
+d) The number of nodes needed to minimize the log-likelihood
+... Incorrect. Likelihood is not computed in this pruning objective.
+
+
+Title: medium – understand – edge – Axis-aligned region limitations
+Points: 1
+1. Why do axis-aligned splits in decision trees limit generalization in some tasks?
+a) They cannot express decision boundaries with categorical variables
+... Incorrect. Categorical features can be split via subsets.
+*b) They require deep trees to approximate diagonal or curved boundaries
+... Correct. Axis-aligned splits only carve out rectangles; complex boundaries require many layers.
+c) They cannot separate points with missing values
+... Incorrect. Missing values are handled separately.
+d) They prevent use of Gini or entropy
+... Incorrect. The choice of impurity is independent of split orientation.
+
+
+Title: medium – apply – edge – Interpretability and structure
+Points: 1
+1. Which of the following contributes most to the interpretability of decision trees?
+a) Smooth approximation of the posterior
+... Incorrect. Trees yield stepwise constant outputs.
+*b) The ability to trace predictions to specific feature thresholds and paths
+... Correct. Trees produce rule-based decisions that can be visualized and understood.
+c) The low training error achieved by deep trees
+... Incorrect. Interpretability is unrelated to training error.
+d) The fact that trees use all features equally
+... Incorrect. Trees use only the features chosen at splits.
+
+
+Title: concept-check – remember – non-edge – Tree prediction equation
+Points: 1
+1. In PRML’s tree model, how is the prediction $y(\mathbf{x})$ defined over the input space?
+a) As the mode of all class labels in the dataset
+... Incorrect. That ignores the partitioning structure of trees.
+*b) A constant value selected from the region $R_j$ that contains $\mathbf{x}$
+... Correct. The model assigns a single constant per disjoint region, and $\mathbf{x}$ lies in exactly one.
+c) As a weighted average of all leaves
+... Incorrect. There is no weighting across leaves.
+d) As a linear combination of features and thresholds
+... Incorrect. Trees are non-parametric and non-linear.
+
+
+Title: concept-check – remember – non-edge – Role of design matrix
+Points: 1
+1. In supervised learning with decision trees, what does the design matrix $X$ represent?
+a) A matrix of target values across all class labels
+... Incorrect. That describes the label vector, not the design matrix.
+*b) A matrix where each row is a sample and each column is a feature
+... Correct. The design matrix encodes input features for all data points.
+c) A square matrix of feature-feature covariances
+... Incorrect. That would be the Gram or covariance matrix.
+d) A distance matrix used for tree clustering
+... Incorrect. Decision trees do not use distance matrices.
+
+
+Title: medium – apply – non-edge – Handling ordinal vs nominal
+Points: 1
+1. What is a key difference in how decision trees handle ordinal versus nominal features?
+a) Nominal features must be normalized before use
+... Incorrect. Trees are invariant to feature scaling.
+*b) Ordinal features can be thresholded, while nominal features require subset splits
+... Correct. Thresholding is meaningful for ordered variables, but not unordered categories.
+c) Ordinal features must be one-hot encoded
+... Incorrect. That’s not needed; ordering can be used directly.
+d) Nominal features must be binned into percentiles
+... Incorrect. Trees natively handle unordered categories without binning.
+
+
+Title: medium – understand – non-edge – Overfitting in deep trees
+Points: 1
+1. Why do deep decision trees tend to overfit training data?
+a) They rely on linear combinations of input features
+... Incorrect. Trees split on single features at each node.
+*b) They can create regions with very few samples, fitting noise
+... Correct. Deep trees partition the space finely and capture spurious structure.
+c) They use entropy which always overestimates the true loss
+... Incorrect. Entropy is an impurity measure, not a direct loss estimator.
+d) They minimize training error by pruning aggressively
+... Incorrect. Pruning reduces complexity, not overfitting.
+
+
+Title: hard – analyze – edge – Why complexity penalty matters
+Points: 1
+1. In cost-complexity pruning, what is the effect of increasing the regularization parameter $\lambda$?
+a) It increases the number of leaf nodes by forcing deeper splits
+... Incorrect. It penalizes complexity, so does the opposite.
+*b) It favors smaller trees by adding more weight to the number of terminal nodes
+... Correct. The term $\lambda |T|$ grows with tree size and discourages deep structures.
+c) It converts Gini impurity into entropy
+... Incorrect. These are distinct impurity functions.
+d) It eliminates all internal splits from the tree
+... Incorrect. It reduces tree size, but doesn't necessarily remove all structure.
+
+
+Title: medium – apply – edge – Min samples per leaf
+Points: 1
+1. Why might some decision tree implementations enforce a minimum number of data points per leaf or limit the tree depth?
+a) To avoid averaging over too many noisy features
+... Incorrect. This affects splits, not features used.
+*b) To prevent overfitting by restricting model complexity
+... Correct. Small leaf nodes or deep trees can overfit to noise in the training data.
+c) To reduce variance in Gini or entropy estimates
+... Incorrect. While variance is a concern, this isn't the primary purpose.
+d) To guarantee balanced class distributions in each region
+... Incorrect. No such guarantee is enforced in standard decision trees.
+
+
+Title: medium – understand – edge – Regression tree fitting a linear target
+Points: 1
+1. What is a limitation of using regression trees to model a simple linear relationship between input and target?
+a) Trees cannot represent numeric outputs
+... Incorrect. Trees support regression with real-valued outputs.
+*b) Trees approximate the target using step functions, requiring many splits to mimic a line
+... Correct. A linear trend must be approximated by many piecewise-constant regions.
+c) Trees only work when the target is categorical
+... Incorrect. That applies to classification trees, not regression trees.
+d) Trees require one-hot encoding to fit continuous functions
+... Incorrect. One-hot encoding is not used in regression trees.
+
+
+Title: medium – understand – edge – Tree consistency
+Points: 1
+1. Why are standalone decision trees not guaranteed to be consistent estimators?
+a) Because they do not compute likelihoods
+... Incorrect. Consistency does not require likelihood-based inference.
+*b) Because greedy splitting and fixed depth may not converge to the Bayes optimal solution
+... Correct. Even with infinite data, greedy partitioning can fail to converge to the true boundary.
+c) Because they always underfit the training data
+... Incorrect. Deep trees often overfit.
+d) Because pruning always discards important features
+... Incorrect. Pruning removes complexity, not necessarily useful splits.
+
+
+Title: hard – evaluate – edge – Stability vs interpretability
+Points: 1
+1. What is a key trade-off between interpretability and stability in decision trees?
+a) Deeper trees are more stable but less interpretable
+... Incorrect. Deeper trees are less stable and harder to interpret.
+*b) Trees are interpretable but highly sensitive to small changes in data
+... Correct. A single data point can change the tree structure significantly.
+c) Stability is always achieved by using entropy over Gini
+... Incorrect. Impurity choice has little effect on structural stability.
+d) Pruned trees are stable but require boosting to interpret
+... Incorrect. Boosting reduces variance but reduces interpretability.

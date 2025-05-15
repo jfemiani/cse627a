@@ -1,0 +1,224 @@
+Quiz title: PRML Sections 14.2–14.3 – Committees and Boosting  
+Quiz description: This quiz tests understanding of ensemble methods, including bagging, Bayesian model averaging, additive models, and AdaBoost.  
+shuffle answers: true  
+show correct answers: false  
+
+
+Title: concept-check – remember – non-edge – Committee variance
+Points: 1
+1. If $L$ uncorrelated models each have variance $\sigma^2$, what is the variance of their average?
+a) $\sigma^2$
+... Incorrect. That is the variance of a single model, not the average.
+*b) $\sigma^2 / L$
+... Correct. Averaging $L$ uncorrelated models reduces variance linearly with $L$.
+c) $L \cdot \sigma^2$
+... Incorrect. That is the total variance across all models, not the average.
+d) $\sqrt{\sigma^2 / L}$
+... Incorrect. That would be the standard deviation, not the variance.
+
+
+Title: medium – understand – non-edge – Why bagging reduces variance
+Points: 1
+1. Why does bagging help reduce generalization error for high-variance models?
+a) It increases training set size by duplicating examples
+... Incorrect. Bagging does not increase the number of unique data points.
+*b) It averages predictions across diverse models trained on bootstrapped samples
+... Correct. This reduces variance by aggregating uncorrelated model errors.
+c) It penalizes complexity via a regularization term
+... Incorrect. Bagging does not modify the loss function.
+d) It reweights examples to emphasize misclassified instances
+... Incorrect. That describes boosting, not bagging.
+
+Title: medium – understand – edge – Functional gradient perspective
+Points: 1
+1. In forward stagewise additive modeling, what role does each new base learner $h_m(\mathbf{x})$ play?
+a) It replaces the previous ensemble with a new full model
+... Incorrect. Previous models are retained.
+*b) It approximates the functional gradient of the loss at $f_{m-1}(\mathbf{x})$
+... Correct. Each $h_m$ incrementally improves the fit by following the loss gradient.
+c) It computes the posterior predictive distribution
+... Incorrect. That relates to Bayesian averaging, not boosting.
+d) It normalizes the outputs of prior base learners
+... Incorrect. There is no normalization of base learners.
+
+
+Title: medium – apply – non-edge – Residuals in boosting
+Points: 1
+1. In boosting with squared error loss, what does each new base learner $h_m(\mathbf{x})$ learn?
+a) The label values $t_n$
+... Incorrect. That would be regression on the original targets.
+*b) The residuals $r_n^{(m)} = t_n - f_{m-1}(\mathbf{x}_n)$
+... Correct. This directly minimizes squared loss by fitting the residuals.
+c) The weights $\beta_m$ directly
+... Incorrect. $\beta_m$ is chosen after $h_m$ is trained.
+d) The margin between class probabilities
+... Incorrect. Margin only applies in classification contexts.
+
+
+Title: concept-check – remember – non-edge – Exponential loss form
+Points: 1
+1. What is the exponential loss used in AdaBoost for binary classification?
+a) $\mathcal{L}(t, f(\mathbf{x})) = (t - f(\mathbf{x}))^2$
+... Incorrect. That is squared error.
+*b) $\mathcal{L}(t, f(\mathbf{x})) = \exp(-t f(\mathbf{x}))$
+... Correct. AdaBoost minimizes exponential loss to emphasize misclassified points.
+c) $\mathcal{L}(t, f(\mathbf{x})) = \ln(1 + \exp(-t f(\mathbf{x})))$
+... Incorrect. That is log loss (logistic).
+d) $\mathcal{L}(t, f(\mathbf{x})) = -t \ln f(\mathbf{x})$
+... Incorrect. That is cross-entropy.
+
+
+Title: medium – apply – non-edge – AdaBoost weight update
+Points: 1
+1. After training a weak learner, how are sample weights updated in AdaBoost?
+a) Increased for all examples, then normalized
+... Incorrect. Only misclassified examples have increased weights.
+*b) Multiplied by $\exp(-\beta_m t_n h_m(\mathbf{x}_n))$, then normalized
+... Correct. This updates the distribution to emphasize incorrect classifications.
+c) Replaced by the residual errors from the current model
+... Incorrect. That applies to regression-based boosting, not AdaBoost.
+d) Divided by the learner's accuracy
+... Incorrect. That is not how sample-level weights are updated.
+
+
+Title: medium – apply – edge – Meaning of $\beta_m$
+Points: 1
+1. In AdaBoost, what does the weight $\beta_m$ assigned to each weak classifier represent?
+a) The variance of the weak learner
+... Incorrect. AdaBoost does not estimate variance.
+*b) A measure of classifier accuracy: larger when training error is low
+... Correct. $\beta_m = \frac{1}{2} \ln\left(\frac{1 - \epsilon_m}{\epsilon_m}\right)$.
+c) A normalization constant across all classifiers
+... Incorrect. $\beta_m$ is local to each classifier.
+d) The number of times the weak learner is reused
+... Incorrect. Each learner appears once in the sum.
+
+
+Title: medium – understand – edge – Why exponential loss amplifies mistakes
+Points: 1
+1. Why does exponential loss cause AdaBoost to focus more on misclassified points?
+a) It assigns each point a margin based on confidence
+... Incorrect. That describes hinge or log loss.
+*b) It grows rapidly when $t f(\mathbf{x})$ is negative
+... Correct. Misclassified examples have $t f(\mathbf{x}) < 0$, so loss becomes large.
+c) It penalizes confidence on all examples
+... Incorrect. Confident correct predictions incur very little loss.
+d) It normalizes probabilities before each iteration
+... Incorrect. There is no probabilistic normalization.
+
+
+Title: concept-check – remember – non-edge – Final AdaBoost prediction
+Points: 1
+1. How is the final prediction made in AdaBoost after $M$ rounds?
+a) Take the average of all weak predictions
+... Incorrect. AdaBoost uses a weighted sum, not a simple average.
+*b) Compute $f_M(\mathbf{x}) = \sum_{m=1}^M \beta_m h_m(\mathbf{x})$ and take its sign
+... Correct. This forms the additive model and outputs the predicted label.
+c) Use the last weak learner only
+... Incorrect. The ensemble uses all past learners.
+d) Apply cross-validation to select one best weak model
+... Incorrect. AdaBoost does not discard earlier learners.
+
+
+Title: medium – apply – edge – Functional form of ensemble
+Points: 1
+1. What is the function $f_M(\mathbf{x})$ in AdaBoost before applying the sign?
+a) A linear model over input features
+... Incorrect. $f_M$ is a linear combination of classifiers, not features.
+*b) A weighted sum of weak learners: $f_M(\mathbf{x}) = \sum_{m=1}^M \beta_m h_m(\mathbf{x})$
+... Correct. This is the core additive model.
+c) The average accuracy of all weak learners
+... Incorrect. $f_M$ aggregates predictions, not accuracies.
+d) The loss function minimized during training
+... Incorrect. $f_M$ is the model output, not the loss.
+
+
+Title: concept-check – remember – non-edge – Role of normalization in AdaBoost
+Points: 1
+1. Why does AdaBoost normalize weights after updating them?
+a) To turn the weights into posterior probabilities over class labels
+... Incorrect. AdaBoost weights are over training examples, not over labels or parameters.
+*b) To maintain a valid sampling distribution over training examples
+... Correct. Normalization ensures the weights define a proper distribution for weighting the next learner’s loss.
+c) To penalize high-confidence predictions
+... Incorrect. Normalization does not directly affect confidence.
+d) To adjust the learning rate across rounds
+... Incorrect. AdaBoost does not use an explicit learning rate.
+
+
+Title: medium – understand – edge – Why weak learners are used
+Points: 1
+1. Why does AdaBoost work best with weak learners like decision stumps?
+a) Because they overfit training data aggressively
+... Incorrect. Overfitting is a risk, not a benefit.
+*b) Because AdaBoost incrementally corrects their errors to build a strong classifier
+... Correct. Weak learners ensure each step improves the ensemble without overfitting.
+c) Because they minimize exponential loss in closed form
+... Incorrect. Exponential loss minimization still requires optimization.
+d) Because they produce probabilistic outputs
+... Incorrect. AdaBoost uses hard predictions $\pm 1$.
+
+
+Title: hard – analyze – edge – Exponential loss vs cross-entropy loss
+Points: 1
+1. Which of the following best compares exponential loss to binary cross-entropy in boosting?
+a) Exponential loss is convex, but cross-entropy is not
+... Incorrect. Both losses are convex.
+*b) Exponential loss penalizes large negative margins more aggressively than cross-entropy
+... Correct. Exponential loss increases faster when $t f(\mathbf{x}) < 0$.
+c) Cross-entropy is used only in bagging
+... Incorrect. Cross-entropy appears in gradient boosting and logistic regression.
+d) They yield the same weight updates in AdaBoost
+... Incorrect. They lead to different gradient directions and update rules.
+
+
+Title: medium – apply – edge – When AdaBoost overfits
+Points: 1
+1. Under what condition is AdaBoost most likely to overfit?
+a) When weak learners underperform on noisy examples
+... Incorrect. That usually leads to underfitting.
+*b) When the model continues training far past zero training error on noisy data
+... Correct. Boosting will continue to emphasize mislabeled or noisy points.
+c) When bagging is used instead of boosting
+... Incorrect. Bagging reduces variance and is unrelated to boosting.
+d) When deep decision trees are used as weak learners
+... Incorrect. Deep trees are strong learners and reduce the need for boosting.
+
+
+Title: medium – understand – edge – Bagging vs Boosting goals
+Points: 1
+1. Which best characterizes the distinction between bagging and boosting?
+a) Bagging reduces bias, boosting reduces variance
+... Incorrect. It’s the other way around.
+*b) Bagging reduces variance via averaging, boosting reduces bias via sequential correction
+... Correct. Bagging stabilizes high-variance models; boosting focuses on model underfit.
+c) Both bagging and boosting increase variance to reduce bias
+... Incorrect. That is not a valid tradeoff.
+d) Boosting works only for classification, while bagging is for regression
+... Incorrect. Both can be applied to either task.
+
+
+Title: medium – understand – edge – Interpretability of AdaBoost
+Points: 1
+1. What limits the interpretability of an AdaBoost model compared to a single decision tree?
+a) AdaBoost uses a probabilistic output, not rules
+... Incorrect. AdaBoost outputs a sign-weighted sum, not probabilities.
+*b) AdaBoost is a weighted sum of many models, each of which is simple but hard to interpret globally
+... Correct. The ensemble effect obscures simple logical structure.
+c) The loss function used is non-parametric
+... Incorrect. Loss choice does not affect interpretability.
+d) AdaBoost requires neural networks to explain margins
+... Incorrect. There is no connection to neural networks here.
+
+
+Title: medium – apply – edge – Stability of bagging vs boosting
+Points: 1
+1. Which of the following statements is true about the stability of bagging and boosting?
+a) Both are stable because they use averaging
+... Incorrect. Boosting is not stable in this sense.
+*b) Bagging improves stability by averaging over resampled models; boosting is sensitive to data noise
+... Correct. Bagging reduces variance, boosting amplifies outliers.
+c) Boosting is stable because it uses convex loss
+... Incorrect. Stability refers to model output sensitivity, not loss curvature.
+d) Neither method affects model stability
+... Incorrect. Bagging reduces sensitivity to data variation.
